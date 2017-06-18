@@ -1,0 +1,59 @@
+{include file="public/header"}
+<div class="container">
+<h2>商品列表管理</h2>
+<!-- {:url('add')}  跳转至当前应用下的当前控制器里面的add操作
+{:url('goods/add')}  跳转至当前应用下的goods控制器里面的add操作
+{:url('应用名称/控制器/操作')}  跳转至指定的应用下的goods控制器里面的add操作 -->
+<div class="row">
+  <div class="col-md-3">
+  	<a href="{:url('add')}" class="btn btn-success">添加商品</a>
+	<a href="{:url('cate/add')}" class="btn btn-success">添加分类</a>
+	<a href="{:url('cate/index')}" class="btn btn-success">分类列表</a>
+  </div>
+  <div class="col-md-7 pull-right">
+  	<form action="{:url('index')}">
+  		<div class="form-group">
+		    <input type="text" class="form-control" name="keyword" style="width:60%;display: inline-block;">
+		    <select name="cateID" class="form-control" style="width:20%;display: inline-block;" id="searchcate">
+		    	<option value="">请选择</option>
+		    	{foreach $cateList as $item}
+		    	<option value="$item.cateID">{$item.cate_name}</option>
+		    	{/foreach}
+		    </select>
+		    <input type="submit" name="" value="搜索" class="btn btn-info" style="display: inline-block;" id="search">
+		  </div>
+  	</form>
+  </div>
+</div>
+<!-- <a href="{:url('index/cartnoon/index')}" class="btn btn-success">是浏览漫画api</a>
+ -->
+ <script type="text/javascript">
+ 	$('#searchcate').change(function(){
+ 		$('#search').click();
+ 	});
+ </script>
+<table class="table">
+	<tr class="row">
+		<th class="col-md-1">ID</th>
+		<th class="col-md-3">商品名称</th>
+		<th class="col-md-4">介绍</th>
+		<th class="col-md-1">分类</th>
+		<th class="col-md-3">操作</th>
+	</tr>
+
+
+	{foreach $dm_goodsList as $item}
+	<tr class="row">
+		<td class="col-md-1">{$item.goods_id}</td>
+		<td class="col-md-3">{$item['goods_title']}</td>
+		<td class="col-md-4">{$item['goods_brief']}</audio></td>
+ 		<td class="col-md-1">{$item['cate_name']}</td>
+		<td class="col-md-3">
+			<a href="{:url('edit',['id'=>$item['goods_id']])}" class="btn btn-success">修改商品</a>
+			<a href="{:url('delete',['id'=>$item['goods_id']])}" class="btn btn-danger" >删除商品</a>
+		</td>
+	</tr>
+	{/foreach}
+</table>
+{$dm_goodsList->render()}
+{include file="public/footer"}

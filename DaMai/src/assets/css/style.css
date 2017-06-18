@@ -1,0 +1,36 @@
+*{margin: 0;padding: 0;}
+body,html{font-size: 20px;font-family: "微软雅黑";background-color: #fff;}
+ul,li{list-style: none;}
+
+.rightIn-enter-active{
+	transition: all .3s ease-out;
+	transform: translate(0,0);		
+}
+.rightIn-enter{
+	transform: translate(360px,0);
+}
+.container .mint-cell-wrapper{
+	padding:0 !important;
+	text-align: left !important;
+	font-size:0.7rem !important;
+	color:#111111 !important;
+	background-image: none;
+}
+.container .mint-cell-value{
+	color:#111111 !important;
+	display: inline-block;
+}
+.container .address .mint-cell-title{
+	flex: 0!important;
+}
+.container .seat .mint-cell-title{
+	flex: 0!important;
+}
+.container .seat .mint-cell-value,.container .starTeam .mint-cell-value{
+	color:#000 !important;
+	display: inline-block;
+}
+.limitBuy .mint-cell-title .mint-cell-text{
+	color:#080808 !important;
+	font-size: 0.7rem;
+}

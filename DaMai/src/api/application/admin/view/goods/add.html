@@ -1,0 +1,65 @@
+{include file="public/header"}
+<div class="container">
+	<h2>添加商品表单</h2>
+	<form action="{:url('music/save')}" enctype="multipart/form-data" method="post">
+		<div class="form-group">
+			<label for="">商品名称</label>
+			<input type="text" class="form-control" name="musicName">
+		</div>
+		<div class="form-group">
+			<label for="">所属分类</label>
+			<select name="cateID" >
+				<option value="">请选择</option>
+				{foreach $cateList as $item}
+				<option value="{$item.cate_id}">{$item.cate_name}</option>
+				{/foreach}
+
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="">图片</label>
+			<input type="file"  name="mp3Src">
+		</div>
+		<div class="form-group">
+			<label for="">场馆</label>
+			<input type="text" name="venue" placeholder="请输入场馆名称" id="venueName">	
+			<input type="button" name="" class="btn btn-info" value="检索" onclick="search()">
+			经度：<input type="text" name="lng">纬度：<input type="text" name="lat">
+			<div id="allmap" style="width: 1146px; height: 250px;border:1px solid #ccc;"></div>
+			<!-- <textarea name="venue" id=""  ></textarea> -->
+		</div>
+		<div class="form-group">
+			<input type="submit" class="btn-success btn" value="保存">
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=jGkeYH9gth1yUVqwgjdGLefayIHnvGK9"></script>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");          
+	//map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+	var point = new BMap.Point(116.400244,39.92556);//添加覆盖物 拖拽
+	map.centerAndZoom(point, 12);
+	var marker = new BMap.Marker(point);// 创建标注
+	map.addOverlay(marker);             // 将标注添加到地图中
+	marker.enableDragging();
+	marker.addEventListener("dragend",attribute)//给覆盖物注册事件
+	function attribute(){
+		var p = marker.getPosition();  //获取marker的位置
+		$("input[name='lng']").val(p.lng);
+		$("input[name='lat']").val(p.lat);
+		    
+	}
+	//左上角，添加默认缩放平移控件
+	var top_left_navigation = new BMap.NavigationControl(); 
+	map.addControl(top_left_navigation);
+	//找到指定位置
+	var local = new BMap.LocalSearch(map, {
+		renderOptions:{map: map}
+	});
+	function search(){
+		local.search($('#venueName').val());
+	}
+</script>
+
+{include file="public/footer"}
