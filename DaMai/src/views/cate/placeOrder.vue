@@ -52,8 +52,16 @@
 					</mt-tabbar>
 					 <mt-tab-container v-model="selected" >
 					 	<mt-tab-container-item id="快递" >	 	
-					 		<mt-cell title="您还没有收货地址" icon="date" value="" >
-					 			<div class="addAdress"  @click="addAddress()"></div>
+					 		<mt-cell title="您还没有收货地址" icon="date" value="" v-if="address.status">
+					 			<div class="addAdress"  @click="chooseAddress()"></div>
+					 		</mt-cell>
+					 		<mt-cell title="" icon="date" value="" v-if="!address.status">
+					 			<div class="defaultAddresss">
+					 				<p>1111</p>
+					 				<p>11111111111</p>
+					 				<span>11111111111</span>
+					 			</div>
+					 			<div class="addAdress"  @click="chooseAddress()"></div>
 					 		</mt-cell>
 					 	</mt-tab-container-item>
 					 	<mt-tab-container-item id="大麦网自取" >
@@ -82,8 +90,65 @@
 		</div>
 
 		<div class="payWay">
-			<mt-cell title="支付方式" value="">
+			<mt-cell title="支付方式" value="" style="border-bottom: 1px solid #ccc;">
 			</mt-cell>
+			<div class="wayList">
+				<div class="wayItem">
+				  <img src="../../assets/images/zhifubao_02.png">
+				  <div class="itemRight">
+				  		<div class="wayIntro">
+				  			<span>支付宝</span>
+				  			<p>推荐支付宝用户使用</p>
+
+				  		</div>
+				  		<div class="radio">
+				  			<input type="radio" name="payway">
+				  		</div>
+				  </div>					
+				</div>
+				<div class="wayItem">
+				  <img src="../../assets/images/weixin.png">
+				  <div class="itemRight">
+				  		<div class="wayIntro">
+				  			<span>微信支付</span>
+				  			<p>推荐已安装微信大的用户使用</p>
+				  		</div>
+				  		<div class="radio">
+				  			<input type="radio" name="payway">
+				  		</div>
+				  </div>					
+				</div>
+				<div class="wayItem">
+				  <img src="../../assets/images/weixin.png">
+				  <div class="itemRight">
+				  		<div class="wayIntro">
+				  			<span>电子钱包</span>
+				  			<p>大麦钱包支付</p>
+				  		</div>
+				  		<div class="radio">
+				  			<input type="radio" name="payway">
+				  		</div>
+				  </div>					
+				</div>
+				<div class="wayItem" v-if="showWay">
+				  <img src="../../assets/images/yinlian.png">
+				  <div class="itemRight">
+				  		<div class="wayIntro">
+				  			<span>银联WAP</span>
+				  			<p>支持储蓄卡、信用卡，无需开通网银</p>
+				  		</div>
+				  		<div class="radio">
+				  			<input type="radio" name="payway">
+				  		</div>
+				  </div>					
+				</div>
+			</div>
+			<div class="moreway" @click="moreway()">
+				<p>
+					更多支付方式
+					<i class="fa fa-angle-down" aria-hidden="true" style="position: static;font-size:0.7rem;margin-left:0.25rem;"></i>
+				</p>
+			</div>
 		</div>
 
 		<div class="invoice">
@@ -112,12 +177,16 @@
 </template>
 <script type="es6">
 import {mapState,mapMutations} from 'vuex'
+import Vue from 'vue'
 	export default{
 		data(){
 			return{
 				selected:'快递',
 				totleTicket:0,
-				totleMoney:0
+				totleMoney:0,
+				addressArr:[],
+				address:'',
+				showWay:false
 			}
 		},
 		created(){
@@ -137,6 +206,17 @@ import {mapState,mapMutations} from 'vuex'
 					vm.totleTicket+=Number(vm.itemArray[i].num)
 					vm.totleMoney+=Number(vm.itemArray[i].price)*Number(vm.itemArray[i].num)
 				}
+				let user_id=1;
+				Vue.http.jsonp('api/mobile/User',{params:{user_id:user_id}}).then(rtn=>{
+							console.log(rtn.data);
+							vm.addressArr=rtn.data;
+							for(var i=0;i<vm.addressArr.length;i++){
+								if(vm.addressArr[i].status==0){
+									vm.address=vm.addressArr[i]
+								}
+							}
+							// vm.setAttributeData(vm.goods_attribute)
+				})
 				// vm.goods_data=to.query.goods_data;
 			});
 		},
@@ -146,9 +226,16 @@ import {mapState,mapMutations} from 'vuex'
 		methods: {
 			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase']),
 			//跳转添加收货地址
-			addAddress(){
+			chooseAddress(){
 				//console.log(1111)
-				this.$router.push({path: '/addAddress'})
+				this.$router.push({path: '/chooseAddress'})
+			},
+			moreway(){
+				if(this.showWay){
+					this.showWay=false;
+				}else{
+					this.showWay=true;
+				}
 			}
 		},
 	}
@@ -356,23 +443,44 @@ import {mapState,mapMutations} from 'vuex'
 				}
 			}
 			.mint-tab-container{
-				
 				border-top: 1px solid #000;
 				.mint-tab-container-wrap{
 					.mint-tab-container-item{
 						.mint-cell{
 							padding-bottom: 0.5rem;
 							position: relative;
-							.addAdress{
-								position: absolute;
-								width: 0;
-							    height: 0;
-							    border-bottom: 8px solid #919191;
-							    border-left: 8px solid transparent;
-								right: 3px;
-								bottom: 0.6rem;
+							.mint-cell-wrapper{
+								display: block;
+								.mint-cell-title{
+									flex:none!important;
+								}
+								.mint-cell-value{
+									.addAdress{
+										position: absolute;
+										width: 0;
+									    height: 0;
+									    border-bottom: 8px solid #919191;
+									    border-left: 8px solid transparent;
+										right: 3px;
+										bottom: 0.6rem;
+									}
+									.defaultAddresss{
+										margin-top: 0.5rem;
+										position: absolute;
+										left: 0;
+										top: 0;
+										p{
+											font-size: 0.75rem;
+											color:#030303;
+										}
+										span{
+											font-size: 0.6rem;
+											color: #a1a1a1;
+										}
+									}
+								}
 							}
-
+							
 						}
 						.selfTake{
 							input{
@@ -387,7 +495,6 @@ import {mapState,mapMutations} from 'vuex'
 						}
 					}
 				}	
-				
 			}
 		}
 	}
@@ -419,6 +526,52 @@ import {mapState,mapMutations} from 'vuex'
 	}
 	.payWay{
 		@extend .coupon;
+		.moreway{
+			background-color: #fff;
+			p{
+				text-align: center;
+				padding:0.9rem 0;
+			}
+		}
+		.wayList{
+			background-color: #fff;
+			.wayItem{
+				width: 16.8rem;
+				margin:auto;
+				overflow: hidden;
+				img{
+					width: 2rem;
+					height: 2rem;
+					float: left;
+					vertical-align: middle;
+					margin:0.75rem 0 ;
+				}
+				.itemRight{
+					width: 13.8rem;
+					float: left;
+					margin-left: 0.5rem;
+					padding:0.7rem 0 ;
+					border-bottom: 1px solid #ccc;
+					.wayIntro{
+						width: 12.7rem;
+						float: left;
+						p{
+							font-weight: normal;
+
+						}
+					}
+					.radio{
+						float: left;
+						margin-top: 0.5rem;
+						input{
+							width: 0.9rem;
+							height: 0.9rem;					
+						}
+
+					}
+				}
+			}
+		}
 	}
 	.takeNote{
 		background-color: #fff;

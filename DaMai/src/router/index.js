@@ -47,6 +47,11 @@ export default new Router({
       component: require('../views/cate/placeOrder')
     },
     {
+      path: '/chooseAddress',
+      name: 'chooseAddress',
+      component: require('../views/cate/chooseAddress')
+    },
+    {
       path: '/addAddress',
       name: 'addAddress',
       component: require('../views/cate/addAddress')

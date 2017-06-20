@@ -1,9 +1,9 @@
 <template>
 	<div style="background-color:#f2f2f2;padding-top:4rem;padding-bottom: 5rem;">
 		<div class="receiveMessage">
-			<form class="forming">
+			<form class="forming" action="" method="">
 				<div>
-					<label>姓名</label><input type="text" name="" placeholder="请输入收货人姓名">
+					<label>姓名</label><input type="text" name="receiveName" placeholder="请输入收货人姓名">
 				</div>
 				<div>
 					<label>电话</label><input type="text" name="" placeholder="请输入收货人手机号码">	
@@ -25,7 +25,7 @@
 				</div>
 				
 				<div class="save">
-					<input type="button" name="" value="保存">
+					<input type="submit" name="" value="保存">
 				</div>
 			</form>
 		</div>

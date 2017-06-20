@@ -18,14 +18,16 @@
 
 				<mt-tab-container v-model="selected" class="content">
 					<mt-tab-container-item id="1" class="timeRange">
-						<i class="fa fa-check" aria-hidden="true"></i><mt-cell title="全部时间" />
+						<i class="fa fa-check" aria-hidden="true"></i>
+						<mt-cell title="全部时间" />
 						<mt-cell title="今天" />
 						<mt-cell title="明天" />
 						<mt-cell title="一周内" />
 						<mt-cell title="一个月内" />
 					</mt-tab-container-item>
 					<mt-tab-container-item id="2" class="rangeType">
-						<i class="fa fa-check" aria-hidden="true"></i><mt-cell title="按热门" />
+						<i class="fa fa-check" aria-hidden="true"></i>
+						<mt-cell title="按热门" />
 						<mt-cell title="按更新时间" />
 						<mt-cell title="按演出时间" />
 				   <!--  <mt-cell title="" />
