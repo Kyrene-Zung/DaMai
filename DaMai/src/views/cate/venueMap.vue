@@ -67,7 +67,7 @@ import {mapState, mapMutations} from 'vuex'
 
 </script>
 
-<style type="text/css">
+<style type="text/css" scoped>
 /*公共样式*/
 	.bottomBorder{
 		border-bottom: 1px solid #f2f2f2;

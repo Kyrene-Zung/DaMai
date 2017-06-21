@@ -70,8 +70,7 @@ import ticking from '../../components/cate/tick'
 		    this.setHeadFlag(false)
 		},
 		beforeRouteEnter(to,from,next){
-			// console.log(to.query);
-			Toast("是否登录了？")
+			 console.log(to.query);
 			next(vm=>{
 					if(typeof to.query.goods_data=='string'){ //返回上一页的时候
 						//console.log(vm.itemArray);
@@ -90,29 +89,31 @@ import ticking from '../../components/cate/tick'
 				       // console.log(vm.goods); 			
 				   }
 				});
-			// if(localStorage.getItem('user')){
-			// 	next(vm=>{
-			// 		if(typeof to.query.goods_data=='string'){ //返回上一页的时候
-			// 			//console.log(vm.itemArray);
-			// 			vm.goods_attribute=vm.attributeData	
-			// 			vm.itemArr=vm.itemArray	
-			// 			if(vm.itemArr.length!=0) {
-			// 				vm.popupVisible=true 			
-			// 			}
-			// 		}else{
-			// 			let goods_data=to.query.goods_data;
-			// 			Vue.http.jsonp('api/mobile/Attribute',{params:{goods_id:goods_data.goods_id}}).then(rtn=>{
-			// 				//console.log(rtn.data);
-			// 				vm.goods_attribute=rtn.data;
-			// 				vm.setAttributeData(vm.goods_attribute)
-			// 			})
-			// 	       // console.log(vm.goods); 			
-			// 	   }
-			// 	});
-			// }else{
-			// 	Toast("是否登录了？")
-			// }
-
+			
+				// next(vm=>{
+				// 	console.log(vm.userInfo)
+				// 	if(vm.userInfo){
+				// 		if(typeof to.query.goods_data=='string'){ //返回上一页的时候
+				// 			//console.log(vm.itemArray);
+				// 			vm.goods_attribute=vm.attributeData	
+				// 			vm.itemArr=vm.itemArray	
+				// 			if(vm.itemArr.length!=0) {
+				// 				vm.popupVisible=true 			
+				// 			}
+				// 		}else{
+				// 			let goods_data=to.query.goods_data;
+				// 			Vue.http.jsonp('api/mobile/Attribute',{params:{goods_id:goods_data.goods_id}}).then(rtn=>{
+				// 				//console.log(rtn.data);
+				// 				vm.goods_attribute=rtn.data;
+				// 				vm.setAttributeData(vm.goods_attribute)
+				// 			})
+				// 	       // console.log(vm.goods); 			
+				// 	   }
+				//    }else{
+				// 		Toast("是否登录了？")
+				// 	}
+				// });
+			
 		},
 		watch:{
 			itemArr:function (newvalue,oldvalue){

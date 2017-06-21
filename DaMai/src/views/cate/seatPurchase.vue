@@ -83,7 +83,7 @@ import ticking from '../../components/cate/tick'
 		}
 	}
 </script>
-<style type="text/css">
+<style type="text/css" scoped>
 	.seatClick{
 		width: 100%;
 		height: 15rem;

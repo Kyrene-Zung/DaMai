@@ -52,25 +52,34 @@
 					</mt-tabbar>
 					 <mt-tab-container v-model="selected" >
 					 	<mt-tab-container-item id="快递" >	 	
-					 		<mt-cell title="您还没有收货地址" icon="date" value="" v-if="address.status">
+					 		<mt-cell title="您还没有收货地址" icon="date" value="" v-if="!address">
 					 			<div class="addAdress"  @click="chooseAddress()"></div>
 					 		</mt-cell>
-					 		<mt-cell title="" icon="date" value="" v-if="!address.status">
+					 		<mt-cell title="" icon="date" value="" v-if="address" id="add">
 					 			<div class="defaultAddresss">
-					 				<p>1111</p>
-					 				<p>11111111111</p>
-					 				<span>11111111111</span>
+					 				<p>{{address.deliver_name}}</p>
+					 				<p>{{address.phone_num}}</p>
+					 				<span>
+					 				{{address.province}}{{address.city}}{{address.area}}{{address.address}}
+					 				</span>
 					 			</div>
 					 			<div class="addAdress"  @click="chooseAddress()"></div>
 					 		</mt-cell>
+					 		<div class="freeDeliver" v-if="address">
+					 			满300.00元免运费，不满收10.0元
+					 		</div>
 					 	</mt-tab-container-item>
 					 	<mt-tab-container-item id="大麦网自取" >
 					 		<div class="selfTake">
-					 			<input type="" name="" placeholder="姓名">
-					 			<input type="" name="" placeholder="电话">
+					 			<input type="" name="" :placeholder="address.deliver_name||'姓名'">
+					 			<input type="" name="" :placeholder="address.phone_num||'电话'">
 					 		</div>
+					 		<!-- <div class="selfTake" v-if="address.status">
+					 			<input type="" name="" :value="">
+					 			<input type="" name="" >
+					 		</div> -->
 					 		<div class="selfTip">
-					 			<p>111111111111111111111111111</p>
+					 			<p>取票地址：广州市越秀区东风东路753号天誉商务大厦东塔2301-2323（东峻广场马路对面），营业时间：星期一至星期天9：00-18：00，请持订票人身份证原件上门自取，代领需出示订票人及代领人身份证原件</p>
 					 		</div>
 					 	</mt-tab-container-item>
 					 </mt-tab-container>
@@ -184,7 +193,7 @@ import Vue from 'vue'
 				selected:'快递',
 				totleTicket:0,
 				totleMoney:0,
-				addressArr:[],
+				// addressArr:[],
 				address:'',
 				showWay:false
 			}
@@ -199,35 +208,37 @@ import Vue from 'vue'
 		    this.setHeadFlag(false)
 		},
 		beforeRouteEnter(to,from,next){
-			//console.log(to.query);
-			next(vm=>{
-				//console.log(vm.itemArray)
-				for(var i=0;i<vm.itemArray.length;i++){
-					vm.totleTicket+=Number(vm.itemArray[i].num)
-					vm.totleMoney+=Number(vm.itemArray[i].price)*Number(vm.itemArray[i].num)
-				}
-				let user_id=1;
-				Vue.http.jsonp('api/mobile/User',{params:{user_id:user_id}}).then(rtn=>{
-							console.log(rtn.data);
-							vm.addressArr=rtn.data;
-							for(var i=0;i<vm.addressArr.length;i++){
-								if(vm.addressArr[i].status==0){
-									vm.address=vm.addressArr[i]
-								}
-							}
-							// vm.setAttributeData(vm.goods_attribute)
+			console.log(typeof to.query.address);
+			if(to.query.address){
+				next(vm=>{
+					for(var i=0;i<vm.itemArray.length;i++){
+						vm.totleTicket+=Number(vm.itemArray[i].num)
+						vm.totleMoney+=Number(vm.itemArray[i].price)*Number(vm.itemArray[i].num)
+					}
+					vm.address=to.query.address;
+				})	
+			}else{
+				next(vm=>{
+					for(var i=0;i<vm.itemArray.length;i++){
+						vm.totleTicket+=Number(vm.itemArray[i].num)
+						vm.totleMoney+=Number(vm.itemArray[i].price)*Number(vm.itemArray[i].num)
+					}
+					for(var i=0;i<vm.addressArr.length;i++){
+						if(vm.addressArr[i].status==1){
+							vm.address=vm.addressArr[i]
+						}
+					}
 				})
-				// vm.goods_data=to.query.goods_data;
-			});
+			}
 		},
 		computed:{
-			...mapState(['goodsData','itemArray'])
+			...mapState(['goodsData','itemArray','userInfo','addressArr'])
 		},
 		methods: {
 			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase']),
 			//跳转添加收货地址
 			chooseAddress(){
-				//console.log(1111)
+				// console.log(1111)
 				this.$router.push({path: '/chooseAddress'})
 			},
 			moreway(){
@@ -247,6 +258,12 @@ import Vue from 'vue'
 		margin: 0;
 		padding:0;
 	}
+
+
+		.mint-cell-value{
+			min-height: 65px;
+		}
+	
 	.borderStyle{
 		border-bottom: 1px solid #f4f4f4;
 		box-sizing:border-box;
@@ -446,15 +463,21 @@ import Vue from 'vue'
 				border-top: 1px solid #000;
 				.mint-tab-container-wrap{
 					.mint-tab-container-item{
+
 						.mint-cell{
 							padding-bottom: 0.5rem;
 							position: relative;
+							&#add{
+								.mint-cell-value{
+									min-height: 65px;}
+							}
 							.mint-cell-wrapper{
 								display: block;
 								.mint-cell-title{
 									flex:none!important;
 								}
 								.mint-cell-value{
+									min-height: 65px;
 									.addAdress{
 										position: absolute;
 										width: 0;
@@ -465,22 +488,30 @@ import Vue from 'vue'
 										bottom: 0.6rem;
 									}
 									.defaultAddresss{
-										margin-top: 0.5rem;
+										// margin-top: 0.5rem;
 										position: absolute;
 										left: 0;
 										top: 0;
+										padding-bottom: 0.5rem;
 										p{
 											font-size: 0.75rem;
 											color:#030303;
+											line-height: 1rem;
 										}
 										span{
 											font-size: 0.6rem;
 											color: #a1a1a1;
+											line-height: 0.7rem;
 										}
 									}
 								}
 							}
 							
+						}
+						.freeDeliver{
+							font-size: 0.6rem;
+							padding:0.65rem 0;
+							border-top:1px solid #ccc;
 						}
 						.selfTake{
 							input{
@@ -491,7 +522,7 @@ import Vue from 'vue'
 							}
 						}
 						.selfTip{
-							margin-top: 1rem;
+							    margin: 0.5rem 0;
 						}
 					}
 				}	

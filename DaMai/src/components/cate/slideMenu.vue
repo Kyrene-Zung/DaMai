@@ -121,7 +121,7 @@ function slideMenu(){
 
 </script>
 
-<style type="text/css">
+<style type="text/css" scoped>
 	.box{width: 100%;position: fixed;background-color: #fff;overflow: hidden;height: 2rem;
   border-bottom: 1px solid #ccc;
   box-sizing: border-box;

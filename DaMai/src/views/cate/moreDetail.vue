@@ -111,7 +111,7 @@ import {mapMutations} from 'vuex'
 		faRss.style.zIndex=2000;
 	}
 </script>
-<style type="text/css">
+<style type="text/css" scoped>
 
 	.projectBrief .container{
 		width:16.3rem;

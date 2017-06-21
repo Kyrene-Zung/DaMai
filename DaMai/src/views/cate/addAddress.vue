@@ -3,38 +3,56 @@
 		<div class="receiveMessage">
 			<form class="forming" action="" method="">
 				<div>
-					<label>姓名</label><input type="text" name="receiveName" placeholder="请输入收货人姓名">
+					<label>姓名</label><input type="text" v-model="deliver_name" placeholder="请输入收货人姓名">
 				</div>
 				<div>
-					<label>电话</label><input type="text" name="" placeholder="请输入收货人手机号码">	
+					<label>电话</label><input type="text" v-model="phone_num" placeholder="请输入收货人手机号码">	
 				</div>
 				<div>
-					<label>省份</label><input type="text" name="" placeholder="请选择">
+					<label>省份</label><input type="text" v-model="province" placeholder="请选择">
 				</div>
 				<div>
-					<label>城市</label><input type="text" name="" placeholder="请选择">
+					<label>城市</label><input type="text" v-model="city" placeholder="请选择">
 				</div>
 				<div>
-					<label>区域</label><input type="text" name="" placeholder="请选择">
+					<label>区域</label><input type="text" v-model="area" placeholder="请选择">
 				</div>
 				<div>
-					<label>地址</label><input type="text" name="" placeholder="请输入收货人详细地址">
+					<label>地址</label><input type="text" v-model="address" placeholder="请输入收货人详细地址">
 				</div>
 				<div>
-					<label>身份证</label><input type="text" name="" placeholder="选填" style="width:13rem;">
+					<label>身份证</label><input type="text" v-model="id_num" placeholder="选填" style="width:13rem;">
 				</div>
-				
+				<!-- <div>
+					<input type="hidden" name="">
+				</div> -->
 				<div class="save">
-					<input type="submit" name="" value="保存">
+					<input type="button" name="" value="保存" @click="addAddress()">
 				</div>
 			</form>
 		</div>
 	</div>
 </template>
 <script type="es6">
-import {mapMutations} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
+import { Axios } from '../../service/config'
+import {Toast} from 'mint-ui'
+import Vue from 'vue'
 	export default{
-		
+		data(){
+			return{
+				deliver_name:'',
+				phone_num:'',
+				province:'',
+				city:'',
+				area:'',
+				address:'',
+				id_num:''
+			}
+		},
+		computed:{
+			...mapState(['userInfo'])
+		},
 		created(){
 			this.setHeadTitle('添加收货地址')
 			this.setMapHead(true)
@@ -51,8 +69,51 @@ import {mapMutations} from 'vuex'
 			});
 		},
 		methods: {
-			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase']),
-			//点击文档
+			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setAddressArr']),
+			//保存收货地址
+			addAddress(){
+				
+				if(!this.deliver_name){
+					Toast("请添加收货人姓名！")
+				}else if(!this.phone_num){
+					Toast("请添加收货人电话！")
+				}else if(!this.address){
+					Toast("请添加收货人地址！")
+				}else if(!/^1\d{10}/.test(this.phone_num)){
+					Toast("请填写正确的手机号码")
+				}else if(this.address.length<4 ||this.address.length>40){
+					Toast("详细地址的字数需为4到40字")
+				}else if(!this.province||!this.city||!this.area){
+					Toast("请添加区域")
+				}else{
+					var obj={
+						deliver_name:this.deliver_name,
+						phone_num:this.phone_num,
+						province:this.province,
+						city:this.city,
+						area:this.area,
+						address:this.address,
+						id_num:this.id_num,
+						user_id:this.userInfo.user_id
+					}
+					Axios({
+		              method:"post",//post:data
+		              url:"/api/mobile/user/addAddress",
+		              params:{
+		                obj
+		              }
+			        }).then( rtn =>{
+			        		Vue.http.jsonp('api/mobile/User',{params:{user_id:this.userInfo.user_id}}).then(rtn=>{
+								console.log(rtn.data);
+								this.setAddressArr(rtn.data);
+								// vm.setAttributeData(vm.goods_attribute)
+								this.$router.go(-2)
+							})
+			        		
+			        	})
+				}
+				console.log(obj)
+			}
 		},
 	}
 

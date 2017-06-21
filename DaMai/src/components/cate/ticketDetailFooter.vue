@@ -51,11 +51,11 @@
 	  computed: {//激活的时候
 	    ...mapState(['buyFoot']) //映射属性
 	  },
-	  props:['goods_data'],
+	  props:['goods_data']
 	}
 </script>
 
-<style type="text/css">
+<style type="text/css" scoped>
 	.mint-tabbar a{
 	    font-size: 0.8rem;
 	    color: #000;

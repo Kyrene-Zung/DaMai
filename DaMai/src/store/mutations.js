@@ -31,6 +31,13 @@ export default {
   setItemArr (state, itemArray) {
     state.itemArray = itemArray
     // console.log(state.itemArray)
+  },
+  setUserInfo (state, userInfo) {
+    state.userInfo = userInfo
+    console.log(state.userInfo)
+  },
+  setAddressArr (state, addressArr) {
+    state.addressArr = addressArr
+    console.log(state.addressArr)
   }
-
 }

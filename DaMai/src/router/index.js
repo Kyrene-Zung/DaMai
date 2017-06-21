@@ -4,7 +4,7 @@ import index from '@/views/index'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: '/',
@@ -34,12 +34,18 @@ export default new Router({
     {
       path: '/seatPurchase',
       name: 'seatPurchase',
-      component: require('../views/cate/seatPurchase')
+      component: require('../views/cate/seatPurchase'),
+      meta: {
+        requireLogin: true
+      }
     },
     {
       path: '/buyNow',
       name: 'buyNow',
-      component: require('../views/cate/buyNow')
+      component: require('../views/cate/buyNow'),
+      meta: {
+        requireLogin: true
+      }
     },
     {
       path: '/placeOrder',
@@ -57,14 +63,85 @@ export default new Router({
       component: require('../views/cate/addAddress')
     },
     {
-      path: '/mine',
-      name: 'mine',
-      component: require('../views/mine')
-    },
-    {
       path: '/find',
       name: 'find',
       component: require('../views/find')
+    },
+    {
+      path: '/mine/index',
+      name: 'mine',
+      component: require('../views/mine/index')
+    },
+    {
+      path: '/mine/infor',
+      name: 'mine_infor',
+      component: require('../views/mine/infor')
+    },
+    {
+      path: '/mine/scan_code',
+      name: 'mine_scan_code',
+      component: require('../views/mine/scan_code')
+    },
+    {
+      path: '/mine/login',
+      name: 'login',
+      component: require('../views/mine/login')
+    },
+    {
+      path: '/mine/login/index',
+      name: 'login_index',
+      component: require('../views/mine/login/index')
+    },
+    {
+      path: '/mine/login/register',
+      name: 'login_register',
+      component: require('../views/mine/login/register')
+    },
+    {
+      path: '/mine/comment',
+      name: 'comment',
+      component: require('../views/mine/comment')
+    },
+    {
+      path: '/mine/set/index',
+      name: 'set_index',
+      component: require('../views/mine/set/index')
+    },
+    {
+      path: '/mine/set/verification_code',
+      name: 'set_verification_code',
+      component: require('../views/mine/set/verification_code')
+    },
+    {
+      path: '/mine/set/feedback',
+      name: 'set_feedback',
+      component: require('../views/mine/set/feedback')
+    },
+    {
+      path: '/mine/set/about',
+      name: 'set_about',
+      component: require('../views/mine/set/about')
+    },
+    {
+      path: '/mine/set/help',
+      name: 'set_help',
+      component: require('../views/mine/set/help')
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  // console.log(to)
+  if (to.meta.requireLogin) {
+    let userInfo = localStorage.getItem('userInfo')
+    // console.log(userInfo)
+    if (userInfo) {
+      next()
+    } else {
+      next({path: 'mine/login/index'})
+    }
+  } else {
+    next()
+  }
+})
+export default router

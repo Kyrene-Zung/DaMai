@@ -147,7 +147,7 @@ function tick(ele){
 }
 
 </script>
-<style type="text/css">
+<style type="text/css" scoped>
 	/********下拉选择框*************/
 .popup.mint-popup-top{
 	width: 100%;

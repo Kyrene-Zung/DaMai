@@ -17,7 +17,7 @@
 						</p>
 					</div>
 					<div class="right">
-						<input type="radio" name="deliveryAddress" value=""  :checked="!address.status">
+						<input type="radio" name="deliveryAddress" value=""  :checked="address.status" @click="chooseAddress(address)">
 					</div>
 				</div>
 			</div>
@@ -30,12 +30,12 @@
 	</div>
 </template>
 <script type="es6">
-import {mapMutations} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 import Vue from 'vue'
 	export default{
 		data(){
 			return{
-				addressArr:[],
+				// addressArr:[],
 			
 			}
 		},
@@ -48,24 +48,40 @@ import Vue from 'vue'
 			this.setFlag(false)
 		    this.setHeadFlag(false)
 		},
+		computed:{
+			...mapState(['addressArr'])
+		},
 		beforeRouteEnter(to,from,next){
 			//console.log(to.query);
-			next(vm=>{
-				// let user_name=localStorage.getItem('user');//获取当前用户名
-				let user_id=1;
-				Vue.http.jsonp('api/mobile/User',{params:{user_id:user_id}}).then(rtn=>{
-							console.log(rtn.data);
-							vm.addressArr=rtn.data;
-							// vm.setAttributeData(vm.goods_attribute)
-						})
+			next();
+			// next(vm=>{
+			// 	// let user_name=localStorage.getItem('user');//获取当前用户名
+			// 	let user_id=1;
+			// 	Vue.http.jsonp('api/mobile/User',{params:{user_id:user_id}}).then(rtn=>{
+			// 				console.log(rtn.data);
+			// 				vm.addressArr=rtn.data;
+			// 				// vm.setAttributeData(vm.goods_attribute)
+			// 			})
 				// vm.goods_data=to.query.goods_data;
-			});
+			//});
 		},
 		methods: {
 			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase']),
 			addAddress(){
 				//console.log(1111)
 				this.$router.push({path: '/addAddress'})
+			},
+			chooseAddress(address){
+				console.log(address);
+				for(var i=0;i<this.addressArr.length;i++){
+					if(this.addressArr[i]==address){
+						this.addressArr[i].status=1
+					}else{
+						this.addressArr[i].status=0
+					}
+				}
+				console.log(this.addressArr);
+				this.$router.push({path: '/placeOrder',query:{address:address}})
 			}
 		},
 	}

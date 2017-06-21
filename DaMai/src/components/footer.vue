@@ -12,7 +12,7 @@
 	         <router-link to="/find">发现</router-link>
 	        </mt-tab-item>
 	       <mt-tab-item id="tab4">
-	         <router-link to="/mine">我的</router-link>
+	         <router-link to="/mine/index">我的</router-link>
 	        </mt-tab-item>
 	    </mt-tabbar>
 	<!-- 商品详情页面显示的3种尾部 -->
