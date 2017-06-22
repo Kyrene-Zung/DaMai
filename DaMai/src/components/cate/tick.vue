@@ -18,18 +18,16 @@
 
 				<mt-tab-container v-model="selected" class="content">
 					<mt-tab-container-item id="1" class="timeRange">
-						<i class="fa fa-check" aria-hidden="true"></i>
-						<mt-cell title="全部时间" />
-						<mt-cell title="今天" />
+						<i class="fa fa-check" aria-hidden="true"></i><mt-cell v-for="time in timeRange " :title="time"/>
+						<!-- <mt-cell title="今天" />
 						<mt-cell title="明天" />
 						<mt-cell title="一周内" />
-						<mt-cell title="一个月内" />
+						<mt-cell title="一个月内" /> -->
 					</mt-tab-container-item>
 					<mt-tab-container-item id="2" class="rangeType">
-						<i class="fa fa-check" aria-hidden="true"></i>
-						<mt-cell title="按热门" />
-						<mt-cell title="按更新时间" />
-						<mt-cell title="按演出时间" />
+						<i class="fa fa-check" aria-hidden="true"></i><mt-cell v-for="range in rangeType" :title="range"  @click="ranging(range)" />
+						<!-- <mt-cell title="按更新时间" />
+						<mt-cell title="按演出时间" /> -->
 				   <!--  <mt-cell title="" />
 				   <mt-cell title="" /> -->
 				   </mt-tab-container-item>
@@ -62,7 +60,9 @@ export default {
   data() {
   	return {
   		popupVisible:false,
-  		selected:'1'
+  		selected:'1',
+  		timeRange:['全部时间','今天','明天','一周内','一个月内'],
+  		rangeType:['按热门','按更新时间','按演出时间']
   	}
   },
   computed: {//激活的时候
@@ -70,20 +70,22 @@ export default {
   },
   mounted(){
 	  	this.init();
-
   },
   methods:{
   	init(){
-  		 clickItem()
+  		 clickItem()//  点击搜索选项
   	},
-  	clickRange(){
+  	ranging(choice){ //  点击搜索??mint-cell不能触发点击事件
+  		console.log(choice)
+  	},
+  	clickRange(){ //  出现选项栏
   		if(this.popupVisible){
   			this.popupVisible=false;
   		}else{
   			this.popupVisible=true;
   		}
   	},
-  	clickTriangle(eve){
+  	clickTriangle(eve){ //  选座购买时点击时间打勾
   		eve=eve||event;
   		eve.stopPropagation();
   		var triangle=document.querySelector('.push .triangle');
@@ -116,15 +118,20 @@ function clickItem(){
 	var rangeType=document.querySelectorAll('.rangeType .mint-cell');
 	tick(timeRange);
 	tick(rangeType);
+	//console.log(timeRange)
 }
 function tick(ele){
+	// console.log(ele)
 	for(var i=0;i<ele.length;i++){
 		ele[i].index=i;
 		ele[i].onclick=function(){
 			var parent = this.parentNode;
 			for(var j=0;j<ele.length;j++){
+				//console.log(ele[j].previousSibling)
 				if(ele[j].previousSibling){
+					// console.log(ele[j].previousSibling)
 					if(ele[j].previousSibling.nodeName=='I'){
+						//console.log(ele[j].previousSibling)
 						// console.log(ele[j].previousSibling.nodeName)
 						parent.removeChild(ele[j].previousSibling); 
 					}
@@ -147,7 +154,7 @@ function tick(ele){
 }
 
 </script>
-<style type="text/css" scoped>
+<style type="text/css">
 	/********下拉选择框*************/
 .popup.mint-popup-top{
 	width: 100%;

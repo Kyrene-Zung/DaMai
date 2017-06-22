@@ -21,11 +21,14 @@
 			<i class="fa fa-paper-plane-o"></i>
 		</div>
 	<!-- 粉紫色头部 -->
-		<div  v-if="mapHead">
+	
+		<div  v-if="mapHead" >
 			<mt-header fixed :title="headTitle"  class="mapHead">
 			</mt-header>
 			<mt-button icon="back" @click.native="$router.go(-1)" class="mapBack"></mt-button>
 		</div>
+	
+		
 		
 	</div>
 	

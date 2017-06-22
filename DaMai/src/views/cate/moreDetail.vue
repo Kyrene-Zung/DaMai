@@ -1,4 +1,5 @@
 <template>
+<transition name="rightIn">
 	<div class="projectBrief">
 		<div class="container">
 
@@ -87,6 +88,8 @@
 
 		</div>
 	</div>
+</transition>
+	
 </template>
 <script type="es6">
 import {mapMutations} from 'vuex'

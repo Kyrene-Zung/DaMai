@@ -9,6 +9,14 @@ ul,li{list-style: none;}
 .rightIn-enter{
 	transform: translate(360px,0);
 }
+.rightOut-enter-active{
+	transition: all .3s ease-out;
+	transform: translate(0,0);		
+}
+.rightOut-enter{
+	transform: translate(360px,0);
+}
+
 .container .mint-cell-wrapper{
 	padding:0 !important;
 	text-align: left !important;

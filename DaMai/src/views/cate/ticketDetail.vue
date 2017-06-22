@@ -1,4 +1,5 @@
 <template>
+<transition name="rightIn">
 	<div style="background-color:#f1f5f4;padding-bottom:3.5rem;">
 	 <div class="list" style="margin-top:3rem;">
 		<div class="container">
@@ -93,19 +94,21 @@
 
 	<div class="list">
 		<div class="container">
-		 		<mt-cell title="网友点评 (0)" to="//github.com" is-link value="" >
-				</mt-cell>
-	  </div>
+			<mt-cell title="网友点评 (0)" to="//github.com" is-link value="" >
+			</mt-cell>
+		</div>
 	</div>
 
 	<div class="list">
 		<div class="container">
-		 		<mt-cell title="客服答疑 (125)" to="//github.com" is-link value="" icon="map" >
-				</mt-cell>
-	  </div>
+			<mt-cell title="客服答疑 (125)" to="//github.com" is-link value="" icon="map" >
+			</mt-cell>
+		</div>
 	</div>
 	<ticketDetailFooter :goods_data="goods"></ticketDetailFooter>
 </div>
+</transition>
+	
 
 </template>
 
@@ -266,4 +269,5 @@ export default{
 		color:#050505;
 		display: inherit;
 	}
+
 </style>

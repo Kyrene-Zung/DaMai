@@ -1,5 +1,6 @@
 <template>
-   <div style="background: #f2f2f2;">
+<transition name="rightIn">
+	   <div style="background: #f2f2f2;">
    		<i class="fa fa-rss" aria-hidden="true"></i>
    		<div class="map" id="allmap">
    			
@@ -33,6 +34,8 @@
    			</ul>
    		</div>
    </div>
+</transition>
+
 </template>
 
 <script type="es6">

@@ -8,6 +8,7 @@ class User
     {
      // echo input('cateID');
       $user_id=Request::instance()->param();
+      // print_r($user_id);exit();
       $user=$user_id['user_id'];
       $addressList=db('address')->where('user_id',$user)->select();
       return jsonp($addressList);

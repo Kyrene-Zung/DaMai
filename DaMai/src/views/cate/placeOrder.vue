@@ -223,11 +223,18 @@ import Vue from 'vue'
 						vm.totleTicket+=Number(vm.itemArray[i].num)
 						vm.totleMoney+=Number(vm.itemArray[i].price)*Number(vm.itemArray[i].num)
 					}
-					for(var i=0;i<vm.addressArr.length;i++){
-						if(vm.addressArr[i].status==1){
-							vm.address=vm.addressArr[i]
+					let userInfo=JSON.parse(localStorage.getItem('userInfo'))
+					console.log(userInfo.user_id);
+                    Vue.http.jsonp('api/mobile/User',{params:{user_id:userInfo.user_id}}).then(rtn=>{
+                          console.log(rtn.data);
+                          vm.setAddressArr(rtn.data);
+                          for(var i=0;i<vm.addressArr.length;i++){
+							if(vm.addressArr[i].status==1){
+								vm.address=vm.addressArr[i]
+							}
 						}
-					}
+                    })
+					
 				})
 			}
 		},
@@ -235,7 +242,7 @@ import Vue from 'vue'
 			...mapState(['goodsData','itemArray','userInfo','addressArr'])
 		},
 		methods: {
-			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase']),
+			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setAddressArr']),
 			//跳转添加收货地址
 			chooseAddress(){
 				// console.log(1111)

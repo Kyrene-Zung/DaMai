@@ -81,7 +81,7 @@ import Vue from 'vue'
 					}
 				}
 				console.log(this.addressArr);
-				this.$router.push({path: '/placeOrder',query:{address:address}})
+				this.$router.go(-1)
 			}
 		},
 	}

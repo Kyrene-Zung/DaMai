@@ -1,10 +1,13 @@
 <template>
+<transition name="rightIn">
 	<div style="background-color:#f2f2f2!important">	
 		<div class="chooseTime">
 			<p>选择时间</p>
 			<ul>
-				<li class="active"><span>2017-08-11</span><br/><span>周五 19:00</span></li>
-				<li><span>2017-08-12</span><br/><span>周六 19:00</span></li>
+				<li :class="{'active':time.status}" v-for="time in timeArr" @click="chooseTime(time)">
+					<span>{{time.date}}</span><br/><span>{{time.week}} {{time.time}}</span>
+				</li>
+				<!-- <li><span>2017-08-12</span><br/><span>周六 19:00</span></li> -->
 			</ul>
 		</div>
 
@@ -41,6 +44,8 @@
 			</div>
 		
 	</div>
+</transition>
+	
 </template>
 <script type="es6">
 import {mapMutations, mapState} from 'vuex'
@@ -52,13 +57,13 @@ import ticking from '../../components/cate/tick'
 			return{
 				popupVisible:false,
 				itemArr:[],
-				// goods_data:[]
+				// timeArr:[],
 				goods_attribute:[],
 				num:0,
 			}
 		},
 		computed:{
-			...mapState(['attributeData','itemArray']),
+			...mapState(['attributeData','itemArray','timeArr']),
 		},
 		created(){
 			this.setHeadTitle('选择商品')
@@ -82,38 +87,21 @@ import ticking from '../../components/cate/tick'
 					}else{
 						let goods_data=to.query.goods_data;
 						Vue.http.jsonp('api/mobile/Attribute',{params:{goods_id:goods_data.goods_id}}).then(rtn=>{
-							//console.log(rtn.data);
-							vm.goods_attribute=rtn.data;
-							vm.setAttributeData(vm.goods_attribute)
+							vm.setTimeArr(rtn.data)
+							for(var i=0;i<rtn.data.length;i++){
+								if(rtn.data[i].status==1){
+									Vue.http.jsonp('api/mobile/Attribute/price',{params:{time_id:rtn.data[i].time_id}}).then(rtn=>{
+										console.log(rtn.data)
+										vm.goods_attribute=rtn.data;
+										vm.setAttributeData(vm.goods_attribute)
+									})
+								}
+							}
+							
 						})
 				       // console.log(vm.goods); 			
 				   }
 				});
-			
-				// next(vm=>{
-				// 	console.log(vm.userInfo)
-				// 	if(vm.userInfo){
-				// 		if(typeof to.query.goods_data=='string'){ //返回上一页的时候
-				// 			//console.log(vm.itemArray);
-				// 			vm.goods_attribute=vm.attributeData	
-				// 			vm.itemArr=vm.itemArray	
-				// 			if(vm.itemArr.length!=0) {
-				// 				vm.popupVisible=true 			
-				// 			}
-				// 		}else{
-				// 			let goods_data=to.query.goods_data;
-				// 			Vue.http.jsonp('api/mobile/Attribute',{params:{goods_id:goods_data.goods_id}}).then(rtn=>{
-				// 				//console.log(rtn.data);
-				// 				vm.goods_attribute=rtn.data;
-				// 				vm.setAttributeData(vm.goods_attribute)
-				// 			})
-				// 	       // console.log(vm.goods); 			
-				// 	   }
-				//    }else{
-				// 		Toast("是否登录了？")
-				// 	}
-				// });
-			
 		},
 		watch:{
 			itemArr:function (newvalue,oldvalue){
@@ -152,8 +140,23 @@ import ticking from '../../components/cate/tick'
 					}
 				}
 			},
+			chooseTime(time){
+				console.log(1111)
+				for(var i=0;i<this.timeArr.length;i++){
+					this.timeArr[i].status=0;
+				}
+				time.status=1;
+				this.askPrice(time.time_id)
+			},
+			askPrice(time_id){
+				Vue.http.jsonp('api/mobile/Attribute/price',{params:{time_id:time_id}}).then(rtn=>{
+					console.log(rtn.data)
+					this.goods_attribute=rtn.data;
+					this.setAttributeData(rtn.data)
+				})
+			},
 			//映射方法
-			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setAttributeData','setItemArr']),
+			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setAttributeData','setItemArr','setTimeArr']),
 			//减一
 			minusNum(item){
 				if(item.num>1){
@@ -340,14 +343,17 @@ import ticking from '../../components/cate/tick'
 		margin-left: 0.3rem;
 		display: inline-block;
 		width: 1rem;
+		line-height: 0;
 	}
 	.choseItem li input{
 		width:1.5rem;
 		height: 1.5rem;
 		background-color: #e8e8e8;
+		vertical-align: middle;
 	}
 	.choseItem li input.minus{
 		margin-left: 7.25rem;
+
 	}
 	.choseItem li span.itemNum{
 		width:3rem;

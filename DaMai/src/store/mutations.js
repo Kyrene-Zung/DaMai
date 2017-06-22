@@ -39,5 +39,9 @@ export default {
   setAddressArr (state, addressArr) {
     state.addressArr = addressArr
     console.log(state.addressArr)
+  },
+  setTimeArr (state, timeArr) {
+    state.timeArr = timeArr
+    console.log(state.timeArr)
   }
 }

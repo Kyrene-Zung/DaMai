@@ -78,12 +78,6 @@ export default{
                     Vue.http.jsonp('api/mobile/User',{params:{user_id:user_id}}).then(rtn=>{
                           console.log(rtn.data);
                           this.setAddressArr(rtn.data);
-                          // vm.addressArr=rtn.data;
-                          // for(var i=0;i<vm.addressArr.length;i++){
-                          //   if(vm.addressArr[i].status==0){
-                          //     vm.address=vm.addressArr[i]
-                          //   }
-                          // }
                     })
 
               }else{

@@ -17,7 +17,8 @@ const store = new Vuex.Store({
     attributeData: null,
     itemArray: [],
     userInfo: [],
-    addressArr: []
+    addressArr: [],
+    timeArr: []
   },
   getters: {
     musicName: state => state.musicName,

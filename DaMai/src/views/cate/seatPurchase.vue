@@ -21,6 +21,7 @@
 			</ul>
 		</div>
 	</div>
+	
 </template>
 <script type="es6">
 import {mapMutations} from 'vuex'

@@ -4,12 +4,9 @@
           <mt-navbar v-model="active" >
             <mt-tab-item :id="0">全部分类</mt-tab-item>
             <mt-tab-item :id="cate.cate_id" v-for="(cate,index) in CateList">{{cate.cate_name}}</mt-tab-item>
-          <!--   <mt-tab-item id="tab-container2">选项二</mt-tab-item>
-            <mt-tab-item id="tab-container3">选项三</mt-tab-item> -->
           </mt-navbar>
 
           <mt-tab-container v-model="active" swipeable>
-
             <mt-tab-container-item :id="0" > <!-- 全部分类 -->
               <div class="cateList">
                 <ul>
@@ -24,19 +21,18 @@
                       <span class="price"><strong>{{goods.goods_price}}</strong> 元</span>
                     </div>
                   </div>
-
                   <p class="listDown">{{goods.goods_brief}}</p>
-                </li>
+                 </li>
                 </ul>
               </div>
             </mt-tab-container-item>
-
+            <!-- 其他分类 -->
             <mt-tab-container-item :id="cate.cate_id" v-for="(cate,index) in CateList">
               <div class="cateList">
                 <ul>
                  <li v-for="goods in goodsList">
                   <div class="listUp">
-                    <img :src="goods.goods_pic" @click="ticketDetail()">
+                    <img :src="goods.goods_pic" @click="ticketDetail(goods)">
                     <div class="description">
                       <h3>{{goods.goods_title}}</h3>
                       <p>时间：{{goods.show_time}}</p>
@@ -51,9 +47,6 @@
                 </ul>
               </div>
             </mt-tab-container-item>
-          <!--   <mt-tab-container-item id="tab-container3">
-              <mt-cell v-for="n in 7" title="tab-container 3"></mt-cell>
-            </mt-tab-container-item> -->
           </mt-tab-container>
       </div>
   </div>
@@ -99,14 +92,6 @@ export default{
           // console.log(value)
           // console.log(oldVal)
           slidePanel(3,value);
-       // if(value > oldVal){
-       //      slidePanel(3,value);
-       //       // console.log(3)
-       //    }else if(value<oldVal){
-       //      slidePanel(3,value);
-       //     //  console.log(-3)
-       //    }
-
           Vue.http.jsonp(apiUrl+'/mobile/goods',{params:{cate_id:value}}).then(rtn =>{ 
               //console.log(rtn.data)
               this.goodsList=rtn.data
@@ -121,14 +106,9 @@ export default{
       ...mapMutations (['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase']), // 映射方法
       init(){
         slideMenu()
-       //clickSlideMenu()
      }
    },
-  // filters:{ 
-  //   slideTap(id){
-  //     console.log(id);
-  //   }
-  // }
+
 }
 function slidePanel(len,index){
   var slider=document.getElementById('slideMenu2');//父盒子的宽度360px
