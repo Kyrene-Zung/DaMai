@@ -4,7 +4,7 @@
 		<div v-if="headFlag">
 			<mt-header fixed :title="headTitle" >
 			</mt-header>
-			<div class="location">
+			<div class="location" @click="location()">
 				<span>广州</span>  <i class="fa fa-chevron-down" aria-hidden="true"></i>
 			</div>
 			
@@ -44,6 +44,11 @@ export default {
   },
   components:{
   	ticking
+  },
+  methods:{
+  	location(){
+  		this.$router.push({'path':'/location'})
+  	}
   }
 }
 

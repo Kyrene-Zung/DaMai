@@ -130,7 +130,7 @@ export default{
     this.setHeadTitle('项目介绍') 
     this.setDetailHead(true)
     this.setBuyFoot(true)
-    this.setFlag(false) //不显示分类页面的尾部
+    // this.setFlag(false) //不显示分类页面的尾部
     this.setHeadFlag(false)  // 映射方法,进入该页面显示不同的头部
     this.setMapHead(false)
     this.setSeatPurchase(false)

@@ -68,6 +68,11 @@ let router = new Router({
       component: require('../views/find')
     },
     {
+      path: '/location',
+      name: 'location',
+      component: require('../views/location')
+    },
+    {
       path: '/mine/index',
       name: 'mine',
       component: require('../views/mine/index')

@@ -2,9 +2,9 @@ export default {
   setHeadTitle (state, title) {
     state.headTitle = title // 设置头部标题等于传过来的标题
   },
-  setFlag (state, flag) {
-    state.flag = flag // 设置三个主tab
-  },
+  // setFlag (state, flag) {
+  //   state.flag = flag // 设置三个主tab
+  // },
   setBuyFoot (state, buyFoot) {
     state.buyFoot = buyFoot // 设置详细页面购买尾部
   },
@@ -24,9 +24,9 @@ export default {
     state.goodsData = goodsData
     console.log(state.goodsData)
   },
-  setAttributeData (state, attributeData) {
-    state.attributeData = attributeData
-    // console.log(state.attributeData)
+  setPriceData (state, priceData) {
+    state.priceData = priceData
+    // console.log(state.priceData)
   },
   setItemArr (state, itemArray) {
     state.itemArray = itemArray

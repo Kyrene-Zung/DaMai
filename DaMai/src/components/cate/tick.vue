@@ -44,8 +44,8 @@
 			</div>
 			<mt-popup  position="top"  v-model="popupVisible" class="clickTime">
 				<mt-tab-container class="time">
-					<i class="fa fa-check" aria-hidden="true"></i><mt-cell title="2017-08-11 周五 19:00" />
-					<mt-cell title="2017-08-12 周六 19:00" />
+					<i class="fa fa-check" aria-hidden="true"></i><mt-cell :title="time.date+' '+time.week+' '+time.time" v-for="time in timeArr"/>
+					<!-- <mt-cell title="2017-08-12 周六 19:00" /> -->
 				</mt-tab-container>
 			</mt-popup>
 		</div>
@@ -66,7 +66,7 @@ export default {
   	}
   },
   computed: {//激活的时候
-    ...mapState(['headFlag','seatPurchase']), //映射属性
+    ...mapState(['headFlag','seatPurchase','timeArr']), //映射属性
   },
   mounted(){
 	  	this.init();

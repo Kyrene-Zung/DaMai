@@ -9,9 +9,9 @@
 				<span>全部价格</span><i class="fa fa-angle-down" aria-hidden="true"></i>
 			</div>
 			<ul class="priceDetail">
-				<li v-for="attribute in goods_attribute">
+				<li v-for="price in goods_price">
 					<i class="fa fa-archive" aria-hidden="true"></i>
-					<span>{{attribute.price}}</span>元
+					<span>{{price.price}}</span>元
 				</li>
 				<!-- <li><i class="fa fa-archive" aria-hidden="true"></i><span>1680</span>元</li>
 				<li><i class="fa fa-archive" aria-hidden="true"></i><span>1680</span>元</li>
@@ -24,7 +24,7 @@
 	
 </template>
 <script type="es6">
-import {mapMutations} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 import Vue from 'vue'
 import {Toast} from 'mint-ui'
 import ticking from '../../components/cate/tick'
@@ -32,7 +32,8 @@ import ticking from '../../components/cate/tick'
 		data(){
 			return{
 				goods_data:[],
-				goods_attribute:[]
+				goods_price:[],
+				time:{}
 			}
 		},
 		created(){
@@ -41,8 +42,11 @@ import ticking from '../../components/cate/tick'
 			this.setSeatPurchase(true)
 		    this.setDetailHead(false)
 			this.setBuyFoot(false)
-			this.setFlag(false)
+			// this.setFlag(false)
 		    this.setHeadFlag(false)
+		},
+		computed:{
+			...mapState(['timeArr','priceData'])
 		},
 		beforeRouteEnter(to,from,next){
 			//console.log(typeof to.query.goods_data);
@@ -51,21 +55,31 @@ import ticking from '../../components/cate/tick'
 				Toast("是否登录了？")
 						if(typeof to.query.goods_data=='string'){ //返回上一页的时候
 							//console.log(vm.itemArray);
-							vm.goods_attribute=vm.attributeData	
+							vm.goods_price=vm.priceData	
 							//vm.itemArr=vm.itemArray	
 						}else{
-							let goods_data=to.query.goods_data;console.log(goods_data);
-							Vue.http.jsonp('api/mobile/Attribute',{params:{goods_id:goods_data.goods_id}}).then(rtn=>{
+							let goods_data=to.query.goods_data;
+							Vue.http.jsonp('api/mobile/attribute',{params:{goods_id:goods_data.goods_id}}).then(rtn=>{
+								vm.setTimeArr(rtn.data)
+								for(var i=0;i<rtn.data.length;i++){
+									if(rtn.data[i].status==1){
+										//获取默认时间
+										vm.time=rtn.data[i];
+										//获取默认时间的价格
+										Vue.http.jsonp('api/mobile/attribute/price',{params:{time_id:rtn.data[i].time_id}}).then(rtn=>{
+											//console.log(rtn.data)
+											vm.goods_price=rtn.data;
+											vm.setPriceData(vm.goods_price)
+										})
+									}
+								}
 								
-								vm.goods_attribute=rtn.data;
-								vm.setAttributeData(vm.goods_attribute)
-							})
-					       // console.log(vm.goods); 			
+							})					
 					   }
 			});
 		},
 		methods: {
-			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setAttributeData']),
+			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setPriceData','setTimeArr']),
 			downOrUp(){
 				var faAngleDown=document.querySelector('.allPrice .fa');
 				var bottomPull=document.querySelector('.bottomPull');

@@ -1,7 +1,7 @@
 <template>
 	<div>
 	<!-- 分类页面显示的尾部 -->
-		<mt-tabbar style="position:fixed;" v-model="selected" v-show="flag">
+		<mt-tabbar style="position:fixed;" v-model="selected">
 	       <mt-tab-item id="tab1">
 	          <router-link to="/">推荐</router-link>
 	       </mt-tab-item>

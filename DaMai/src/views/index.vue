@@ -16,7 +16,7 @@ export default {
   },
    created(){
     this.setHeadTitle('分类')
-    this.setFlag(true) //不显示分类页面的尾部
+    // this.setFlag(true) //不显示分类页面的尾部
     this.setHeadFlag(true) 
     this.setDetailHead(false)
     this.setBuyFoot(false)

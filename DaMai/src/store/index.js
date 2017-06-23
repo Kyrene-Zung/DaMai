@@ -7,14 +7,14 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     headTitle: '',
-    flag: true,
+    // flag: true,
     headFlag: true,
     detailHead: true,
     buyFoot: true,
     mapHead: true,
     seatPurchase: true,
     goodsData: null,
-    attributeData: null,
+    priceData: null,
     itemArray: [],
     userInfo: [],
     addressArr: [],

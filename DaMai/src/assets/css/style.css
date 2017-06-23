@@ -16,7 +16,7 @@ ul,li{list-style: none;}
 .rightOut-enter{
 	transform: translate(360px,0);
 }
-
+/*商品详情页面*/
 .container .mint-cell-wrapper{
 	padding:0 !important;
 	text-align: left !important;
@@ -41,4 +41,22 @@ ul,li{list-style: none;}
 .limitBuy .mint-cell-title .mint-cell-text{
 	color:#080808 !important;
 	font-size: 0.7rem;
+}
+/*定位页面*/
+::-webkit-scrollbar{width:0px}
+.cityList .mint-indexlist .mint-indexlist-content{
+	/*overflow: inherit!important;*/
+	margin-right: 0!important;
+
+}
+.cityList .mint-indexlist .mint-indexlist-content .mint-indexsection-index{
+	background-color: #f1f5f4;
+}
+.cityList .mint-indexlist .mint-indexlist-content .mint-cell-wrapper{
+	background-image: none;
+}
+.cityList .mint-indexlist .mint-indexlist-nav{
+	background-color: transparent!important;
+	border-left:none!important;
+	position: fixed;
 }

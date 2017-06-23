@@ -14,35 +14,74 @@
 		<div class="choosePrice">
 			<p>选择价格</p>
 			<ul>
-				<li :class="{'sellOut':!attribute.ticket_left,'active':isActive(attribute.price)}" @click="clickPrice($event)" v-for="attribute in goods_attribute">
-				{{attribute.price}}
+				<li :class="{'sellOut':!price.ticket_left,'active':isActive(price.price)}" @click="clickPrice($event)" v-for="price in goods_price">
+				{{price.price}}
 				</li>
 
 			</ul>
 		</div>
-
-			<div v-model="popupVisible" position="bottom" class="buyIt">
-					<ul class="choseItem" style="display:block">  
-						<li v-for="item in itemArr">
-							<span class="itemPrice">{{item.price}}</span>
-							<input type="button" name="" value="-" class="minus" @click="minusNum(item)">
-							<span class="itemNum">{{item.num}}</span>
-							<input type="button" name="" value="+" class="add" @click="addNum(item)">
-							<i class="fa fa-times" aria-hidden="true" @click="clickCrow($event)"></i>
-						</li>
-					</ul>
-					<ul class="chooseDone" v-if="popupVisible">
-						<li class="left"> 
-							<span class="clickShow" @click="HideOrShow($event)"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
-							<span class="totle" v-model="itemArr">
-								{{itemArr | totlePrice}}<em>元</em>
-								<i>({{itemArr | totleNum}}张)</i>
-							</span>
-						</li>
-						<li class="right"><router-link to="/placeOrder">选好了</router-link></li>
-					</ul>
-			</div>
-		
+<!-- 选择不缺货票价弹出 -->
+		<div v-model="popupVisible" position="bottom" class="buyIt">
+			<ul class="choseItem" style="display:block">  
+				<li v-for="item in itemArr">
+					<span class="itemPrice">{{item.price}}</span>
+					<input type="button" name="" value="-" class="minus" @click="minusNum(item)">
+					<span class="itemNum">{{item.num}}</span>
+					<input type="button" name="" value="+" class="add" @click="addNum(item)">
+					<i class="fa fa-times" aria-hidden="true" @click="clickCrow($event)"></i>
+				</li>
+			</ul>
+			<ul class="chooseDone" v-if="popupVisible">
+				<li class="left"> 
+					<span class="clickShow" @click="HideOrShow($event)"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+					<span class="totle" v-model="itemArr">
+						{{itemArr | totlePrice}}<em>元</em>
+						<i>({{itemArr | totleNum}}张)</i>
+					</span>
+				</li>
+				<li class="right"><router-link to="/placeOrder">选好了</router-link></li>
+			</ul>
+		</div>
+<!-- 选择缺货票价弹出 -->
+		<mt-popup v-model="popupVisible2" position="bottom" class="outOfStock">
+		 	<div class="lackHeader">
+		 		<span>缺货登记</span><span>关闭</span>
+		 	</div>
+		 	<div class="lackBody">
+		 		<div class="lackMesg lackBorder">
+		 			<div class="lackContainer">
+		 				<h4>黎明Leon Random Run 2017演唱会（广州站）</h4>
+		 				<p>时间：2017.08.11-2017.08.12</p>
+		 				<div><span><em>380.0</em>元</span><span>暂时缺货</span></div>
+		 			</div>
+		 		</div>
+		 		<div class="lackInput">
+		 			<div class="lackContainer lackBorder">
+		 				<input type="" name="" placeholder="请输入真是号码，方便我们与您联系">
+		 			</div>
+		 		</div>
+		 		<div class="reminder">
+		 			<div class="lackContainer">
+		 				<p>温馨提示:我们会记录您的基本信息，待到货时我们会第一时间通知您，若始终缺货，大麦网将不做另行通知。</p>
+		 			</div>
+		 		</div>
+		 		<div class="lackLink lackBorder">
+		 			<div class="lackContainer">
+		 				<div class="piaoHu">
+		 					<div class="huLogo"><img src=""></div>
+		 					<div class="huText">
+		 						<p>没有票？登记还靠碰运气！</p>
+		 						<p>去票乎看看，多档价位任你淘！</p>
+		 					</div>
+		 					<div class="goTao"><a href="">去淘票</a></div>
+		 				</div>
+		 			</div>
+		 		</div>
+		 		<div class="lackButton">
+		 			<div class="lackContainer">提交</div>
+		 		</div>
+		 	</div>
+		</mt-popup>		
 	</div>
 </transition>
 	
@@ -56,14 +95,15 @@ import ticking from '../../components/cate/tick'
 		data(){
 			return{
 				popupVisible:false,
-				itemArr:[],
-				// timeArr:[],
-				goods_attribute:[],
+				popupVisible2:false,
+				itemArr:[],//选择购买的商品属性
+				time:{},//选择购买的时间
+				goods_price:[],
 				num:0,
 			}
 		},
 		computed:{
-			...mapState(['attributeData','itemArray','timeArr']),
+			...mapState(['priceData','itemArray','timeArr']),
 		},
 		created(){
 			this.setHeadTitle('选择商品')
@@ -71,7 +111,7 @@ import ticking from '../../components/cate/tick'
 			this.setSeatPurchase(true)
 		    this.setDetailHead(false)
 			this.setBuyFoot(false)
-			this.setFlag(false)
+			// this.setFlag(false)
 		    this.setHeadFlag(false)
 		},
 		beforeRouteEnter(to,from,next){
@@ -79,32 +119,35 @@ import ticking from '../../components/cate/tick'
 			next(vm=>{
 					if(typeof to.query.goods_data=='string'){ //返回上一页的时候
 						//console.log(vm.itemArray);
-						vm.goods_attribute=vm.attributeData	
-						vm.itemArr=vm.itemArray	
+						vm.goods_price=vm.priceData	
+						vm.itemArr=vm.itemArray	//选择购买的商品属性
 						if(vm.itemArr.length!=0) {
 							vm.popupVisible=true 			
 						}
 					}else{
 						let goods_data=to.query.goods_data;
-						Vue.http.jsonp('api/mobile/Attribute',{params:{goods_id:goods_data.goods_id}}).then(rtn=>{
+						//获取时间
+						Vue.http.jsonp('api/mobile/attribute',{params:{goods_id:goods_data.goods_id}}).then(rtn=>{
 							vm.setTimeArr(rtn.data)
 							for(var i=0;i<rtn.data.length;i++){
 								if(rtn.data[i].status==1){
-									Vue.http.jsonp('api/mobile/Attribute/price',{params:{time_id:rtn.data[i].time_id}}).then(rtn=>{
-										console.log(rtn.data)
-										vm.goods_attribute=rtn.data;
-										vm.setAttributeData(vm.goods_attribute)
+									//获取默认时间
+									vm.time=rtn.data[i];
+									//获取默认时间的价格
+									Vue.http.jsonp('api/mobile/attribute/price',{params:{time_id:rtn.data[i].time_id}}).then(rtn=>{
+										//console.log(rtn.data)
+										vm.goods_price=rtn.data;
+										vm.setPriceData(vm.goods_price)
 									})
 								}
 							}
 							
-						})
-				       // console.log(vm.goods); 			
+						})			
 				   }
 				});
 		},
 		watch:{
-			itemArr:function (newvalue,oldvalue){
+			itemArr:function (newvalue,oldvalue){//选择购买的商品属性改变时，就改变setItemArr
 				this.setItemArr(newvalue);
 				// console.log(newvalue)
 			}
@@ -128,7 +171,7 @@ import ticking from '../../components/cate/tick'
 			}
 		},
 		methods: {
-			isActive(price){
+			isActive(price){ //控制选好价格提交后返回的价格样式
 				//console.log(price)
 				//console.log(this.itemArr)
 				for(var i=0;i<this.itemArr.length;i++){
@@ -140,23 +183,26 @@ import ticking from '../../components/cate/tick'
 					}
 				}
 			},
-			chooseTime(time){
-				console.log(1111)
-				for(var i=0;i<this.timeArr.length;i++){
+			chooseTime(time){ //点击事件请求api获取价格
+				this.itemArr=[]
+				for(var i=0;i<this.timeArr.length;i++){ //去掉所有点击样式
 					this.timeArr[i].status=0;
 				}
+				this.popupVisible=false
+				this.time=time;
+				console.log(this.time)
 				time.status=1;
 				this.askPrice(time.time_id)
 			},
 			askPrice(time_id){
-				Vue.http.jsonp('api/mobile/Attribute/price',{params:{time_id:time_id}}).then(rtn=>{
+				Vue.http.jsonp('api/mobile/attribute/price',{params:{time_id:time_id}}).then(rtn=>{
 					console.log(rtn.data)
-					this.goods_attribute=rtn.data;
-					this.setAttributeData(rtn.data)
+					this.goods_price=rtn.data;
+					this.setPriceData(rtn.data)
 				})
 			},
 			//映射方法
-			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setAttributeData','setItemArr','setTimeArr']),
+			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setPriceData','setItemArr','setTimeArr']),
 			//减一
 			minusNum(item){
 				if(item.num>1){
@@ -178,28 +224,22 @@ import ticking from '../../components/cate/tick'
 				// var choseItem=document.querySelector('.choseItem');//以选价格列表
 				//点击价格li，判断有没有sellOut样式（在渲染界面是加）
 				if(clickItem.className=='sellOut'){
-							//弹出。。。
+							this.popupVisible2=true
 				}else if(clickItem.className=='active'){
 					clickItem.className=""
 					for(var i=0;i<this.itemArr.length;i++){
 						if(clickItem.innerHTML==this.itemArr[i].price){
-							this.itemArr.splice(i,1);
+							this.itemArr.splice(i,1);//控制订单列表
 							if(this.itemArr.length==0){
-								//var chooseDone=document.querySelector('.chooseDone');
-								//chooseDone.style.display="none";
 								this.popupVisible=false
 							}					
 						}
 					}
 				}else{
-					
-						//var chooseDone=document.querySelector('.chooseDone');
-						//chooseDone.style.display="block";
+					//点击购买商品属性
 					this.popupVisible=true
-				
-					//clickItem.className="active";
-					this.itemArr.unshift({price:clickItem.innerHTML,num:1});
-					//console.log(this.itemArr)
+					this.itemArr.push({time:this.time,price:clickItem.innerHTML,num:1});
+					// console.log(this.itemArr)
 				}
 
 			},
@@ -248,7 +288,7 @@ import ticking from '../../components/cate/tick'
 
 
 </script>
-<style type="text/css" scoped>
+<style lang="scss" scoped>
 	*{
 		margin: 0;
 		padding:0;
@@ -430,5 +470,135 @@ import ticking from '../../components/cate/tick'
 	}
 	.chooseDone li.right a{
 		color:#fff;
+	}
+/***缺货****/
+	// 公共样式
+	.lackContainer{
+		width: 16.8rem;
+		margin:auto;
+	}
+	.lackBorder{
+		border-bottom: 1px solid #eeeeee;
+		box-shadow: 0px 1px 0px #f7f7f7;
+	}
+	//主样式
+	.outOfStock{
+		width: 100%;
+		.lackHeader{
+			height: 2.25rem;
+			line-height: 2.25rem;
+			background-color:#e31c45;
+			span{
+				font-size: 0.75rem;
+				color:#fff;
+				&:nth-child(1){
+					margin-left: 0.6rem;
+				}
+				&:nth-child(2){
+					margin-left: 12rem;
+				}
+			}
+		}
+		.lackBody{
+			.lackMesg{
+				h4{
+					font-size: 0.75rem;
+					font-weight: 500;
+				    padding:0.75rem 0;
+				}
+				p{
+					color: #494949;
+					padding-bottom:0.5rem;
+				}
+				div{
+					padding-bottom: 0.25rem;
+					span{
+						font-size: 0.6rem;
+						color: #d40c35;
+						em{
+							font-style: normal;
+							font-size: 0.7rem;
+						}
+						&:nth-child(2){
+							// display: inline-block;
+							// width: 
+							padding:0.3rem 0.25rem;
+							background-color: #494949;
+							color: #fff;
+							margin-left: 10rem;
+						}
+					}
+				}
+			}
+			.lackInput{
+				margin-top: 1rem;
+				input{
+					width: 100%;
+					border:none;
+					font-size: 0.65rem;
+					padding-bottom: 0.4rem;
+					padding-left: 3rem;
+				}
+			}
+			.reminder{
+				background-color: #f8f8f8;
+				padding:0.5rem 0;
+				p{
+					color: #707070;
+				}
+			}
+			.lackLink{
+				padding: 0.75rem 0;
+				.lackContainer{
+					background-color:#f8f8f8; 
+					.piaoHu{
+						font-size: 0.6rem;
+						width: 15.4rem;
+						margin:auto;
+						height: 2rem;
+						.huLogo{
+							float: left;
+							height: 100%;
+							width: 2rem;
+							img{
+								height: 100%;
+								width:100%; 
+							}
+						}
+						.huText{
+							margin-left: 0.25rem;
+							float: left;
+							p{
+								&:nth-child(1){color: #c31416;}
+								&:nth-child(2){color: #010101;}
+							}
+						}
+						.goTao{
+							float: right;
+							border:2px solid #eeeeee;
+							border-radius: 5px;
+							margin:0.5rem 0;
+							a{
+								font-size: 0.6rem;
+								color: #c31416;
+								padding:0.3rem 0.35rem;
+							}
+						}
+					}
+				}
+			}
+			.lackButton{
+				overflow: hidden;
+				padding:0.5rem 0;
+				.lackContainer{
+					height: 2.3rem;
+					background-color: #e31c45;
+					text-align: center;
+					line-height: 2.3rem;
+					color: #fff;
+					font-size: 0.8rem;
+				}
+			}
+		}
 	}
 </style>

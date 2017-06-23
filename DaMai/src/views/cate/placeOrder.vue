@@ -6,7 +6,7 @@
 					<img :src="goodsData.goods_pic">
 					<div class="goodsDetail">
 						<h4>{{goodsData.goods_title}}</h4>
-						<p>时间：{{goodsData.show_time}}</p>
+						<p>时间：{{itemArray[0].time.date}} {{itemArray[0].time.week}} {{itemArray[0].time.time}}</p>
 						<p>地点：{{goodsData.venue}}</p>
 					</div>
 				</div>
@@ -21,16 +21,6 @@
 					<span>X{{ticket.num}}</span>
 					<span>{{ticket.price*ticket.num}}元</span>
 				</li>
-				<!-- <li>
-					<span>1680</span>
-					<span>X1111</span>
-					<span>1680111元</span>
-				</li>
-				<li>
-					<span>1680</span>
-					<span>X1111</span>
-					<span>1680111元</span>
-				</li> -->
 			</ul>
 		</div>
 
@@ -204,7 +194,7 @@ import Vue from 'vue'
 			this.setSeatPurchase(true)
 		    this.setDetailHead(false)
 			this.setBuyFoot(false)
-			this.setFlag(false)
+			// this.setFlag(false)
 		    this.setHeadFlag(false)
 		},
 		beforeRouteEnter(to,from,next){

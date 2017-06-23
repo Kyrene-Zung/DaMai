@@ -46,7 +46,7 @@ import {mapState, mapMutations} from 'vuex'
 			this.setMapHead(true)
 		    this.setDetailHead(false)
 			this.setBuyFoot(false)
-			this.setFlag(false)
+			// this.setFlag(false)
 		    this.setHeadFlag(false)
 		    this.setSeatPurchase(false)
 		    //map();

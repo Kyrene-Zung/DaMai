@@ -4,7 +4,7 @@
 
       <router-view></router-view>
 
-    <footing></footing>
+    <footing v-if="$route.path=='/'||$route.path=='/category'||$route.path=='/find'||$route.path=='/mine/index'"></footing>
   </div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
     }
   },
   computed: {//激活的时候
-    ...mapState(['headTitle','flag']) //映射属性
+    ...mapState(['headTitle']) //映射属性
   },
   components: {
     heading,
