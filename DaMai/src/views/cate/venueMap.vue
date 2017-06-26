@@ -63,7 +63,7 @@ import {mapState, mapMutations} from 'vuex'
 			...mapState(['goodsData'])
 		},
 		methods: {
-			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase'])
+			...mapMutations(['setHeadTitle','setMapHead','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase'])
 		}
 
 	}

@@ -1,7 +1,7 @@
 <template>
 	<div>
 	<!-- 分类页面显示的头部 -->
-		<div v-if="headFlag">
+		<div v-if="$route.path=='/category'">
 			<mt-header fixed :title="headTitle" >
 			</mt-header>
 			<div class="location" @click="location()">
@@ -13,7 +13,7 @@
 		</div>
 
 	<!-- 商品详情页面显示的头部 -->
-		<div v-if="detailHead">
+		<div v-if="$route.path=='/ticketDetail'">
 			<mt-header fixed :title="headTitle"  class="headStyle">
 			</mt-header>
 			<mt-button icon="back" @click.native="$router.go(-1)"></mt-button>
@@ -21,15 +21,17 @@
 			<i class="fa fa-paper-plane-o"></i>
 		</div>
 	<!-- 粉紫色头部 -->
-	
-		<div  v-if="mapHead" >
+		<div  v-if="$route.path=='/seatPurchase'||$route.path=='/buyNow'||$route.path=='/placeOrder'||$route.path=='/chooseAddress'||$route.path=='/addAddress'||$route.path=='/pay'||$route.path=='/orderDetail'" >
 			<mt-header fixed :title="headTitle"  class="mapHead">
 			</mt-header>
 			<mt-button icon="back" @click.native="$router.go(-1)" class="mapBack"></mt-button>
 		</div>
-	
-		
-		
+	<!-- 大麦订单头部 -->
+		<div  v-if="$route.path=='/damaiOrder'" >
+			<mt-header fixed :title="headTitle"  class="mapHead">
+			</mt-header>
+			<mt-button icon="back" @click.native="$router.push({path:'/mine/index'})" class="mapBack"></mt-button>
+		</div>
 	</div>
 	
 </template>

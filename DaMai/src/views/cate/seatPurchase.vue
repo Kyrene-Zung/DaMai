@@ -79,7 +79,7 @@ import ticking from '../../components/cate/tick'
 			});
 		},
 		methods: {
-			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setPriceData','setTimeArr']),
+			...mapMutations(['setHeadTitle','setMapHead','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setPriceData','setTimeArr']),
 			downOrUp(){
 				var faAngleDown=document.querySelector('.allPrice .fa');
 				var bottomPull=document.querySelector('.bottomPull');

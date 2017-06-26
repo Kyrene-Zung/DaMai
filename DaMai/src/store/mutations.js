@@ -22,7 +22,7 @@ export default {
   },
   setGoodsData (state, goodsData) {
     state.goodsData = goodsData
-    console.log(state.goodsData)
+    // console.log(state.goodsData)
   },
   setPriceData (state, priceData) {
     state.priceData = priceData
@@ -34,14 +34,14 @@ export default {
   },
   setUserInfo (state, userInfo) {
     state.userInfo = userInfo
-    console.log(state.userInfo)
+    // console.log(state.userInfo)
   },
   setAddressArr (state, addressArr) {
     state.addressArr = addressArr
-    console.log(state.addressArr)
+    // console.log(state.addressArr)
   },
   setTimeArr (state, timeArr) {
     state.timeArr = timeArr
-    console.log(state.timeArr)
+    // console.log(state.timeArr)
   }
 }

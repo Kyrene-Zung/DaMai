@@ -11,6 +11,7 @@ import './assets/css/mui.min.css'
 import './assets/css/style.css'
 import './assets/css/animated.css'
 import './assets/lib/fontasome/css/font-awesome.min.css'
+import $ from 'jquery'
 // import './assets/lib/jquery/jquery.min.js'
 // import './assets/js/wow.js'
 
@@ -26,6 +27,7 @@ new Vue({
   router,
   store,
   APIUrl,
+  $,
   template: '<App/>',
   components: { App }
 })

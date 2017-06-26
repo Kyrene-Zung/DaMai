@@ -1,4 +1,4 @@
-<template>
+ <template>
 <transition name="rightIn">
 	<div style="background-color:#f2f2f2!important">	
 		<div class="chooseTime">
@@ -14,7 +14,7 @@
 		<div class="choosePrice">
 			<p>选择价格</p>
 			<ul>
-				<li :class="{'sellOut':!price.ticket_left,'active':isActive(price.price)}" @click="clickPrice($event)" v-for="price in goods_price">
+				<li :class="{'sellOut':!price.ticket_left,'active':isActive(price.price)}" @click="clickPrice($event,price)" v-for="price in goods_price">
 				{{price.price}}
 				</li>
 
@@ -45,14 +45,14 @@
 <!-- 选择缺货票价弹出 -->
 		<mt-popup v-model="popupVisible2" position="bottom" class="outOfStock">
 		 	<div class="lackHeader">
-		 		<span>缺货登记</span><span>关闭</span>
+		 		<span>缺货登记</span><span @click="close()">关闭</span>
 		 	</div>
 		 	<div class="lackBody">
 		 		<div class="lackMesg lackBorder">
 		 			<div class="lackContainer">
 		 				<h4>黎明Leon Random Run 2017演唱会（广州站）</h4>
 		 				<p>时间：2017.08.11-2017.08.12</p>
-		 				<div><span><em>380.0</em>元</span><span>暂时缺货</span></div>
+		 				<div><span><em>{{lackPrice}}.0</em>元</span><span>暂时缺货</span></div>
 		 			</div>
 		 		</div>
 		 		<div class="lackInput">
@@ -99,7 +99,7 @@ import ticking from '../../components/cate/tick'
 				itemArr:[],//选择购买的商品属性
 				time:{},//选择购买的时间
 				goods_price:[],
-				num:0,
+				lackPrice:'',
 			}
 		},
 		computed:{
@@ -115,7 +115,7 @@ import ticking from '../../components/cate/tick'
 		    this.setHeadFlag(false)
 		},
 		beforeRouteEnter(to,from,next){
-			 console.log(to.query);
+			 //console.log(to.query);
 			next(vm=>{
 					if(typeof to.query.goods_data=='string'){ //返回上一页的时候
 						//console.log(vm.itemArray);
@@ -126,15 +126,15 @@ import ticking from '../../components/cate/tick'
 						}
 					}else{
 						let goods_data=to.query.goods_data;
-						//获取时间
-						Vue.http.jsonp('api/mobile/attribute',{params:{goods_id:goods_data.goods_id}}).then(rtn=>{
+						//获取该商品的属性：时间
+						Vue.http.jsonp('api/mobile/Goods/goodsTime',{params:{goods_id:goods_data.goods_id}}).then(rtn=>{
 							vm.setTimeArr(rtn.data)
 							for(var i=0;i<rtn.data.length;i++){
 								if(rtn.data[i].status==1){
 									//获取默认时间
 									vm.time=rtn.data[i];
 									//获取默认时间的价格
-									Vue.http.jsonp('api/mobile/attribute/price',{params:{time_id:rtn.data[i].time_id}}).then(rtn=>{
+									Vue.http.jsonp('api/mobile/Goods/goodsPrice',{params:{time_id:rtn.data[i].time_id}}).then(rtn=>{
 										//console.log(rtn.data)
 										vm.goods_price=rtn.data;
 										vm.setPriceData(vm.goods_price)
@@ -165,6 +165,9 @@ import ticking from '../../components/cate/tick'
 				let totleNum=0;
 				for(var i=0;i<arr.length;i++){
 					totleNum+=arr[i].num;
+					if(totleNum>5){
+						Toast('不能购买超过5张票！')
+					}
 					// this.num+=arr[i].num
 				}
 				return totleNum;
@@ -183,40 +186,27 @@ import ticking from '../../components/cate/tick'
 					}
 				}
 			},
-			chooseTime(time){ //点击事件请求api获取价格
-				this.itemArr=[]
+			chooseTime(time){ //点击选择时间事件请求api获取价格
+				//console.log(this.time)
+				this.itemArr=[] //清空选择的商品属性
 				for(var i=0;i<this.timeArr.length;i++){ //去掉所有点击样式
 					this.timeArr[i].status=0;
 				}
 				this.popupVisible=false
 				this.time=time;
-				console.log(this.time)
+				// console.log(this.time)
 				time.status=1;
 				this.askPrice(time.time_id)
 			},
 			askPrice(time_id){
-				Vue.http.jsonp('api/mobile/attribute/price',{params:{time_id:time_id}}).then(rtn=>{
-					console.log(rtn.data)
+				Vue.http.jsonp('api/mobile/Goods/goodsPrice',{params:{time_id:time_id}}).then(rtn=>{
+					// console.log(rtn.data)
 					this.goods_price=rtn.data;
 					this.setPriceData(rtn.data)
 				})
 			},
-			//映射方法
-			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setPriceData','setItemArr','setTimeArr']),
-			//减一
-			minusNum(item){
-				if(item.num>1){
-						item.num--;
-				}else{
-					Toast('disabled!')
-				}
-			},
-			//加一
-			addNum(item){
-				item.num++;
-			},
 			//点击价格
-			clickPrice(event){
+			clickPrice(event,price){
 				
 				var clickItem=event.currentTarget;
 				//console.log(event);
@@ -224,7 +214,8 @@ import ticking from '../../components/cate/tick'
 				// var choseItem=document.querySelector('.choseItem');//以选价格列表
 				//点击价格li，判断有没有sellOut样式（在渲染界面是加）
 				if(clickItem.className=='sellOut'){
-							this.popupVisible2=true
+					this.popupVisible2=true
+					this.lackPrice=price.price //缺货的价格
 				}else if(clickItem.className=='active'){
 					clickItem.className=""
 					for(var i=0;i<this.itemArr.length;i++){
@@ -238,7 +229,9 @@ import ticking from '../../components/cate/tick'
 				}else{
 					//点击购买商品属性
 					this.popupVisible=true
-					this.itemArr.push({time:this.time,price:clickItem.innerHTML,num:1});
+					var obj=Object.assign({},this.time,{price:price.price,num:1})
+					// let obj=$.extend(this.time,{price:clickItem.innerHTML,num:1})
+					this.itemArr.unshift(obj);
 					// console.log(this.itemArr)
 				}
 
@@ -267,6 +260,23 @@ import ticking from '../../components/cate/tick'
 				}
 
 			},
+			//减一
+			minusNum(item){
+				if(item.num>1){
+					item.num--
+					var index=this.itemArr.indexOf(item)
+					this.itemArr[index].num=item.num	
+				}else{
+					Toast('disabled!')
+				}
+			},
+			//加一
+			addNum(item){
+				item.num++
+				var index=this.itemArr.indexOf(item)
+				this.itemArr[index].num=item.num
+			},
+			
 			//点击隐藏/显示
 			HideOrShow(event){
 				var choseItem=document.querySelector('.choseItem')
@@ -279,7 +289,12 @@ import ticking from '../../components/cate/tick'
 					choseItem.style.display='none'
 					clickItem.childNodes[0].className="fa fa-angle-up"
 				}
-			}
+			},
+			close(){//关闭缺货登记
+				this.popupVisible2=false;
+			},
+			//映射方法
+			...mapMutations(['setHeadTitle','setMapHead','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setPriceData','setItemArr','setTimeArr']),
 		},
 		components:{
 			ticking

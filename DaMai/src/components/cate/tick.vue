@@ -1,7 +1,7 @@
 <template>
 	<div>
 	<!-- 分类排序 -->
-		<div v-if="headFlag">
+		<div v-if="$route.path=='/category'">
 			<div class="range" v-if="headFlag" @click="clickRange()">
 				<i class="fa fa-angle-double-down" aria-hidden="true"></i>
 			</div>
@@ -36,7 +36,7 @@
 		</div>
 
 	<!-- 选座购买选时间 -->
-		<div v-if="seatPurchase">
+		<div v-if="$route.path=='/seatPurchase'">
 			<div class="pushDown"  @click="clickTriangle()">
 				<div class="push">
 					<span class="date">2017-08-11 周五 19:00</span><span class="triangle"></span>

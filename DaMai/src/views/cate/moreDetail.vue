@@ -104,7 +104,7 @@ import {mapMutations} from 'vuex'
 		    this.setSeatPurchase(false)
 		},
 		methods: {
-			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase'])
+			...mapMutations(['setHeadTitle','setMapHead','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase'])
 		}
 
 	}

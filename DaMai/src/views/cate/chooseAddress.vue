@@ -66,7 +66,7 @@ import Vue from 'vue'
 			//});
 		},
 		methods: {
-			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase']),
+			...mapMutations(['setHeadTitle','setMapHead','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase']),
 			addAddress(){
 				//console.log(1111)
 				this.$router.push({path: '/addAddress'})

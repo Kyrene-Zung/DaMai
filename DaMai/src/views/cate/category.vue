@@ -7,25 +7,25 @@
           </mt-navbar>
 
           <mt-tab-container v-model="active" swipeable>
-            <mt-tab-container-item :id="0" > <!-- 全部分类 -->
-              <div class="cateList">
-                <ul>
-                 <li v-for="goods in goodsList"  @click="ticketDetail(goods)">
-                  <div class="listUp">
-                    <img :src="goods.goods_pic">
-                    <div class="description">
-                      <h3>{{goods.goods_title}}</h3>
-                      <p>时间：{{goods.show_time}}</p>
-                      <p>场馆：{{goods.venue}}</p>
-                      <span class="onSale">售票中</span>
-                      <span class="price"><strong>{{goods.goods_price}}</strong> 元</span>
+              <mt-tab-container-item :id="0" > <!-- 全部分类 -->
+                <div class="cateList">
+                  <ul>
+                   <li v-for="goods in goodsList"  @click="ticketDetail(goods)">
+                    <div class="listUp">
+                      <img :src="goods.goods_pic">
+                      <div class="description">
+                        <h3>{{goods.goods_title}}</h3>
+                        <p>时间：{{goods.show_time}}</p>
+                        <p>场馆：{{goods.venue}}</p>
+                        <span class="onSale">售票中</span>
+                        <span class="price"><strong>{{goods.goods_price}}</strong> 元</span>
+                      </div>
                     </div>
-                  </div>
-                  <p class="listDown">{{goods.goods_brief}}</p>
-                 </li>
-                </ul>
-              </div>
-            </mt-tab-container-item>
+                    <p class="listDown">{{goods.goods_brief}}</p>
+                   </li>
+                  </ul>
+                </div>
+              </mt-tab-container-item>
             <!-- 其他分类 -->
             <mt-tab-container-item :id="cate.cate_id" v-for="(cate,index) in CateList">
               <div class="cateList">
@@ -103,7 +103,7 @@ export default{
        // console.log(goods);
         this.$router.push({path: '/ticketDetail',query:{goods:goods}})
      },
-      ...mapMutations (['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase']), // 映射方法
+      ...mapMutations (['setHeadTitle','setMapHead','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase']), // 映射方法
       init(){
         slideMenu()
      }

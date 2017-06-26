@@ -101,7 +101,7 @@
 
 				  		</div>
 				  		<div class="radio">
-				  			<input type="radio" name="payway">
+				  			<input type="radio" name="payway" value="支付宝"  checked @click="choosePay($event)">
 				  		</div>
 				  </div>					
 				</div>
@@ -112,8 +112,8 @@
 				  			<span>微信支付</span>
 				  			<p>推荐已安装微信大的用户使用</p>
 				  		</div>
-				  		<div class="radio">
-				  			<input type="radio" name="payway">
+				  		<div class="radio" >
+				  			<input type="radio" name="payway" value="微信支付" @click="choosePay($event)">
 				  		</div>
 				  </div>					
 				</div>
@@ -125,7 +125,7 @@
 				  			<p>大麦钱包支付</p>
 				  		</div>
 				  		<div class="radio">
-				  			<input type="radio" name="payway">
+				  			<input type="radio" name="payway" value="电子钱包"  @click="choosePay($event)">
 				  		</div>
 				  </div>					
 				</div>
@@ -137,7 +137,7 @@
 				  			<p>支持储蓄卡、信用卡，无需开通网银</p>
 				  		</div>
 				  		<div class="radio">
-				  			<input type="radio" name="payway">
+				  			<input type="radio" name="payway" value="银联WAP"  @click="choosePay($event)">
 				  		</div>
 				  </div>					
 				</div>
@@ -169,7 +169,7 @@
 				<li class="left"> 
 					<span>应付：<em>{{totleMoney}}</em> <i>元</i></span>
 				</li>
-				<li class="right"><router-link to="/placeOrder">同意以上协议</router-link></li>
+				<li class="right"><router-link :to="{path:'securitySure',query:{payWay:payWay,address:address}}">同意以上协议</router-link></li>
 			</ul>
 		</div>
 	</div>
@@ -185,12 +185,12 @@ import Vue from 'vue'
 				totleMoney:0,
 				// addressArr:[],
 				address:'',
-				showWay:false
+				showWay:false,
+				payWay:'支付宝'
 			}
 		},
 		created(){
 			this.setHeadTitle('提交订单')
-			this.setMapHead(true)
 			this.setSeatPurchase(true)
 		    this.setDetailHead(false)
 			this.setBuyFoot(false)
@@ -198,7 +198,7 @@ import Vue from 'vue'
 		    this.setHeadFlag(false)
 		},
 		beforeRouteEnter(to,from,next){
-			console.log(typeof to.query.address);
+			//console.log(typeof to.query.address);
 			if(to.query.address){
 				next(vm=>{
 					for(var i=0;i<vm.itemArray.length;i++){
@@ -214,9 +214,9 @@ import Vue from 'vue'
 						vm.totleMoney+=Number(vm.itemArray[i].price)*Number(vm.itemArray[i].num)
 					}
 					let userInfo=JSON.parse(localStorage.getItem('userInfo'))
-					console.log(userInfo.user_id);
+					//console.log(userInfo.user_id);
                     Vue.http.jsonp('api/mobile/User',{params:{user_id:userInfo.user_id}}).then(rtn=>{
-                          console.log(rtn.data);
+                          //console.log(rtn.data);
                           vm.setAddressArr(rtn.data);
                           for(var i=0;i<vm.addressArr.length;i++){
 							if(vm.addressArr[i].status==1){
@@ -232,7 +232,7 @@ import Vue from 'vue'
 			...mapState(['goodsData','itemArray','userInfo','addressArr'])
 		},
 		methods: {
-			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setAddressArr']),
+			...mapMutations(['setHeadTitle','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setAddressArr']),
 			//跳转添加收货地址
 			chooseAddress(){
 				// console.log(1111)
@@ -244,6 +244,10 @@ import Vue from 'vue'
 				}else{
 					this.showWay=true;
 				}
+			},
+			choosePay(event){
+				// console.log();
+				this.payWay=event.currentTarget.value;
 			}
 		},
 	}

@@ -63,6 +63,16 @@ let router = new Router({
       component: require('../views/cate/addAddress')
     },
     {
+      path: '/securitySure',
+      name: 'securitySure',
+      component: require('../views/cate/securitySure')
+    },
+    {
+      path: '/pay',
+      name: 'pay',
+      component: require('../views/cate/pay')
+    },
+    {
       path: '/find',
       name: 'find',
       component: require('../views/find')
@@ -71,6 +81,16 @@ let router = new Router({
       path: '/location',
       name: 'location',
       component: require('../views/location')
+    },
+    {
+      path: '/damaiOrder',
+      name: 'damaiOrder',
+      component: require('../views/mine/order/damaiOrder')
+    },
+    {
+      path: '/orderDetail',
+      name: 'orderDetail',
+      component: require('../views/mine/order/orderDetail')
     },
     {
       path: '/mine/index',

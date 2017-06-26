@@ -69,7 +69,7 @@ import Vue from 'vue'
 			});
 		},
 		methods: {
-			...mapMutations(['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setAddressArr']),
+			...mapMutations(['setHeadTitle','setMapHead','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setAddressArr']),
 			//保存收货地址
 			addAddress(){
 				

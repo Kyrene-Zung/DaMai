@@ -60,3 +60,12 @@ ul,li{list-style: none;}
 	border-left:none!important;
 	position: fixed;
 }
+/*付款页面*/
+.mesgList .payContainer .mint-cell .mint-cell-text{
+	color:#959595;
+	font-size: 0.75rem;
+}
+.mesgList .payContainer .mint-cell .mint-cell-value{
+	color:#545454;
+	font-size: 0.75rem;
+}

@@ -136,7 +136,7 @@ export default{
     this.setSeatPurchase(false)
   },
   methods: {
-    ...mapMutations(['setFlag','setHeadFlag','setHeadTitle','setBuyFoot','setDetailHead','setMapHead','setSeatPurchase','setGoodsData']), // 映射方法
+    ...mapMutations(['setHeadFlag','setHeadTitle','setBuyFoot','setDetailHead','setMapHead','setSeatPurchase','setGoodsData']), // 映射方法
     alertSeat(){
     	this.popupVisible=true;
     },
