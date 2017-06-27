@@ -72,12 +72,6 @@ export default{
   },
   created(){
     this.setHeadTitle('分类')
-      // this.setFlag(true) //不显示分类页面的尾部
-      this.setHeadFlag(true) 
-      this.setDetailHead(false)
-      this.setBuyFoot(false)
-      this.setMapHead(false)
-      this.setSeatPurchase(false)
        Vue.http.jsonp(apiUrl+'/mobile/cate').then(rtn =>{ //获取分类表的内容
         this.CateList=rtn.data
        });
@@ -103,7 +97,7 @@ export default{
        // console.log(goods);
         this.$router.push({path: '/ticketDetail',query:{goods:goods}})
      },
-      ...mapMutations (['setHeadTitle','setMapHead','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase']), // 映射方法
+      ...mapMutations (['setHeadTitle']), // 映射方法
       init(){
         slideMenu()
      }

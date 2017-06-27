@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/views/index'
+import Home from '@/views/home/index'
 
 Vue.use(Router)
 
@@ -8,8 +8,67 @@ let router = new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
-      component: index
+      component: Home
+    },
+    {
+      path: '/singing',
+      name: 'singing',
+      component: require('../views/home/singing')
+    },
+    {
+      path: '/concert',
+      name: 'concert',
+      component: require('../views/home/concert')
+    },
+    {
+      path: '/drama',
+      name: 'drama',
+      component: require('../views/home/drama')
+    },
+    {
+      path: '/sport',
+      name: 'sport',
+      component: require('../views/home/sport')
+    },
+    {
+      path: '/parenting',
+      name: 'parenting',
+      component: require('../views/home/parenting')
+    },
+    {
+      path: '/q_yuan',
+      name: 'q_yuan',
+      component: require('../views/home/q_yuan')
+    },
+    {
+      path: '/dance',
+      name: 'dance',
+      component: require('../views/home/dance')
+    },
+    {
+      path: '/movie',
+      name: 'movie',
+      component: require('../views/home/movie')
+    },
+    {
+      path: '/m_recommend',
+      name: 'm_recommend',
+      component: require('../views/home/m_recommend')
+    },
+    {
+      path: '/edt_recommend',
+      name: 'edt_recommend',
+      component: require('../views/home/edt_recommend')
+    },
+    {
+      path: '/ranking',
+      name: 'ranking',
+      component: require('../views/home/ranking')
+    },
+    {
+      path: '/star',
+      name: 'star',
+      component: require('../views/home/star')
     },
     {
       path: '/category',
@@ -96,6 +155,11 @@ let router = new Router({
       path: '/mine/index',
       name: 'mine',
       component: require('../views/mine/index')
+    },
+    {
+      path: '/addressMan',
+      name: 'addressMan',
+      component: require('../views/mine/addressMan')
     },
     {
       path: '/mine/infor',

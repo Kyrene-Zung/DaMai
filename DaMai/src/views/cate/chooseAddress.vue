@@ -45,7 +45,6 @@ import Vue from 'vue'
 			this.setSeatPurchase(true)
 		    this.setDetailHead(false)
 			this.setBuyFoot(false)
-			// this.setFlag(false)
 		    this.setHeadFlag(false)
 		},
 		computed:{
@@ -101,6 +100,7 @@ import Vue from 'vue'
 		box-shadow: 0px 1px 0px #f9f9f9;
 	}
 	.rootDiv{
+		background-color: #fff;
 		padding-top:3.5rem;
 		padding-bottom: 5rem;
 		.addressList{

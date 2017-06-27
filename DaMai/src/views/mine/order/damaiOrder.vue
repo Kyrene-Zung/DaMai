@@ -73,18 +73,15 @@ import Vue from 'vue'
 				this.setHeadTitle('大麦订单')
 		},
 		beforeRouteEnter(to,from,next){ //请求全部
+			console.log(to.query.type)
 			
 			next(vm=>{
-				let user_id=JSON.parse(localStorage.getItem('userInfo')).user_id;
-				Vue.http.jsonp('api/mobile/Order/getOrder',{params:{user_id:user_id}}).then(rtn=>{
-					//console.log(rtn.data)
-					vm.orderArr=rtn.data;
-				})
+				vm.active=to.query.type;
 			})
 		},
 		watch:{
 			active:function(value,oldvalue){
-				console.log(value)
+				// console.log(value)
 				let user_id=JSON.parse(localStorage.getItem('userInfo')).user_id;
 				Vue.http.jsonp('api/mobile/Order/getOrder',{params:{user_id:user_id,status:value}}).then(rtn=>{
 					//console.log(rtn.data)
@@ -97,6 +94,13 @@ import Vue from 'vue'
 				console.log(order)
 				this.$router.push({path:'/orderDetail',query:{order:order}})
 			},
+			// askOrderApi(value){
+			// 	let user_id=JSON.parse(localStorage.getItem('userInfo')).user_id;
+			// 	Vue.http.jsonp('api/mobile/Order/getOrder',{params:{user_id:user_id,status:value}}).then(rtn=>{
+			// 		//console.log(rtn.data)
+			// 		this.orderArr=rtn.data;
+			// 	})
+			// },
 			...mapMutations(['setHeadTitle'])
 		}
 	}

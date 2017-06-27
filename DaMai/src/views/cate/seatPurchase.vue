@@ -38,12 +38,6 @@ import ticking from '../../components/cate/tick'
 		},
 		created(){
 			this.setHeadTitle('选择区域')
-			this.setMapHead(true)
-			this.setSeatPurchase(true)
-		    this.setDetailHead(false)
-			this.setBuyFoot(false)
-			// this.setFlag(false)
-		    this.setHeadFlag(false)
 		},
 		computed:{
 			...mapState(['timeArr','priceData'])
@@ -79,7 +73,7 @@ import ticking from '../../components/cate/tick'
 			});
 		},
 		methods: {
-			...mapMutations(['setHeadTitle','setMapHead','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setPriceData','setTimeArr']),
+			...mapMutations(['setHeadTitle','setPriceData','setTimeArr']),
 			downOrUp(){
 				var faAngleDown=document.querySelector('.allPrice .fa');
 				var bottomPull=document.querySelector('.bottomPull');

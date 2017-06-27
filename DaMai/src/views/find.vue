@@ -93,7 +93,7 @@ export default{
 	     	this.CateList=rtn.data
 	     });
         Vue.http.jsonp(apiUrl+'/mobile/goods').then(rtn =>{ //获取商品表的内容
-          console.log(rtn.data)
+          //console.log(rtn.data)
           this.goodsList=rtn.data
       });
     },
@@ -104,14 +104,14 @@ export default{
           console.log(oldVal)
           if(value > oldVal){
             slidePanel(3);
-              console.log(3)
+              //console.log(3)
           }else if(value<oldVal){
             slidePanel(-3);
-              console.log(-3)
+              //console.log(-3)
           }
 
               Vue.http.jsonp(apiUrl+'/mobile/goods',{params:{cate_id:value}}).then(rtn =>{ 
-              console.log(rtn.data)
+              //console.log(rtn.data)
               this.goodsList=rtn.data
           });
       }
@@ -141,9 +141,9 @@ function slidePanel(len){
      box.style.left = 0+'rem';
   }
   else{
-    console.log(box.offsetLeft/20)
+    //console.log(box.offsetLeft/20)
      box.style.left = box.offsetLeft/20-len+'rem';
-     console.log(box.offsetLeft/20)
+    // console.log(box.offsetLeft/20)
   }
 }
 //滑动菜单
@@ -184,7 +184,7 @@ function slideMenu(){
         }else if(box.offsetLeft<(2.5-limitLeft)*20){
             box.style.left=2.5-limitLeft+"rem";
         }
-        console.log(111)
+        //console.log(111)
 
   }
 

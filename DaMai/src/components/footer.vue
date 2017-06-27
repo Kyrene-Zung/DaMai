@@ -27,9 +27,6 @@
 	      selected : 'tab1',
 	    }
 	  },
-	  computed: {//激活的时候
-	    ...mapState(['flag','buyFoot']) //映射属性
-	  },
 	}
 </script>
 

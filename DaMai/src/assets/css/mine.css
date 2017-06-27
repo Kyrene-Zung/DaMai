@@ -1,0 +1,50 @@
+.icon {
+    font-size: 20px;
+}
+#header {
+    height: 5rem;
+    background-color: #ee1554;
+    margin-top: 20px;
+}
+#header router-link{
+  display:block;
+}
+#header a {
+    line-height: 20px;
+}
+
+.mui-card {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+#icon1{
+  float: left;
+  font-size: 50px;
+}
+#icon2,#icon3{
+  float: right;
+  font-size: 50px;
+}
+
+#input_password{
+  margin-left:13%;
+}
+#input_phone{
+  width: 50%;
+}
+.mui-table-view .mui-media, .mui-table-view .mui-media-body{
+  overflow:visible;
+}
+#app{
+  background: #efeff4;
+}
+.mui-card-content
+{
+  text-align-last: center;
+}
+
+.my_header{
+  color:#000 ;
+  float:left;
+  margin-left:10px;
+}

@@ -107,12 +107,6 @@ import ticking from '../../components/cate/tick'
 		},
 		created(){
 			this.setHeadTitle('选择商品')
-			this.setMapHead(true)
-			this.setSeatPurchase(true)
-		    this.setDetailHead(false)
-			this.setBuyFoot(false)
-			// this.setFlag(false)
-		    this.setHeadFlag(false)
 		},
 		beforeRouteEnter(to,from,next){
 			 //console.log(to.query);
@@ -294,7 +288,7 @@ import ticking from '../../components/cate/tick'
 				this.popupVisible2=false;
 			},
 			//映射方法
-			...mapMutations(['setHeadTitle','setMapHead','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setPriceData','setItemArr','setTimeArr']),
+			...mapMutations(['setHeadTitle','setPriceData','setItemArr','setTimeArr']),
 		},
 		components:{
 			ticking

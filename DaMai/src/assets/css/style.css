@@ -69,3 +69,13 @@ ul,li{list-style: none;}
 	color:#545454;
 	font-size: 0.75rem;
 }
+/*粉色头部返回*/
+.pinkBack{
+	color:#fff!important;
+}
+.mint-header.mapHead.is-fixed .mint-header-title{
+	color: #fff;
+	margin-left: -9.5rem;
+    margin-top: 0.7rem;
+    font-size: 0.9rem;
+}

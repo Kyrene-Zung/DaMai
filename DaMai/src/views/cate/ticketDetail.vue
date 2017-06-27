@@ -128,15 +128,9 @@ export default{
   },
   created () {
     this.setHeadTitle('项目介绍') 
-    this.setDetailHead(true)
-    this.setBuyFoot(true)
-    // this.setFlag(false) //不显示分类页面的尾部
-    this.setHeadFlag(false)  // 映射方法,进入该页面显示不同的头部
-    this.setMapHead(false)
-    this.setSeatPurchase(false)
   },
   methods: {
-    ...mapMutations(['setHeadFlag','setHeadTitle','setBuyFoot','setDetailHead','setMapHead','setSeatPurchase','setGoodsData']), // 映射方法
+    ...mapMutations(['setHeadTitle','setGoodsData']), // 映射方法
     alertSeat(){
     	this.popupVisible=true;
     },

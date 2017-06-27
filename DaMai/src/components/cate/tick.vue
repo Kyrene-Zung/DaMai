@@ -3,7 +3,7 @@
 	<!-- 分类排序 -->
 		<div v-if="$route.path=='/category'">
 			<div class="range" v-if="headFlag" @click="clickRange()">
-				<i class="fa fa-angle-double-down" aria-hidden="true"></i>
+				<i class="fa fa-angle-double-down" aria-hidden="true" style="color:#000"></i>
 			</div>
 
 			<mt-popup  position="top"  v-model="popupVisible" class="popup">
@@ -155,7 +155,14 @@ function tick(ele){
 
 </script>
 <style type="text/css">
-	/********下拉选择框*************/
+/********下拉选择框*************/
+.range{
+	position: absolute;
+    color: #000;
+    z-index: 3000;
+    right: 1.25rem;
+    top: 1.6rem;
+}
 .popup.mint-popup-top{
 	width: 100%;
 	display: flex;

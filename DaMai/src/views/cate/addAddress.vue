@@ -59,7 +59,6 @@ import Vue from 'vue'
 			this.setSeatPurchase(true)
 		    this.setDetailHead(false)
 			this.setBuyFoot(false)
-			// this.setFlag(false)
 		    this.setHeadFlag(false)
 		},
 		beforeRouteEnter(to,from,next){

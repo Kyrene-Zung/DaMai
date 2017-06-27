@@ -12,6 +12,8 @@ import './assets/css/style.css'
 import './assets/css/animated.css'
 import './assets/lib/fontasome/css/font-awesome.min.css'
 import $ from 'jquery'
+import './assets/css/font/iconfont.css'
+import './assets/css/mine.css'
 // import './assets/lib/jquery/jquery.min.js'
 // import './assets/js/wow.js'
 

@@ -53,15 +53,20 @@ import Vue from 'vue'
 		position: fixed;
 		width: 100%;
 		z-index: 30;
+		.mint-button--default{
+			background-color: #fff;
+    		box-shadow: none;
+		}
 		span{
-			margin-left: 35px;
-		    padding-top: 32px;
+			margin-left: 0;
+		    padding-top: 0.6rem;
 		    font-size: 0.75rem;
 		    /* vertical-align: bottom; */
 		    display: inline-block;
 		}
 	}
 	.securityBody{
+		background-color: #fff;
 		padding-top: 3.5rem;
 		text-align: center;
 		h1{

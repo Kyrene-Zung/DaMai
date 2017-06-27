@@ -1,0 +1,152 @@
+<template>
+  <div class="mai_recommend">
+    <h1>最推荐页面</h1>
+    <!-- 头部图片 -->
+    <div class="head">
+      <div class="photo">
+        <router-link to="/">
+          <img :src="head" alt=""> 
+        </router-link>
+        <div class="triangle-topleft"></div>
+          <div class="font">
+            <p>{{cate}}</p>
+            <p class="time">{{time}}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 评语 -->
+    <div class="comment">
+      <div class="container">
+        <h5>{{cate}}-{{ city }}</h5>
+        <h6>{{ content }}</h6>
+      </div>
+    </div>
+
+    
+    <!-- 电影列表 -->
+    <section v-for="list in list">
+      <div class="container">
+        <ul class="list">
+          <li>
+            <div class="content mui-row">
+              <div class="left mui-col-xs-4">
+                <img :src="list.photo" alt="">
+              </div>
+              <div class="right mui-col-xs-8">
+                <h5>{{ list.title }}</h5>
+                <div class="ticket">
+                  <div class="seat">{{ list.seat }}</div>
+                  <div class="state">{{ list.state }}</div>
+                </div>
+                <h6 class="time">{{ list.time }}</h6>
+                <h6 class="address">{{ list.address }}</h6>
+                <h5 class="price">{{ list.price }}<span>&nbsp;元</span></h5>
+              </div>
+            </div>
+            <br>
+            <div class="comment">
+              <p>
+              <span><i class="fa fa-hand-o-right" aria-hidden="true"></i></span>
+              {{ list.comment }}
+              <span><i class="fa fa-hand-o-left" aria-hidden="true"></i></span>
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <br>
+    <br>
+    <br>
+  </div>
+</template>
+
+<script type="es6">
+export default {
+  name: 'mai_recommend',
+  data () {
+    return {
+      head:'../../../static/images/recommend/1.jpg',
+      cate:'麦力荐',
+      time:'06.19-06.25',
+      city:'广州',
+      content:'文艺范出没周，精彩演出天天有！有视听双重享受的演唱会；还有嗨翻全场的音乐节；更有极具表现力的戏剧音乐剧。',
+
+
+      list:[
+      {photo:'../../../static/images/recommend/rg1.jpg',
+      title:'Declan Galbraith 2017 CHLD OF MIND 中国巡演——广州站',
+      seat:'座',
+      state:'售票中',
+      time:'2017.06.25',
+      address:'TU凸空间',
+      price:'380-680',
+      comment:'他唱的每一首歌，都在吟诵一个故事，是对爱人、对远方、对你的倾诉。'
+      },
+      {photo:'../../../static/images/recommend/rg1.jpg',
+      title:'Declan Galbraith 2017 CHLD OF MIND 中国巡演——广州站',
+      seat:'',
+      state:'售票中',
+      time:'2017.06.25',
+      address:'TU凸空间',
+      price:'380-680',
+      comment:'他唱的每一首歌，都在吟诵一个故事，是对爱人、对远方、对你的倾诉。'
+      },
+      {photo:'../../../static/images/recommend/rg1.jpg',
+      title:'Declan Galbraith 2017 CHLD OF MIND 中国巡演——广州站',
+      seat:'预售中',
+      state:'',
+      time:'2017.06.25',
+      address:'TU凸空间',
+      price:'380-680',
+      comment:'他唱的每一首歌，都在吟诵一个故事，是对爱人、对远方、对你的倾诉。'
+      }
+      ]
+    }
+  },
+  components:{
+    
+  }
+
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style type="text/css" scoped>
+/*公共样式*/
+h4{font-size: 0.9rem;margin-left:0.5rem;padding-top:1rem;font-weight: bolder;text-align: center;margin-bottom: 1rem;}
+ul {list-style-type: none;padding: 0;}
+li {display: inline-block;margin: 0;}
+a {color: #42b983;}
+.mai_recommend{background-color:#f1f5f4;}
+section{background: #fff;margin-top:0.4rem;}
+
+/*头部图片*/
+.head .photo{position: relative;}
+.head .photo img{width: 100%;}
+.head .photo .triangle-topleft { width: 0; height: 0; border-top: 3.5rem solid #f4692b; border-right: 3.5rem solid transparent; position: absolute;top:0.3rem;left: 0;}
+.head .photo .font{transform: rotate(-45deg);width: 3.5rem;height: 2rem;text-align: center;position: absolute;top:0.6rem;left: -0.5rem;}
+.head .photo .font p{color: #fff;font-size: 0.6rem;line-height: 0.6rem;}
+.head .photo .font .time{margin-top:-0.2rem;}
+
+/*评语*/
+.comment{background: #fff;margin-top: -0.35rem;padding-bottom: 0.5rem;}
+.comment h5{color:black;margin-left: 0.5rem;line-height: 1.5rem;}
+.comment h6{margin:-0.2rem 0.5rem;line-height: 0.9rem;}
+
+/*推荐列表*/
+.list li{margin:0.5rem;margin-bottom: 0.1rem;}
+.list li .content .left img{width: 100%;}
+.list li .content .right{padding-left: 0.5rem;}
+.list li .content .right h5{font-size:0.75rem;color:black;margin-top:0.1rem;line-height: 0.9rem;}
+.list li .content .right .ticket{margin-top: 0.4rem;}
+.list li .content .right .ticket .seat{font-size: 0.65rem;background: #30cf16;width: auto;line-height: 0.9rem;text-align: center;color:#fff;border-radius: 5%;float: left;margin-right:0.3rem;padding-left:0.1rem;padding-right:0.1rem;}
+.list li .content .right .ticket .state{font-size: 0.65rem;background: orange;width: 2.9rem;line-height: 0.9rem;text-align: center;color:#fff;border-radius: 5%;float: left;}
+.list li .content .right h6{color: black;}
+.list li .content .right .time{margin-top:2.5rem;}
+.list li .content .right .address{line-height:0.8rem;margin-top:0.4rem;}
+.list li .content .right .price{margin-top: 0.5rem;color: #e2104c;}
+.list li .content .right .price span{font-size: 0.3rem;}
+.list li .comment p{background: #f8f8f8;padding: 0.3rem;}
+</style>

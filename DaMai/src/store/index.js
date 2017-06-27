@@ -7,7 +7,6 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     headTitle: '',
-    // flag: true,
     headFlag: true,
     detailHead: true,
     buyFoot: true,

@@ -70,15 +70,9 @@
 		},
 		created(){
 			this.setHeadTitle('')
-		      // this.setFlag(false) //不显示分类页面的尾部
-		      this.setHeadFlag(false) 
-		      this.setDetailHead(false)
-		      this.setBuyFoot(false)
-		      this.setMapHead(false)
-		      this.setSeatPurchase(false)
 		  },
 		  methods:{
-			...mapMutations (['setHeadTitle','setMapHead','setFlag','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase']), // 映射方法
+			...mapMutations (['setHeadTitle']), // 映射方法
 		}
 	}
 </script>
@@ -108,6 +102,11 @@
 	width:16.5rem;
 	margin:auto;
 }
+.mint-button--default{
+	background-color: #fff;
+	box-shadow:none; 
+	margin-top: 0.75rem;
+}
 	// 盒子样式
 	.header{
 		border-bottom: 1px solid #ccc !important;
@@ -116,10 +115,11 @@
 		position: fixed;
 		width: 100%;
 		z-index: 30;
+		line-height: 70px;
 		.searchCity{
 			width:15rem;
 			padding:0.4rem 0 0.4rem 0.5rem;
-			margin:1.3rem 0 0 2rem;
+			
 			text-align: left;
 			border-radius: 1rem;
 			font-size: 0.6rem;
