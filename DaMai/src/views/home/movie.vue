@@ -1,6 +1,5 @@
 <template>
   <div class="movie">
-    <h1>电影页面</h1>
     <!-- 轮播 -->
     <mt-swipe :auto="2000">
       <mt-swipe-item v-for="lunbo in lb_photo">
@@ -104,7 +103,7 @@ h4{font-size: 0.9rem;margin-left:0.5rem;padding-top:1rem;font-weight: bolder;tex
 ul {list-style-type: none;padding: 0;}
 li {display: inline-block;margin: 0;}
 a {color: #42b983;}
-.movie{background-color:#f1f5f4;}
+.movie{background-color:#f1f5f4;margin-top: 3.5rem;}
 section{background: #fff;margin-top:0.4rem;}
 
 /*轮播*/

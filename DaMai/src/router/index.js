@@ -144,7 +144,10 @@ let router = new Router({
     {
       path: '/damaiOrder',
       name: 'damaiOrder',
-      component: require('../views/mine/order/damaiOrder')
+      component: require('../views/mine/order/damaiOrder'),
+      meta: {
+        requireLogin: true
+      }
     },
     {
       path: '/orderDetail',
@@ -152,19 +155,33 @@ let router = new Router({
       component: require('../views/mine/order/orderDetail')
     },
     {
+      path: '/addressMan',
+      name: 'addressMan',
+      component: require('../views/mine/addressMan'),
+      meta: {
+        requireLogin: true
+      }
+    },
+    {
+      path: '/accountMan',
+      name: 'accountMan',
+      component: require('../views/mine/accountMan/index'),
+      meta: {
+        requireLogin: true
+      }
+    },
+    {
       path: '/mine/index',
       name: 'mine',
       component: require('../views/mine/index')
     },
     {
-      path: '/addressMan',
-      name: 'addressMan',
-      component: require('../views/mine/addressMan')
-    },
-    {
       path: '/mine/infor',
       name: 'mine_infor',
-      component: require('../views/mine/infor')
+      component: require('../views/mine/infor'),
+      meta: {
+        requireLogin: true
+      }
     },
     {
       path: '/mine/scan_code',
@@ -227,7 +244,7 @@ router.beforeEach((to, from, next) => {
     if (userInfo) {
       next()
     } else {
-      next({path: 'mine/login/index'})
+      next({path: '/mine/login/index'})
     }
   } else {
     next()

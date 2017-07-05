@@ -24,8 +24,9 @@
       <div class="container">
         <div class="news">
           <h4>大麦头条&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;</h4>
-          <div class="content">
-            <h6>{{news[0]}}</h6>
+          <div class="content"  id="textCrousel">
+            <h6><span>{{news[0]}}</span></h6>
+             <h6><span>{{news[0]}}</span></h6>
           </div>
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </div>
@@ -287,6 +288,26 @@ export default {
           price:'280-1680元'}]
     }
   },
+  created(){
+    this.textCrousel();
+  },
+  methods:{
+    textCrousel(){
+      var timer=null;
+      timer=setInterval(function(){
+        var h6Height= $('#textCrousel h6').css('height');//36px
+       // console.log(h6Height)
+         $('#textCrousel').animate({top:-36},1000,function(){
+            //console.log($('#textCrousel').css('top'))
+             if( $('#textCrousel').css('top')=='-'+h6Height){
+                 $('#textCrousel').css('top','0');
+             }
+         });
+         
+      },2000)
+     
+    }
+  },
   components: {
     slide,list,carousel
   }
@@ -315,10 +336,27 @@ section{background: #fff;margin-top:0.4rem;}
 .m_menu ul li img{width: 65%;}
 
 /*大麦头条*/
-.news{height: 2.2rem;}
+.container{
+  overflow: hidden;
+
+}
+.news{height: 2.2rem;   position: relative;}
 .news h4{color:red;line-height:1.8rem;margin-left: 0.5rem;float:left;font-weight:bolder;margin-top: -0.8rem;}
 .news h4 span{color:black;font-weight: normal;}
-.news .content h6{float:left;line-height:1.8rem;}
+.news .content{
+  width:11.5rem;
+  display: inline-block;
+  overflow:hidden;
+  position: absolute;
+}
+.news .content h6{float:left;line-height:1.8rem;width:11.5rem;
+    overflow: hidden;
+ /*   position: relative;*/
+    white-space: nowrap;
+    text-overflow: ellipsis;}
+    .news .content h6 span{
+      position: relative;
+    }
 .news i{float:right;margin-top:0.6rem;margin-right:0.5rem;color:#dcdcdc;}
 
 /*广告*/

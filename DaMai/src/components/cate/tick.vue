@@ -2,7 +2,7 @@
 	<div>
 	<!-- 分类排序 -->
 		<div v-if="$route.path=='/category'">
-			<div class="range" v-if="headFlag" @click="clickRange()">
+			<div class="range" v-if="" @click="clickRange()">
 				<i class="fa fa-angle-double-down" aria-hidden="true" style="color:#000"></i>
 			</div>
 
@@ -11,21 +11,14 @@
 					<mt-tab-item id="1">时间范围</mt-tab-item>
 					<mt-tab-item id="2">排序方式</mt-tab-item>
 					<div style="height:7.2rem;"></div>
-				  <!-- <mt-tab-item></mt-tab-item>
-				  <mt-tab-item></mt-tab-item>
-				  <mt-tab-item></mt-tab-item> -->
 				</mt-navbar>
 
 				<mt-tab-container v-model="selected" class="content">
 					<mt-tab-container-item id="1" class="timeRange">
-						<i class="fa fa-check" aria-hidden="true"></i><mt-cell v-for="time in timeRange " :title="time"/>
-						<!-- <mt-cell title="今天" />
-						<mt-cell title="明天" />
-						<mt-cell title="一周内" />
-						<mt-cell title="一个月内" /> -->
+						<i class="fa fa-check" aria-hidden="true"></i><div v-for="time in timeRange " @click="timeRanging(time)" class="mtCellDiv"><mt-cell :title="time" /></div>
 					</mt-tab-container-item>
 					<mt-tab-container-item id="2" class="rangeType">
-						<i class="fa fa-check" aria-hidden="true"></i><mt-cell v-for="range in rangeType" :title="range"  @click="ranging(range)" />
+						<i class="fa fa-check" aria-hidden="true"></i><div v-for="range in rangeType" @click="rangeTyping(range.rangeAttr)" class="mtCellDiv"><mt-cell  :title="range.rangeName" /></div>
 						<!-- <mt-cell title="按更新时间" />
 						<mt-cell title="按演出时间" /> -->
 				   <!--  <mt-cell title="" />
@@ -54,7 +47,8 @@
 </template>
 
 <script type="es6">
-import { mapState } from'vuex'
+import {mapState, mapMutations} from'vuex'
+import Vue from 'vue'
 export default {
   name: 'ticking',
   data() {
@@ -62,29 +56,81 @@ export default {
   		popupVisible:false,
   		selected:'1',
   		timeRange:['全部时间','今天','明天','一周内','一个月内'],
-  		rangeType:['按热门','按更新时间','按演出时间']
+  		rangeType:[{rangeAttr:'hot',rangeName:'按热门'},{rangeAttr:'create_time',rangeName:'按更新时间'},{rangeAttr:'show_time',rangeName:'按演出时间'}],
   	}
   },
   computed: {//激活的时候
-    ...mapState(['headFlag','seatPurchase','timeArr']), //映射属性
-  },
-  mounted(){
-	  	this.init();
+    ...mapState(['timeArr','searchCriteria']), //映射属性
   },
   methods:{
-  	init(){
-  		 clickItem()//  点击搜索选项
+  	timeRanging(choice){ //  点击时间范围
+  		this.setSearchCriteria({key:'rangeType',value:choice})
+  		// console.log(this.setSearchCriteria)
+  		 Vue.http.jsonp('api/mobile/Goods/search',{params:this.searchCriteria}).then(rtn =>{ 
+              this.setGoodsList(rtn.data)
+          });
   	},
-  	ranging(choice){ //  点击搜索??mint-cell不能触发点击事件
-  		console.log(choice)
+  	rangeTyping(choice){ //  点击排序方式
+  		this.setSearchCriteria({key:'rangeType',value:choice})//改变搜索条件
+  		// console.log(this.setSearchCriteria)
+  		 Vue.http.jsonp('api/mobile/Goods/search',{params:this.searchCriteria}).then(rtn =>{ 
+              this.setGoodsList(rtn.data)
+          });
+
   	},
   	clickRange(){ //  出现选项栏
   		if(this.popupVisible){
   			this.popupVisible=false;
   		}else{
   			this.popupVisible=true;
+  			var timeRange=document.querySelectorAll('.timeRange .mtCellDiv');
+  			var rangeType=document.querySelectorAll('.rangeType .mtCellDiv');
+  			this.tick(timeRange,()=>{
+  				this.popupVisible=false;
+  				//this.$router.push({path:'/category'})
+  			});
+  			this.tick(rangeType,()=>{
+  				this.popupVisible=false;
+  				//this.$router.push({path:'/category'})
+  			});
   		}
   	},
+	tick(ele,fn){
+		//console.log(ele)
+		for(var i=0;i<ele.length;i++){
+			ele[i].index=i;
+			ele[i].onclick=function(){
+				//console.log(this)
+				var parent = this.parentNode;
+				for(var j=0;j<ele.length;j++){
+					//console.log(ele[j].previousSibling)
+					if(ele[j].previousSibling){
+						// console.log(ele[j].previousSibling)
+						if(ele[j].previousSibling.nodeName=='I'){
+							//console.log(ele[j].previousSibling)
+							// console.log(ele[j].previousSibling.nodeName)
+							parent.removeChild(ele[j].previousSibling); 
+						}
+					}
+				}
+				 var newElement=document.createElement('i');
+				 newElement.className='fa fa-check';
+				 newElement.ariaHidden="true";
+				 newElement.style.top=14*(2*this.index+1)+20*this.index+'px';
+				 parent.insertBefore(newElement, this); 
+
+				 var date=document.querySelector('.push .date');
+				 if(date){
+				 	var text=this.querySelector('.mint-cell-wrapper .mint-cell-text').innerText;
+				 	date.innerText=text;
+				 }
+				 if(fn){
+				 	fn();
+				 }
+			}
+		}
+	},
+
   	clickTriangle(eve){ //  选座购买时点击时间打勾
   		eve=eve||event;
   		eve.stopPropagation();
@@ -99,7 +145,7 @@ export default {
   		}
   		this.documentClick();
   		var time=document.querySelectorAll('.time .mint-cell');
-  		tick(time);
+  		this.tick(time);
 	},
 	documentClick(){
 		document.onclick=()=>{
@@ -110,54 +156,56 @@ export default {
 			}
 			document.onclick=null;
 		}
-	}
+	},
+	...mapMutations(['setSearchCriteria','setGoodsList'])
   },
 }
-function clickItem(){
-	var timeRange=document.querySelectorAll('.timeRange .mint-cell');
-	var rangeType=document.querySelectorAll('.rangeType .mint-cell');
-	tick(timeRange);
-	tick(rangeType);
-	//console.log(timeRange)
-}
-function tick(ele){
-	// console.log(ele)
-	for(var i=0;i<ele.length;i++){
-		ele[i].index=i;
-		ele[i].onclick=function(){
-			var parent = this.parentNode;
-			for(var j=0;j<ele.length;j++){
-				//console.log(ele[j].previousSibling)
-				if(ele[j].previousSibling){
-					// console.log(ele[j].previousSibling)
-					if(ele[j].previousSibling.nodeName=='I'){
-						//console.log(ele[j].previousSibling)
-						// console.log(ele[j].previousSibling.nodeName)
-						parent.removeChild(ele[j].previousSibling); 
-					}
-				}
-			}
-			 var newElement=document.createElement('i');
-			 newElement.className='fa fa-check';
-			 newElement.ariaHidden="true";
-			 newElement.style.top=14*(2*this.index+1)+20*this.index+'px';
-			 parent.insertBefore(newElement, this); 
+// function clickItem(){
+// 	var timeRange=document.querySelectorAll('.timeRange .mint-cell');
+// 	var rangeType=document.querySelectorAll('.rangeType .mint-cell');
+// 	tick(timeRange);
+// 	tick(rangeType);
+// 	//console.log(timeRange)
+// }
+// function tick(ele){
+// 	// console.log(ele)
 
-			 var date=document.querySelector('.push .date');
-			 if(date){
-			 	var text=this.querySelector('.mint-cell-wrapper .mint-cell-text').innerText;
-			 	date.innerText=text;
-			 }
-			this.popupVisible=false; 
-		}
-	}
-}
+// 	for(var i=0;i<ele.length;i++){
+// 		ele[i].index=i;
+// 		ele[i].onclick=function(){
+// 			//console.log(this)
+// 			var parent = this.parentNode;
+// 			for(var j=0;j<ele.length;j++){
+// 				//console.log(ele[j].previousSibling)
+// 				if(ele[j].previousSibling){
+// 					// console.log(ele[j].previousSibling)
+// 					if(ele[j].previousSibling.nodeName=='I'){
+// 						//console.log(ele[j].previousSibling)
+// 						// console.log(ele[j].previousSibling.nodeName)
+// 						parent.removeChild(ele[j].previousSibling); 
+// 					}
+// 				}
+// 			}
+// 			 var newElement=document.createElement('i');
+// 			 newElement.className='fa fa-check';
+// 			 newElement.ariaHidden="true";
+// 			 newElement.style.top=14*(2*this.index+1)+20*this.index+'px';
+// 			 parent.insertBefore(newElement, this); 
+
+// 			 var date=document.querySelector('.push .date');
+// 			 if(date){
+// 			 	var text=this.querySelector('.mint-cell-wrapper .mint-cell-text').innerText;
+// 			 	date.innerText=text;
+// 			 }
+// 		}
+// 	}
+// }
 
 </script>
 <style type="text/css">
 /********下拉选择框*************/
 .range{
-	position: absolute;
+	position: fixed;
     color: #000;
     z-index: 3000;
     right: 1.25rem;

@@ -63,6 +63,7 @@
 </template>
 
 <script type="es6">
+import {mapMutations} from 'vuex'
 export default {
   name: 'mai_recommend',
   data () {
@@ -105,8 +106,11 @@ export default {
       ]
     }
   },
-  components:{
-    
+  created(){
+    this.setHeadTitle('麦力荐')
+  },
+  methods:{
+    ...mapMutations(['setHeadTitle'])
   }
 
 }

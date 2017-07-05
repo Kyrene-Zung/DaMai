@@ -121,14 +121,14 @@ import ticking from '../../components/cate/tick'
 					}else{
 						let goods_data=to.query.goods_data;
 						//获取该商品的属性：时间
-						Vue.http.jsonp('api/mobile/Goods/goodsTime',{params:{goods_id:goods_data.goods_id}}).then(rtn=>{
+						Vue.http.jsonp('api/mobile/Attribute/goodsTime',{params:{goods_id:goods_data.goods_id}}).then(rtn=>{
 							vm.setTimeArr(rtn.data)
 							for(var i=0;i<rtn.data.length;i++){
 								if(rtn.data[i].status==1){
 									//获取默认时间
 									vm.time=rtn.data[i];
 									//获取默认时间的价格
-									Vue.http.jsonp('api/mobile/Goods/goodsPrice',{params:{time_id:rtn.data[i].time_id}}).then(rtn=>{
+									Vue.http.jsonp('api/mobile/Attribute/goodsPrice',{params:{time_id:rtn.data[i].time_id}}).then(rtn=>{
 										//console.log(rtn.data)
 										vm.goods_price=rtn.data;
 										vm.setPriceData(vm.goods_price)

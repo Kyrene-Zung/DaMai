@@ -3,136 +3,179 @@ namespace app\admin\controller;
 
 class Goods extends \think\Controller
 {
-	function index(){
-		$searchArr=[];
-		if(input('keyword')){
-			$searchArr['m.goods_title']=['like','%'.input('keyword').'%'];
-		}
-		if(input('cate_id')){
-			$searchArr['s.cate_id']=['=',input('cate_id')];
-		}
-		$dm_goodsList=db('dm_goods')
-		->alias('g')
-		->field('goods_id,goods_title,goods_brief,cate_name')
-		->join('dm_cate c','g.cate_id=c.cate_id')
-		->where($searchArr)
-		->paginate(10);
-		//print_r($dm_goodsList);exit();
-		//歌手的数据
-        $cateList = db('dm_cate')->select();
-        $this->assign('cateList',$cateList);
-		$this->assign('dm_goodsList',$dm_goodsList);
-		return $this->fetch();
-	}
-	function add(){
-		//歌手的数据
-        $cateList = db('dm_cate')->select();
-        $this->assign('cateList',$cateList);
+    public function index()
+    {
+
+//    	查询，实例化音乐模型
+//        数据库的优化方法，第一个：需要哪些字段就只查询哪些字段
+       $m=db('goods');
+       $search_a=array();
+       if (input("keyword")) {
+          $search_a["m.goods_name"]=array("like","%".input("keyword")."%");
+       }
+       if (input("category_id")) {
+          $search_a["m.cate_id"]=array("=",input("category_id"));
+       }
+        $goods_list=$m
+            ->alias('m')
+            ->field('m.id,m.goods_name,m.goods_price,s.cate_name')
+            ->join("__CATEGORY__ s","m.cate_id=s.id")
+            ->where($search_a)
+            ->order(" m.id desc ")
+            ->paginate(10);
+
+            // 测试的时候一定要边界值，为0不传的时候，传的时候很多数据为怎么样
+      
+        $this->assign('goods_list',$goods_list);
+
+        $category_list = db('category')->select();
+        $this->assign('category_list',$category_list);
+       return $this->fetch();
+    }
+
+     public function add()
+    {
+        //明星的数据
+        $category_list = db('category')->select();
+        $this->assign('category_list',$category_list);
         return $this->fetch();
-	}
-	function save(){
-		//1.第一步：把表单传过来的数据放到一个数组里
-		//echo $_GET['goods_title'];exit();
-		$saveData=array(
-          'goods_title'=>input('goods_title'),//用框架自带的方法获取表单传过来的数据
-          'typeID'=>'',
-          'cate_id'=>input('cate_id'),
-          'goods_pic'=>'',
-          'word'=>input('word'),
-          'mp3Src'=>''
+    }
+
+    public function save()
+    {
+
+ 
+//        第一步：把表单传过来的数据放到一个数组里
+        $save_data=array(
+            'goods_name'=>input('goods_name'),
+            'description'=>input('description'),
+            'goods_price'=>input('goods_price'),
+            'lng'=>input('lng'),
+            'lat'=>input('lat'),
+            'start_time'=>input('start_time'),
+            'start_time'=>time(),
+            'cate_id'=>input('cate_id'),
         );
-        //使用验证规则
-        $dm_goods=validate("dm_goods");
-        if($dm_goods->check($saveData)){//调用check方法，不合规则返回false
+//            上传文件
+//            如果没有上传文件提示错误
+          $save_data['goods_thumb'] =  savePic(request(),'goods_thumb');
+          $save_data['thumb_1'] =  savePic(request(),'thumb_1');
+          $save_data['thumb_2'] =  savePic(request(),'thumb_2');
+           
+           //无论是否有上传文件都要保存数据
+           $goodsModel = model('goods');
+           $goodsModel->save($save_data);
+           $goods_id =  $goodsModel->id;//商品ID
+ 
+            // 添加演出时间,需要商品ID（GOODS_ID）
+          
+             // 定义一个临时的时间数组，用来保存它入库后的ID
+             $temp_time_array=[];
+            foreach ($_POST['star_time'] as $key_time => $value_time) {   
+               $goodsTimeModel = model('goods_time');
+               // 遍历一次添加一次，需使用create
+               $add_time_data = array('time_name'=>$value_time,'goods_id'=>$goods_id);
+                //如果是小米商品，加多一个自定义的属性值
+               if ($_POST['goods_type']==2) {
+                 $add_time_data['diy_name'] = $_POST['diy_name'][0];
+               }
+               $n = $goodsTimeModel->create($add_time_data); 
+               $temp_time_array[$key_time] = $n->id;
+              
+               // echo $goodsTimeModel->getlastsql();
+            }
+            // 添加价格和库存
+            foreach ($_POST['sku'] as $key => $value) {
+              //第一次遍历是获取到的是时间 
+              $time_id = $temp_time_array[$key];
+              foreach ($value as $k_two => $v_two) {
+                $price_data=array(
+                    'time_id' => $time_id ,
+                    'stock' => $v_two
+                  );
 
-        	//上传文件
-        	$file=request()->file('mp3Src');//获取表单传过来的文件
-        	$mp3Src='';
-        	if(!empty($file)){//上传文件不为空
-        		$mp3Src=$file->move(ROOT_PATH .'public'.DS.'uploads');//保存到根目录的public下
-	        	if($mp3Src){//判断文件是否上传成功
-					//文件入口
-	                $saveData['mp3Src'] = DS.'public'.DS.'uploads'.DS.$mp3Src->getSaveName();
-	            }else{
-	            	$this->error($mp3Src -> getError());
-	            }
-        	}
-        	//2.插入数据库表中
-					db('dm_goods')->insert($saveData);
-					//跳转页面
-					//如果没有传第二个参数（url地址），默认跳回保存之前的界面
-					//$this->success('添加成功！',url('dm_goods/index'));
-			        $this->success('添加成功！','index');
-        	
-        }else{
-            $this->error($dm_goods->getError());//验证显示错误信息
-        }
-		
-	}//save end
-	function delete($id){
-		db('dm_goods')->where("dm_goodsID='$id'")->delete();
-		$this->success('删除成功！','index');
-		// echo  $id;
-	}
-	function edit($id){
-		$dm_goodsList=db('dm_goods')->where("dm_goodsID='$id'")->select();
-		$this->assign('dm_goodsList',$dm_goodsList);
-		//print_r($dm_goodsList);
-		//歌手的数据
-        $cateList = db('cate')->select();
-        $this->assign('cateList',$cateList);
-		return $this->fetch();
-		// return view();
-	}
-	function update(){
-		//1.第一步：把表单传过来的数据放到一个数组里
-		//echo $_GET['goods_title'];exit();
-		$saveData=array(
-          'goods_title'=>input('goods_title'),//用框架自带的方法获取表单传过来的数据
-          'typeID'=>'',
-          'cate_id'=>input('cate_id'),
-          'dm_goodsImg'=>'',
-          'word'=>input('word')
-        );
-        //使用验证规则
-        $dm_goods=validate("dm_goods");
-        if($dm_goods->scene('edit')->check($saveData)){//调用check方法，不合规则返回false
+                  if ($_POST['goods_type']==2) {
+                     $price_data['diy_name'] = $_POST['diy_name'][1];
+                     $price_data['price'] = $_POST['price'][$key][$k_two];
+                     $price_data['attr_name'] = $_POST['star_price'][$k_two];
+                   }else{
+                     $price_data['price'] = $_POST['star_price'][$k_two];
+                   }
+                 db('goods_price')->insert($price_data);
+               }
+            }
+            $this->success('添加成功！','index');
 
-        	//上传文件
-        	$file=request()->file('mp3Src');//获取表单传过来的文件
-        	if($file){
-        		$mp3Src=$file->move(ROOT_PATH .'public'.DS.'uploads');//保存到根目录的public下
-	        	if($mp3Src){//判断文件是否上传成功
-					//文件入口
-	                $saveData['mp3Src'] = DS.'public'.DS.'uploads'.$mp3Src->getSaveName();
-	                
-	            }else{
-	            	$this->error($mp3Src -> getError());
-	            }
-        	
-        	}else{
-        		$saveData['mp3Src']=input('mp3Hide');
-        	}
+    }
 
-        	//2.更新
-					db('dm_goods')->where("dm_goodsID",input('id'))->update($saveData);
-					//跳转页面
-					//如果没有传第二个参数（url地址），默认跳回保存之前的界面
-					//$this->success('添加成功！',url('dm_goods/index'));
-			        $this->success('修改成功！','index');
-        }else{
-            $this->error($dm_goods->getError());//验证显示错误信息
-        }
-		
-	}//update end
-	function mobiledm_goods(){
-		$dm_goodsList=db('dm_goods')->select();
-		return jsonp($dm_goodsList);
-	}
-	function catedm_goods($id){
-		//echo $id;
-		$dm_goodsList=db('dm_goods')->where("cate_id=$id")->select();
-		//print_r($dm_goodsList);exit();
-		return jsonp($dm_goodsList);
-	}
+    public function delete()
+    {
+        $id = input("id");
+
+        db('goods')->delete($id);
+
+        $this->success('删除成功！','index');
+
+
+    }
+
+    public function edit()
+    {
+        $id = input("id");
+        $info = db("goods")->where("id=$id")->find();
+        $this->assign('info',$info);
+        //明星的数据
+        $category_list = db('category')->select();
+        $this->assign('category_list',$category_list);
+
+        return $this->fetch();
+    }
+
+    public function update()
+    {
+        $id = input("id");
+        $updateData=[
+            'goods_name'=>input('goods_name'),
+            'description'=>input('description'),
+            'goods_price'=>input('goods_price'),
+            'lng'=>input('lng'),
+            'start_time'=>input('start_time'),
+            'lat'=>input('lat'),
+            'cate_id'=>input('cate_id'),
+
+        ];
+
+          $updateData['goods_thumb'] =  savePic(request(),'goods_thumb');
+          if (empty($updateData['goods_thumb'])) {
+           unset($updateData['goods_thumb']);
+          }
+          
+          $updateData['thumb_1'] =  savePic(request(),'thumb_1');
+          if (empty($updateData['thumb_1'])) {
+           unset($updateData['thumb_1']);
+          }
+
+          $updateData['thumb_2'] =  savePic(request(),'thumb_2');
+          if (empty($updateData['thumb_2'])) {
+           unset($updateData['thumb_2']);
+          }
+
+           db("goods")->where("id=$id")->update($updateData);
+           $this->success('修改成功！','index');
+      
+
+
+
+    }
+    //推荐操作
+    public function recommed()
+    {
+      $id_a=$_GET['ids'];
+      if (!empty($id_a)) {
+          foreach ($id_a as $key => $value) {
+              db('goods')->where("id=$value")->update(['position'=>input('position')]);
+          }
+          $this->success('推荐成功！','index');
+      }
+    }
 }

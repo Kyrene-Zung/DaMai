@@ -7,17 +7,16 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     headTitle: '',
-    headFlag: true,
-    detailHead: true,
-    buyFoot: true,
-    mapHead: true,
-    seatPurchase: true,
     goodsData: null,
     priceData: null,
     itemArray: [],
     userInfo: [],
     addressArr: [],
-    timeArr: []
+    timeArr: [],
+    goodsList: [],
+// 分类页面
+    searchCriteria: {curCity: '广州', curCate: 0, timeRange: '全部时间', rangeWay: 'hot'}
+    // 搜索条件：城市(当前定位城市)，分类(全部分类)，时间范围(全部时间)，排序方式(按热门)
   },
   getters: {
     musicName: state => state.musicName,

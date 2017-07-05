@@ -43,7 +43,9 @@
 					</div>
 				<!-- 全部城市 -->
 				<mt-index-section :index="city.area" v-for="city in cityList">
-					<mt-cell :title="cities" v-for="cities in city.cities"></mt-cell>
+					<div  @click="chooseCity(cities)"  v-for="cities in city.cities">
+						<mt-cell :title="cities"></mt-cell>
+					</div>
 				</mt-index-section>
 		</mt-index-list>
 	</div>
@@ -52,8 +54,8 @@
 </template>
 
 <script type="es6">
-	import { mapMutations} from 'vuex'
-
+	import {mapState, mapMutations} from 'vuex'
+	import Vue from 'vue'
 	export default{
 		data(){
 			return{
@@ -64,15 +66,29 @@
 				{area:'D',cities:['北京','北海']},
 				{area:'E',cities:['北京','北海']},
 				{area:'F',cities:['北京','北海']},
-				{area:'G',cities:['北京','北海']},
+				{area:'G',cities:['广州','北海']},
 				]
 			}
 		},
 		created(){
 			this.setHeadTitle('')
 		  },
-		  methods:{
-			...mapMutations (['setHeadTitle']), // 映射方法
+		computed:{
+			...mapState(['searchCriteria'])
+		},
+		methods:{
+		  	chooseCity(city){
+		  		// console.log(city)
+		  		this.setSearchCriteria({key:'curCity',value:city})
+		  		 // console.log(this.searchCriteria)
+		  		 Vue.http.jsonp('api/mobile/Goods/search',{params:this.searchCriteria}).then(rtn =>{ 
+		  		 	// console.log(rtn.data)
+		              this.setGoodsList(rtn.data)
+		              this.$router.push({path:'/category'})
+		         });
+		  		
+		  	},
+			...mapMutations (['setHeadTitle','setSearchCriteria','setGoodsList']), // 映射方法
 		}
 	}
 </script>

@@ -24,7 +24,7 @@ class User
       $user->insert($addData);
       return jsonp(['status'=>1]);
     }
-    public function read()
+    public function read()//登录
     {
       $userM =model('user');
       $param = Request::instance()->param();

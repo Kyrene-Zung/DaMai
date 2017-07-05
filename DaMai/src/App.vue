@@ -1,11 +1,14 @@
 <template>
-  <div id="app">
-    <heading></heading>
-
-      <router-view></router-view>
-
-    <footing v-if="$route.path=='/'||$route.path=='/category'||$route.path=='/find'||$route.path=='/mine/index'"></footing>
-  </div>
+ 
+    <div id="app">
+       <transition name="rightIn">
+          <heading></heading>
+      </transition>
+      <transition name="rightIn">
+        <router-view></router-view></transition>
+      <footing v-if="$route.path=='/'||$route.path=='/category'||$route.path=='/find'||$route.path=='/mine/index'"></footing>
+    </div>
+  
 </template>
 
 <script type="es6">

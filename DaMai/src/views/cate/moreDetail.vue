@@ -96,14 +96,9 @@ import {mapMutations} from 'vuex'
 	export default{
 		created(){
 			this.setHeadTitle('项目简介')
-			this.setMapHead(true)
-		    this.setDetailHead(false)
-			this.setBuyFoot(false)
-		    this.setHeadFlag(false)
-		    this.setSeatPurchase(false)
 		},
 		methods: {
-			...mapMutations(['setHeadTitle','setMapHead','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase'])
+			...mapMutations(['setHeadTitle'])
 		}
 
 	}
@@ -119,6 +114,7 @@ import {mapMutations} from 'vuex'
 		width:16.3rem;
 		margin:auto;
 		text-align: left;
+		margin-top: 3.5rem;
 	}
 	.projectBrief .brief{
 		padding-top: 2rem;

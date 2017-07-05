@@ -25,5 +25,16 @@ export default {
   setTimeArr (state, timeArr) {
     state.timeArr = timeArr
     // console.log(state.timeArr)
+  },
+  // 分类页面
+  setSearchCriteria (state, obj) {
+    // console.log(obj)
+    state.searchCriteria[obj.key] = obj.value
+    // console.log(state.searchCriteria)
+  },
+  setGoodsList (state, goodsList) {
+    // console.log(goodsList)
+    state.goodsList = goodsList
+    // console.log(state.goodsList)
   }
 }

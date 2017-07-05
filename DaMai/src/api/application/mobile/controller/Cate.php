@@ -9,7 +9,7 @@ class Cate
      // echo input('cateID');
       $goodsList=Request::instance()->param();
       // print_r($goodsList);exit();
-      $cateList=db('dm_cate')->select();
+      $cateList=db('cate')->select();
       return jsonp($cateList);
     }
 }

@@ -1,4 +1,4 @@
-<template>
+ <template>
 <div style="background-color：#efeff4">
     <div class="mui-card ">
     <div class="mui-card-header" style="padding:0;margin-top:35px;">
@@ -10,21 +10,21 @@
         <router-link to="scan_code" class="icon iconfont icon-saoerweima mui-pull-right" style="color:#000"></router-link>
 
     </div> -->
-    <div @click='login()' style="height:100px">
+    <div style="height:100px">
         <div class="headImg"> 
              <img :src="userInfo.user_photo || user_photo">
         </div>
-        <div class="loginReg" v-if="!userInfo.user_ID" >
-                登录\注册
+        <div class="loginReg" v-if="!userInfo" >
+                登录 / 注册
         </div>
-        <div style="float:left;margin-top:20px;color:#fff" v-if="userInfo.user_ID">
-        <div v-if='userInfo.user_name'>{{userInfo.user_name}}</div>
-            <div> {{level}}会员</div>
-                <div style="float:right">账户管理 >></div>
+        <div  v-if="userInfo" class="userMessage">
+            <div class="user_name"><span>11111111111111111111111111</span></div>
+            <div class="user_level"><span> {{level}}会员</span></div>
         </div>
+        <span class="accountMan" v-if="userInfo" @click="accountMan()">账户管理 >></span>
 
 
-</div>
+    </div>
 </mt-tab-item>
 
 </div></div>
@@ -249,10 +249,13 @@ created(){
     this.setHeadTitle('分类')
   },
    methods:{
-        damaiOrder(type){
+        accountMan(){ //账户管理
+            this.$router.push({path:'/accountMan'})
+        },
+        damaiOrder(type){ //订单管理
             this.$router.push({path:'/damaiOrder',query:{type:type}})
         },
-        addressDefalutl(){//选择默认地址
+        addressDefalutl(){// 地址管理 选择默认地址
             this.$router.push({path:'/addressMan'});
         },
         ...mapMutations (['setHeadTitle','setUserInfo']), // 映射方法
@@ -275,12 +278,12 @@ created(){
             else
                 return false;
         },
-        login : function () {
-            if(this.userInfo.user_ID)
-                 this.$router.push({path:'/mine/person'})
-             else
-            this.$router.push({path:'/mine/login/index'})
-        }
+        // login : function () {
+        //     if(this.userInfo.user_ID)
+        //          this.$router.push({path:'/mine/person'})
+        //      else
+        //     this.$router.push({path:'/mine/login/index'})
+        // }
       },
 
 }
@@ -307,6 +310,43 @@ created(){
          margin:2.2rem 0 0 0.9rem;
          font-size: 0.9rem;
     }
+    .userMessage{
+        display: inline-block;
+        vertical-align: top;
+        margin: 1.1rem 0 0 0.75rem;
+        .user_name{
+            margin-bottom: 0.5rem;
+            width: 5rem;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow:ellipsis;
+             color:#fff;
+            span{
+                font-size: 0.7rem;
+                color:#fff;
+            }
+        }
+        .user_level{
+            width: 4.75rem;
+            height: 1.25rem;
+            background-color: #fabd33;
+            border-radius: 15px;
+            text-align: center;
+            line-height: 1.25rem;
+            span{
+                font-size: 0.6rem;
+                color: #a37d0f;
+
+            }
+        }
+    }
+     .accountMan{
+            // float: right;
+            font-size: 0.65rem;
+            color: #ea91af;
+            float: right;
+            margin:2rem 0.9rem 0 0;
+        }
     .mui-card{
         .mui-car-header{
             p{

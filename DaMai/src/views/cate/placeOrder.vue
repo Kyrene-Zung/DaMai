@@ -191,10 +191,6 @@ import Vue from 'vue'
 		},
 		created(){
 			this.setHeadTitle('提交订单')
-			this.setSeatPurchase(true)
-		    this.setDetailHead(false)
-			this.setBuyFoot(false)
-		    this.setHeadFlag(false)
 		},
 		beforeRouteEnter(to,from,next){
 			//console.log(typeof to.query.address);
@@ -231,7 +227,7 @@ import Vue from 'vue'
 			...mapState(['goodsData','itemArray','userInfo','addressArr'])
 		},
 		methods: {
-			...mapMutations(['setHeadTitle','setHeadFlag','setDetailHead','setBuyFoot','setSeatPurchase','setAddressArr']),
+			...mapMutations(['setHeadTitle','setAddressArr']),
 			//跳转添加收货地址
 			chooseAddress(){
 				// console.log(1111)

@@ -1,7 +1,7 @@
 <template>
 	<div>
 	<!-- 商品详情页面显示的3种尾部 -->
-		<mt-tabbar style="position:fixed;"  v-show="buyFoot">
+		<mt-tabbar style="position:fixed;"  v-if="$route.path=='/ticketDetail'">
 	       <mt-tab-item id="" style="flex:1 !important" class="aaaa">
 	          <router-link to="/">
 	           <i class="fa fa-headphones" aria-hidden="true" style="display:block;color:#d0032e;font-size:0.75rem;padding-bottom:0.25rem;"></i>

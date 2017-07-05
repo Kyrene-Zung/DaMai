@@ -1,59 +1,76 @@
 {include file="public/header"}
-<div class="container">
 <h2>商品列表管理</h2>
-<!-- {:url('add')}  跳转至当前应用下的当前控制器里面的add操作
-{:url('goods/add')}  跳转至当前应用下的goods控制器里面的add操作
-{:url('应用名称/控制器/操作')}  跳转至指定的应用下的goods控制器里面的add操作 -->
 <div class="row">
-  <div class="col-md-3">
-  	<a href="{:url('add')}" class="btn btn-success">添加商品</a>
-	<a href="{:url('cate/add')}" class="btn btn-success">添加分类</a>
-	<a href="{:url('cate/index')}" class="btn btn-success">分类列表</a>
-  </div>
-  <div class="col-md-7 pull-right">
-  	<form action="{:url('index')}">
-  		<div class="form-group">
-		    <input type="text" class="form-control" name="keyword" style="width:60%;display: inline-block;">
-		    <select name="cateID" class="form-control" style="width:20%;display: inline-block;" id="searchcate">
-		    	<option value="">请选择</option>
-		    	{foreach $cateList as $item}
-		    	<option value="$item.cateID">{$item.cate_name}</option>
-		    	{/foreach}
-		    </select>
-		    <input type="submit" name="" value="搜索" class="btn btn-info" style="display: inline-block;" id="search">
-		  </div>
-  	</form>
-  </div>
+	<div class="col-lg-3">
+		<a href="{:url('add')}" class="btn btn-success">添加商品</a>
+	</div>
+	<div class="col-lg-6 pull-right">
+		<form action="{:url('index')}">
+			商品名称：
+			<input type="text" name="keyword" class="form-control" style="display: inline-block; width: 30%;">
+			商品分类:
+			<select name="category_id" id="category_box">
+				<option value="">请选择</option>
+				{foreach $category_list as $item}
+				<option value="{$item.id}">
+					{if condition="$item['parent_id'] > 0 "}
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			{/if}
+			{$item.cate_name}
+				</option>
+				{/foreach}
+			</select>
+			<input type="submit" id="sbt_info" class="btn btn-info" value="搜索"></form>
+	</div>
 </div>
-<!-- <a href="{:url('index/cartnoon/index')}" class="btn btn-success">是浏览漫画api</a>
- -->
- <script type="text/javascript">
- 	$('#searchcate').change(function(){
- 		$('#search').click();
- 	});
- </script>
+<script type="text/javascript">
+	$(function  () {
+		$('#category_box').change(function  () {
+			 $('#sbt_info').click();
+		})
+	})
+</script>
+<form action="{:url('recommed')}">
 <table class="table">
-	<tr class="row">
-		<th class="col-md-1">ID</th>
-		<th class="col-md-3">商品名称</th>
-		<th class="col-md-4">介绍</th>
-		<th class="col-md-1">分类</th>
-		<th class="col-md-3">操作</th>
+	<tr>
+
+		<th>
+			<label>
+				<input type="checkbox">全选</label>
+		</th>
+		<th>ID</th>
+		<th>商品名称</th>
+		<th>商品价格</th>
+		<th>所属分类</th>
+		<th>操作</th>
 	</tr>
+	{foreach $goods_list as $item}
+	<tr>
+		<td>
+			<input type="checkbox" name="ids[]" value="{$item.id}"></td>
+		<td>{$item.id}</td>
+		<td>{$item['goods_name']}</td>
+		<td>{$item['goods_price']}</td>
+		<td>{$item['cate_name']}</td>
 
-
-	{foreach $dm_goodsList as $item}
-	<tr class="row">
-		<td class="col-md-1">{$item.goods_id}</td>
-		<td class="col-md-3">{$item['goods_title']}</td>
-		<td class="col-md-4">{$item['goods_brief']}</audio></td>
- 		<td class="col-md-1">{$item['cate_name']}</td>
-		<td class="col-md-3">
-			<a href="{:url('edit',['id'=>$item['goods_id']])}" class="btn btn-success">修改商品</a>
-			<a href="{:url('delete',['id'=>$item['goods_id']])}" class="btn btn-danger" >删除商品</a>
+		<td>
+			<a href='{:url("home/goods/info",array("id"=>$item.id))}' target="_blank" class="btn btn-success">预览</a>
+			<a href='{:url("edit",array("id"=>$item.id))}' class="btn btn-info">修改</a>
+			<a href='{:url("delete",array("id"=>$item.id))}' class="btn btn-danger">删除</a>
 		</td>
 	</tr>
 	{/foreach}
+	<tr>
+		<td colspan="5">
+			<select name="position">
+				<option value="">请选择位置</option>
+				<option value="best">小编推荐</option>
+				<option value="hot">热门推荐</option>
+			</select>
+			<input type="submit" class="btn btn-success" value="推荐"></td>
+	</tr>
 </table>
-{$dm_goodsList->render()}
+</form>
+{$goods_list->render()}
 {include file="public/footer"}

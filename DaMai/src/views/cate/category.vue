@@ -10,6 +10,7 @@
               <mt-tab-container-item :id="0" > <!-- 全部分类 -->
                 <div class="cateList">
                   <ul>
+                   <li v-if="!goodsList.length">暂无数据</li> 
                    <li v-for="goods in goodsList"  @click="ticketDetail(goods)">
                     <div class="listUp">
                       <img :src="goods.goods_pic">
@@ -30,7 +31,8 @@
             <mt-tab-container-item :id="cate.cate_id" v-for="(cate,index) in CateList">
               <div class="cateList">
                 <ul>
-                 <li v-for="goods in goodsList">
+                 <li v-if="!goodsList.length">暂无数据</li>
+                 <li v-for="goods in goodsList" v-if="goodsList.length">
                   <div class="listUp">
                     <img :src="goods.goods_pic" @click="ticketDetail(goods)">
                     <div class="description">
@@ -55,49 +57,51 @@
 
 <script type="es6">
 import Vue from 'vue'
-import { mapMutations} from 'vuex'
+import { mapState,mapMutations} from 'vuex'
 import { Swipe, SwipeItem, Cell,Toast} from 'mint-ui'
 import {apiUrl} from '../../service/config.js' 
 
 export default{
   data(){
     return {
-      active:0,
       CateList:null,
-      goodsList:[]
+      active:0,
     }
   },
   updated(){
       this.init();
   },
+  computed:{
+    ...mapState(['searchCriteria','goodsList'])
+  },
   created(){
     this.setHeadTitle('分类')
-       Vue.http.jsonp(apiUrl+'/mobile/cate').then(rtn =>{ //获取分类表的内容
+       Vue.http.jsonp('/api/mobile/cate').then(rtn =>{ //获取分类表的内容
         this.CateList=rtn.data
        });
-        Vue.http.jsonp(apiUrl+'/mobile/goods').then(rtn =>{ //获取商品表的内容
-          //console.log(rtn.data)
-          this.goodsList=rtn.data
-      });
+        Vue.http.jsonp('/api/mobile/Goods/search',{params:this.searchCriteria}).then(rtn =>{ 
+              // console.log(rtn.data)
+              this.setGoodsList(rtn.data)
+          });
     },
     watch: {
       active: function (value, oldVal) { // 监听滑动面板事件
-          // 这里就可以通过 val 的值变更来确定
-          // console.log(value)
-          // console.log(oldVal)
           slidePanel(3,value);
-          Vue.http.jsonp(apiUrl+'/mobile/goods',{params:{cate_id:value}}).then(rtn =>{ 
+         // console.log(this.searchCriteria)
+          this.setSearchCriteria({key:'curCate',value:value})
+          Vue.http.jsonp('/api/mobile/Goods/search',{params:this.searchCriteria}).then(rtn =>{ 
               //console.log(rtn.data)
-              this.goodsList=rtn.data
+             
+                this.setGoodsList(rtn.data)
           });
-      }
+      },
     },
     methods:{
       ticketDetail(goods){ // 进入详情页面
        // console.log(goods);
         this.$router.push({path: '/ticketDetail',query:{goods:goods}})
      },
-      ...mapMutations (['setHeadTitle']), // 映射方法
+      ...mapMutations (['setHeadTitle','setSearchCriteria','setGoodsList']), // 映射方法
       init(){
         slideMenu()
      }

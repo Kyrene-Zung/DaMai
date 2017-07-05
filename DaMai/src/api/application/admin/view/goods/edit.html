@@ -1,41 +1,111 @@
 {include file="public/header"}
-<div class="container">
-	<h2>修改歌曲表单</h2>
-	<form action="{:url('update')}" enctype="multipart/form-data" method="post">
-		<div class="form-group">
-			<label for="">歌曲名称</label>
-			<input type="text" class="form-control" name="musicName" value='{$musicList[0]['musicName']}'>
-		</div>
-		<div class="form-group">
-		<label for="">所属歌手</label>
-		<select name="singerID" >
-			<!-- <option value="">请选择</option> -->
-			{foreach $singerList as $item}
-			<option {if condition="$musicList[0]['singerID'] == $item['singerID']" } selected {/if} value="{$item.singerID}">{$item.singerName}</option>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=SYF6kWV4w0ZC7kA3jaZoIvwPAg1kL15H"></script>
+<style type="text/css">
+	.dropify-wrapper{width:30% !important;float: left;margin-right: 10px;}
+</style>
+<h2>修改商品表单</h2>
+<form action="{:url('update')}" enctype="multipart/form-data" method="post">
+	<div class="form-group">
+		<label for="">商品名称</label>
+		<input type="text" class="form-control" name="goods_name" value="{$info.goods_name}"></div>
+	<div class="form-group">
+		<label for="">商品价格</label>
+		<input type="text" class="form-control" name="goods_price" value="{$info.goods_price}"></div>
+	<div class="form-group">
+		<label for="">开始时间</label>
+		<input type="text" class="form-control" name="start_time" value="{$info.start_time}"></div>
+	<div class="form-group">
+		<label for="">所属分类</label>
+		<select name="cate_id" >
+			<option value="">请选择</option>
+			{foreach $category_list as $item}
+			<option {if condition='$info.cate_id == $item.id'}selected {/if} value="{$item.id}">
+				{if condition="$item['parent_id'] > 0 "}
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			{/if}
+			{$item.cate_name}
+			</option>
 			{/foreach}
-
 		</select>
-		</div>
-		<div class="form-group">
-			<label for="">mp3</label>
-			<input type="file"  name="mp3Src" value='{$musicList[0]['mp3Src']}'>
-			<input type="hidden"  name="mp3Hide" value='{$musicList[0]['mp3Src']}'>
-		</div>
-		<div class="form-group">
-			<label for="">虾米歌曲</label>
-			<embed src="http://www.xiami.com/widget/0_{$musicList[0]['songID']}/singlePlayer.swf" type="application/x-shockwave-flash" width="257" height="33" wmode="transparent"></embed>
-		</div>
-		<div class="form-group">
-			<label for="">歌词</label>
-			<textarea name="word" id=""  style="width: 1146px; height: 190px;" value='{$musicList[0]['word']}'>{$musicList[0]['word']}
-			</textarea>
-		</div>
-		<div class="form-group">
-			<input type="submit" class="btn-success btn" value="保存">
-			<input type="hidden"  name="id" value='{$musicList[0]['musicID']}'>
-		</div>
-	</form>
-</div>
+	</div>
+	<div class="form-group" >
+		<div><label for="">商品图片</label></div>
+		<input type="file"  name="goods_thumb" class="thumb" data-default-file="__PUBLIC__{$info.goods_thumb}">
+		<input type="file"  name="thumb_1" class="thumb" data-default-file="__PUBLIC__{$info.thumb_1}">
+		<input type="file"  name="thumb_2" class="thumb" data-default-file="__PUBLIC__{$info.thumb_2}"></div>
+ 
 
 
+	<div class="form-group" style="clear:both">
+		<label for="">门票地图</label>
+		<input type="text" placeholder="请输入地址关键词" id="map_kwd">
+		<input onclick="search()" value="搜索" type="button" class="btn btn-info">
+		经度：
+		<input type="text" name="lng"  value="{$info.lng}">
+		纬度：
+		<input type="text" name="lat" value="{$info.lat}">
+		<br>
+		<div id="allmap" style="width:100%;height:280px;"></div>
+
+		<script type="text/javascript">
+			// 百度地图API功能
+			var map = new BMap.Map("allmap");  //盒子的ID        
+			 
+				map.addControl(new BMap.NavigationControl());    
+				var point = new BMap.Point(113.243113,23.126342);
+
+				// 添加覆盖物
+	map.centerAndZoom(point, 12);
+	 
+
+		function showInfo(e){
+				$("input[name='lng']").val(e.point.lng);
+			$("input[name='lat']").val(e.point.lat);
+	}
+	map.addEventListener("click", showInfo);
+
+			// 搜索要用的
+			var local = new BMap.LocalSearch(map, {
+				renderOptions:{map: map}
+			});
+			function search () {
+			 	local.search($("#map_kwd").val());
+			}
+		</script>
+	</div>
+
+	<div class="form-group">
+		<label for="">商品简介</label>
+		<textarea name="description" id="description"  style="width: 100%; height: 190px;">{$info.description}</textarea>
+	</div>
+	<div class="form-group">
+		<input type="hidden" name="id" value="{$info.id}">
+		<input type="submit" class="btn-success btn" value="更新"></div>
+</form>
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/library/dropify/dropify.min.css">
+<script type="text/javascript" src="__PUBLIC__/static/library/dropify/dropify.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/static/library/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/library/ueditor/ueditor.all.min.js"></script>
+
+<script type="text/javascript">
+     $('input[name="goods_thumb"]').dropify({
+    	 messages: {
+	        'default': '主图',
+	    }
+    });
+    $('input[name="thumb_1"]').dropify({
+    	 messages: {
+	        'default': '副图一',
+	    }
+    });
+    $('input[name="thumb_2"]').dropify({
+    	 messages: {
+	        'default': '副图二',
+	    }
+    });
+    var ue = UE.getEditor('description');
+</script>
 {include file="public/footer"}
