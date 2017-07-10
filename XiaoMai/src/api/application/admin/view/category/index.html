@@ -1,0 +1,57 @@
+{include file="public/header"}
+<h2>分类列表管理</h2>
+<div class="row">
+	<div class="col-lg-3">
+		<a href="{:url('add')}" class="btn btn-success">添加分类</a>
+		{if $cate_parent}
+		<a href="{:url('index')}" class="btn btn-success">返回一级分类</a>
+		{/if}
+	</div>
+	<div class="col-lg-6 pull-right">
+		<form action="{:url('index')}">
+			分类名称：
+			<input type="text" name="keyword" class="form-control" style="display: inline-block; width: 30%;">
+			 
+			<input type="submit" cate_id="sbt_info" class="btn btn-info" value="搜索"></form>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function  () {
+		$('#category_box').change(function  () {
+			 $('#sbt_info').click();
+		})
+	})
+</script>
+<form action="{:url('recommed')}">
+<table class="table">
+	<tr>
+
+		 
+		<th>cate_id</th>
+		<th>分类名称</th>
+		<th>操作</th>
+	</tr>
+	{foreach $cate_list as $item}
+	<tr>
+		<td>{$item.cate_id}</td>
+		<td>{$item['cate_name']}</td>
+
+		<td>
+{if $item.cate_classnum > 0}
+			<a href='{:url("subclass",array("cate_parent"=>$item.cate_id,"parent_name"=>$item.cate_name))}' class="btn btn-info">查看子类</a>
+			{/if}
+			<a href='{:url("edit",array("cate_id"=>$item.cate_id))}' class="btn btn-info">修改</a>
+
+			<a href='{:url("delete",array("cate_id"=>$item.cate_id,"cate_parent"=>$item.cate_parent))}' class="btn btn-danger">删除</a>
+{if $item.cate_classnum<=0}
+			<!-- <a href='{:url("collectgoods",array("cate_id"=>$item.cate_id))}' class="btn btn-warning">采集商品</a> -->
+			<!-- <a href='{:url("collectsubclass",array("cate_id"=>$item.cate_id))}' class="btn btn-warning">采集子类</a> -->
+{/if}			
+		</td>
+	</tr>
+	{/foreach}
+	 
+</table>
+</form>
+{$cate_list->render()}
+{include file="public/footer"}

@@ -1,0 +1,262 @@
+{include file="public/header"}
+<h1 class="page-title"> 小麦后台管理系统
+                            <small>商品管理、订单管理</small>
+                        </h1>
+ <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="dashboard-stat2 ">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-green-sharp">
+                                                <span data-counter="counterup" data-value="7800">7800</span>
+                                                <small class="font-green-sharp">$</small>
+                                            </h3>
+                                            <small>TOTAL PROFIT</small>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-pie-chart"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 76%;" class="progress-bar progress-bar-success green-sharp">
+                                                <span class="sr-only">76% progress</span>
+                                            </span>
+                                        </div>
+                                        <div class="status">
+                                            <div class="status-title"> progress </div>
+                                            <div class="status-number"> 76% </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="dashboard-stat2 ">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-red-haze">
+                                                <span data-counter="counterup" data-value="1349">1349</span>
+                                            </h3>
+                                            <small>NEW FEEDBACKS</small>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-like"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 85%;" class="progress-bar progress-bar-success red-haze">
+                                                <span class="sr-only">85% change</span>
+                                            </span>
+                                        </div>
+                                        <div class="status">
+                                            <div class="status-title"> change </div>
+                                            <div class="status-number"> 85% </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="dashboard-stat2 ">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-blue-sharp">
+                                                <span data-counter="counterup" data-value="567">567</span>
+                                            </h3>
+                                            <small>NEW ORDERS</small>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-basket"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 45%;" class="progress-bar progress-bar-success blue-sharp">
+                                                <span class="sr-only">45% grow</span>
+                                            </span>
+                                        </div>
+                                        <div class="status">
+                                            <div class="status-title"> grow </div>
+                                            <div class="status-number"> 45% </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="dashboard-stat2 ">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-purple-soft">
+                                                <span data-counter="counterup" data-value="276">276</span>
+                                            </h3>
+                                            <small>NEW USERS</small>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 57%;" class="progress-bar progress-bar-success purple-soft">
+                                                <span class="sr-only">56% change</span>
+                                            </span>
+                                        </div>
+                                        <div class="status">
+                                            <div class="status-title"> change </div>
+                                            <div class="status-number"> 57% </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-xs-12 col-sm-12">
+                                <div class="portlet light ">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <span class="caption-subject bold uppercase font-dark">会员注册时时监控</span>
+                                        </div>
+                                        <div class="actions">
+                                          
+                                            <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="#" data-original-title="" title=""> </a>
+                                        </div>
+                                    </div>
+                                    <script type="text/javascript" src="__PUBLIC__/static/library/echarts.min.js"></script>
+                                    <div class="portlet-body">
+                                        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 100%;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+    title: {
+        text: '动态数据',
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#283b56'
+            }
+        }
+    },
+    legend: {
+        data:['注册数量', '访问人数']
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    dataZoom: {
+        show: false,
+        start: 0,
+        end: 100
+    },
+    xAxis: [
+        {
+            type: 'category',
+            boundaryGap: true,
+            data: (function (){
+                var now = new Date();
+                var res = [];
+                var len = 10;
+                while (len--) {
+                    res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                    now = new Date(now - 2000);
+                }
+                return res;
+            })()
+        },
+        {
+            type: 'category',
+            boundaryGap: true,
+            data: (function (){
+                var res = [];
+                var len = 10;
+                while (len--) {
+                    res.push(len + 1);
+                }
+                return res;
+            })()
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            scale: true,
+            name: '数量',
+            max: 30,
+            min: 0,
+            boundaryGap: [0.2, 0.2]
+        },
+        {
+            type: 'value',
+            scale: true,
+            name: '数量',
+            max: 1200,
+            min: 0,
+            boundaryGap: [0.2, 0.2]
+        }
+    ],
+    series: [
+        {
+            name:'访问人数',
+            type:'bar',
+            xAxisIndex: 1,
+            yAxisIndex: 1,
+            data:(function (){
+                var res = [];
+                var len = 10;
+                while (len--) {
+                    res.push(Math.round(Math.random() * 1000));
+                }
+                return res;
+            })()
+        },
+        {
+            name:'注册数量',
+            type:'line',
+            data:(function (){
+                var res = [];
+                var len = 0;
+                while (len < 10) {
+                    res.push(Math.round((Math.random()*10 + 5)) - 0);
+                    len++;
+                }
+                return res;
+            })()
+        }
+    ]
+};
+var app={}
+app.count = 11;
+setInterval(function (){
+    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+
+    var data0 = option.series[0].data;
+    var data1 = option.series[1].data;
+    data0.shift();
+    data0.push(Math.round(Math.random() * 1000));
+    data1.shift();
+    data1.push(Math.round((Math.random()*10 + 5)) - 0);
+
+    option.xAxis[0].data.shift();
+    option.xAxis[0].data.push(axisData);
+    option.xAxis[1].data.shift();
+    option.xAxis[1].data.push(app.count++);
+
+    myChart.setOption(option);
+}, 5000);
+ 
+    </script>
+                                    </div>
+                                </div>
+                            </div>
+                         
+                        </div>
+{include file="public/footer"}

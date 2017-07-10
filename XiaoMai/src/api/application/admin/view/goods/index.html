@@ -1,0 +1,76 @@
+{include file="public/header"}
+<h2>商品列表管理</h2>
+<div class="row">
+	<div class="col-lg-3">
+		<a href="{:url('add')}" class="btn btn-success">添加商品</a>
+	</div>
+	<div class="col-lg-6 pull-right">
+		<form action="{:url('index')}">
+			商品名称：
+			<input type="text" name="keyword" class="form-control" style="display: inline-block; width: 30%;">
+			商品分类:
+			<select name="cate_id" id="cate_box">
+				<option value="">请选择</option>
+				{foreach $cate_list as $item}
+				<option value="{$item.cate_id}">
+					{if condition="$item['cate_parent'] > 0 "}
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			{/if}
+			{$item.cate_name}
+				</option>
+				{/foreach}
+			</select>
+			<input type="submit" id="sbt_info" class="btn btn-info" value="搜索"></form>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function  () {
+		$('#cate_box').change(function  () {
+			 $('#sbt_info').click();
+		})
+	})
+</script>
+<form action="{:url('recommed')}">
+<table class="table">
+	<tr>
+
+		<th>
+			<label>
+				<input type="checkbox">全选</label>
+		</th>
+		<th>ID</th>
+		<th>商品名称</th>
+		<th>商品价格</th>
+		<th>所属分类</th>
+		<th>操作</th>
+	</tr>
+	{foreach $goods_list as $item}
+	<tr>
+		<td>
+			<input type="checkbox" name="ids[]" value="{$item.goods_id}"></td>
+		<td>{$item.goods_id}</td>
+		<td>{$item['goods_title']}</td>
+		<td>{$item['goods_price']}</td>
+		<td>{$item['cate_name']}</td>
+
+		<td>
+			<a href='{:url("pc/goods/info",array("goods_id"=>$item.goods_id))}' target="_blank" class="btn btn-success">预览</a>
+			<a href='{:url("edit",array("goods_id"=>$item.goods_id))}' class="btn btn-info">修改</a>
+			<a href='{:url("delete",array("goods_id"=>$item.goods_id))}' class="btn btn-danger">删除</a>
+		</td>
+	</tr>
+	{/foreach}
+	<tr>
+		<td colspan="5">
+			<select name="type">
+				<option value="">请选择位置</option>
+				<option value="editor">小编推荐</option>
+				<option value="hot">热门推荐</option>
+			</select>
+			<input type="submit" class="btn btn-success" value="推荐"></td>
+	</tr>
+</table>
+</form>
+{$goods_list->render()}
+{include file="public/footer"}

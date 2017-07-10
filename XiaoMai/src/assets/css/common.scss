@@ -1,0 +1,7 @@
+$aColor: #fff;
+@mixin blockText($size,$color,$align,$lineHeight){
+	font-size:$size;
+	color:$color;
+	text-align:$align;
+	line-height:$lineHeight;
+}

@@ -1,0 +1,104 @@
+*{margin: 0;padding: 0;}
+body,html{font-size: 20px;font-family: "微软雅黑";background-color: #fff;}
+ul,li{list-style: none;}
+
+.rightIn-enter-active{
+	transition: all .3s ease-out;
+	transform: translate(0,0);		
+}
+.rightIn-enter{
+	transform: translate(360px,0);
+}
+.bodyIn-enter-active{
+	transition: all .3s ease-out;
+	transform: translate(0,0);		
+}
+.bodyIn-enter{
+	transform: translate(360px,0);
+}
+/*城市页面进出过渡*/
+.location-enter-active{
+	transition: all .3s ease-out;
+	transform: translate(0,0);		
+}
+.location-enter{
+	transform: translate(360px,0);
+}
+.location-leave-active{
+	
+	transform: translate(360px,0);
+	transition: all .3s ease-out;		
+}
+.location-leave{
+	transform: translate(0,0);
+}
+
+/*商品详情页面*/
+.container .mint-cell-wrapper{
+	padding:0 !important;
+	text-align: left !important;
+	font-size:0.7rem !important;
+	color:#111111 !important;
+	background-image: none;
+}
+.container .mint-cell-value{
+	color:#111111 !important;
+	display: inline-block;
+}
+.container .address .mint-cell-title{
+	flex: 0!important;
+}
+.container .seat .mint-cell-title{
+	flex: 0!important;
+}
+.container .seat .mint-cell-value,.container .starTeam .mint-cell-value{
+	color:#000 !important;
+	display: inline-block;
+}
+.limitBuy .mint-cell-title .mint-cell-text{
+	color:#080808 !important;
+	font-size: 0.7rem;
+}
+/*定位页面*/
+::-webkit-scrollbar{width:0px}
+.cityList .mint-indexlist .mint-indexlist-content{
+	/*overflow: inherit!important;*/
+	margin-right: 0!important;
+
+}
+.cityList .mint-indexlist .mint-indexlist-content .mint-indexsection-index{
+	background-color: #f1f5f4;
+}
+.cityList .mint-indexlist .mint-indexlist-content .mint-cell-wrapper{
+	background-image: none;
+}
+.cityList .mint-indexlist .mint-indexlist-nav{
+	background-color: transparent!important;
+	border-left:none!important;
+	position: fixed;
+}
+/*付款页面*/
+.mesgList .payContainer .mint-cell .mint-cell-text{
+	color:#959595;
+	font-size: 0.75rem;
+}
+.mesgList .payContainer .mint-cell .mint-cell-value{
+	color:#545454;
+	font-size: 0.75rem;
+}
+/*粉色头部返回*/
+.pinkBack{
+	color:#fff!important;
+}
+.mint-header.mapHead.is-fixed .mint-header-title{
+	color: #fff;
+	margin-left: -9.5rem;
+    margin-top: 0.7rem;
+    font-size: 0.9rem;
+}
+/*电影头部*/
+.movieHead.is-fixed .mint-header-title{
+		text-align: center!important;
+		color:#fff;
+
+}
