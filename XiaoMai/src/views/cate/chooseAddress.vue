@@ -51,7 +51,7 @@ import Vue from 'vue'
 			// next(vm=>{
 			// 	// let user_name=localStorage.getItem('user');//获取当前用户名
 			// 	let user_id=1;
-			// 	Vue.http.jsonp('api/mobile/User',{params:{user_id:user_id}}).then(rtn=>{
+			// 	Vue.http.jsonp('/api/mobile/User',{params:{user_id:user_id}}).then(rtn=>{
 			// 				console.log(rtn.data);
 			// 				vm.addressArr=rtn.data;
 			// 				// vm.setAttributeData(vm.goods_attribute)

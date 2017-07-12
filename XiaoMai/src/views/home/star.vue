@@ -1,4 +1,5 @@
 <template>
+ <transition name="bodyIn">
   <div class="star">
 
     <!-- 海报 -->
@@ -40,11 +41,12 @@
   <br>
   <br>
   </div>
+</transition>
 </template>
 
 <script type="es6">
-import vue from 'vue'
-
+import Vue from 'vue'
+import {mapMutations} from 'vuex'
 export default {
   name: 'star',
   data () {
@@ -85,8 +87,11 @@ export default {
       ]
     }
   },
-  components:{
-    
+  created(){
+    this.setHeadTitle('【董贞】')
+  },
+  methods:{
+    ...mapMutations(['setHeadTitle'])
   }
 }
 </script>
@@ -98,7 +103,7 @@ h4{font-size: 0.9rem;margin-left:0.5rem;padding-top:1rem;font-weight: bolder;tex
 ul {list-style-type: none;padding: 0;}
 li {display: inline-block;margin: 0;}
 a {color: #42b983;}
-.star{background-color:#f1f5f4;}
+.star{background-color:#f1f5f4;margin-top: 3.5rem;}
 section{background: #fff;margin-top:0.4rem;}
 
 /*海报*/

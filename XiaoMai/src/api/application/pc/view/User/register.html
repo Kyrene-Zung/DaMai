@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="__PUBLIC__/static/pc/User/css/user_rest.css">
+	<link rel="stylesheet" href="__PUBLIC__/static/pc/User/css/register.css">
+	<script src="__PUBLIC__/static/pc/User/js/jquery.min.js"></script>
+</head>
+<body>
+	<header class="header loginmain bg_white">
+		<nav class="nav">
+				<a class="float_left"><img src="__PUBLIC__/static/pc/User/imgs/logo.png"></a>
+				<h1 class="float_left">账户注册</h1>
+				<a href="javascript:;" class="header_en float_right">English</a>
+		</nav>
+	</header>
+	<div class="container loginmain bg_white">
+		<div class="content">
+			<div class="content_left float_left">
+				<div class="content_right_infos">
+					<form action="{:url('regSum')}" class="loginform">
+						<div class="login_form_div">
+							<span class="login_form_img"></span>
+							<div class="select_area" tabindex="1">
+								<div class="select_value">
+									<span class="f0 float_left"></span>
+									<b class="f1 float_left">中国</b>
+									<b class="f2 float_right">+86</b>
+								</div>
+								<div class="select_item">
+									<h4 class="float_left">
+										<span class="f0 float_left"></span>
+										<b class="f1 float_left">中国</b>
+										<b class="f2 float_right">+86</b>
+									</h4>
+									<h4 class="float_left">
+										<span class="f0 move0 float_left"></span>
+										<b class="f1 float_left">香港</b>
+										<b class="f2 float_right">+852</b>
+									</h4>
+									<h4 class="float_left">
+										<span class="f0 move1 float_left"></span>
+										<b class="f1 float_left">澳门</b>
+										<b class="f2 float_right">+853</b>
+									</h4>
+								</div>
+							</div>
+							<input type="text" id="tel" name="user" placeholder="手机号码">
+							
+							<div id="cur1" style="display: none;width: 170px; color: red;position: absolute;right: -180px;top: 8px;">手机输入格式有误</div>	
+							<div id="cur1_1" style="display: none;width: 170px; color: green;position: absolute;right: -180px;top: 8px;">格式正确</div>
+						</div>
+
+						
+						<div class="login_form_div">
+							<span class="login_form_img move00"></span>
+							<input id="password1" type="password" name="password1" placeholder="登陆密码">
+							<div id="cur2" style="display: none;width: 190px; color: red;position: absolute;right: -200px;top: 8px;">密码长度必须在6位到18位之间</div>	
+							<div id="cur2_2" style="display: none;width: 170px; color: green;position: absolute;right: -180px;top: 8px;">格式正确</div>	
+						</div>
+						<div class="login_form_div">
+							<span class="login_form_img move00"></span>
+							<input id="password2" type="password" name="password2" placeholder="确认密码">
+							<div id="cur3" style="display: none;width: 170px; color: red;position: absolute;right: -180px;top: 8px;">与上次密码不一致</div>	
+							<div id="cur3_3" style="display: none;width: 170px; color: green;position: absolute;right: -180px;top: 8px;">密码一致</div>
+						</div>
+						<!-- <div class="login_form_div">
+							<span class="login_form_img move01"></span>
+							<div class="slider_over"></div>
+							<div class="slider">>></div>
+							<div class="check_m">
+								<img src="__PUBLIC__/static/pc/User/" alt="">
+							</div>							
+						</div> -->
+						<div class="sends_div">
+							<div class="login_form_div sendsinputW">
+							<span class="login_form_img move02"></span>
+							<input type="password" name="password" placeholder="动态密码">						
+						</div>
+						<button class="sends_btn">发送校验码</button>
+						</div>
+						<p class="tips"></p><!-- 提示 -->
+						<input type="button" id="btn" class="login_btn" value="立即注册"><br>
+						<div class="sends_div">
+						<input type="checkbox"><label>我已阅读并同意</lable><a herf="">《大麦网会员服务条款》</a><br>
+						</div>
+					</form>
+
+				</div>
+			</div>
+
+
+							<script>
+								
+								
+								var off1=false;
+								var off2=false;
+								var off2=false;
+
+								$('#tel').blur(function(){
+									/*var user_tel=$('input[name="user"]').val();*/
+									var user_tel=$(this).val();
+
+									
+
+									
+
+									$.post('http://localhost/pc/damaiPC/public/pc/user/checkname.html',{user_tel:$(this).val()},
+									function(rtn){
+										console.log(rtn);
+										if (rtn.status==0) {
+											alert(rtn.msg);
+										}
+										else{
+											if (!/^1\d{10}/.test(user_tel)) {
+									off1=false;
+									$('#cur1').css('display','block');
+									$('#cur1_1').css('display','none');}
+
+									else{
+										off1=true;
+										$('#cur1').css('display','none');
+										$('#cur1_1').css('display','block');}
+										}
+										
+									});
+									
+								})
+
+								$('#password1').blur(function(){
+									console.log(2)
+									/*var logo_password1=$('input[name="password1"]').val();*/
+									var logo_password1=$(this).val();
+									
+									if (logo_password1.length<6 || logo_password1.length>18) {
+										off2=false;
+										$('#cur2').css('display','block');
+										$('#cur2_2').css('display','none');
+
+										$('#password2').blur(function(){
+											/*var logo_password2=$('input[name="password2"]').val();*/
+											var logo_password2=$(this).val();
+
+											if (logo_password2!=logo_password1) {
+											off3=false;
+											$('#cur3').css('display','block');
+											$('#cur3_3').css('display','none');}
+
+											else{
+												off3=true;
+												$('#cur3').css('display','none');
+												$('#cur3_3').css('display','block');}
+											
+										})
+
+									}
+									else{
+										off2=true;
+										$('#cur2').css('display','none');
+										$('#cur2_2').css('display','block');
+
+										$('#password2').blur(function(){
+											var logo_password2=$('input[name="password2"]').val();
+											if (logo_password2!=logo_password1) {
+											off3=false;
+											$('#cur3').css('display','block');
+											$('#cur3_3').css('display','none');}
+
+											else{
+												off3=true;
+												$('#cur3').css('display','none');
+												$('#cur3_3').css('display','block');}
+											
+										})
+									}
+								})
+
+								$('#btn').click(function(){
+									
+									if (off1&off2&off3) {
+										alert('成功');
+										var logo_password1=$('input[name="password1"]').val();
+										var user_tel=$('input[name="user"]').val();
+
+									$.post('http://localhost/pc/damaiPC/public/pc/user/regSum',{user_tel,logo_password1},
+									function(rtn){
+								
+										location.href='http://localhost/pc/damaiPC/public/pc/user/logo';
+									});
+									}
+									else{
+										alert('格式有误');
+									}
+									
+
+								})
+
+								
+								
+
+							
+							</script>
+
+
+
+
+			<div class="content_right float_right">
+				
+			</div>
+			</div>	
+		</div>
+	</div>
+	<div class="footer text_center">
+		<div class="footer_nav">
+			<ul>
+				<li><a href="">公司介绍</a></li>
+				<li><a href="">品牌识别</a></li>
+				<li><a href="">企业荣誉</a></li>
+				<li><a href="">联系方式</a></li>
+				<li><a href="">隐私声明</a></li>
+				<li><a href="">合作招商</a></li>
+				<li><a href="">招聘信息</a></li>
+				<li><a href="">网站地图</a></li>
+				<li><a href="">友情链接</a></li>
+			</ul>
+		</div>
+		<div class="footer_nav">
+			<ul>
+				<li><a href="">京ICP证031057号</a></li>
+				<li><a href="">京ICP备11043884号</a></li>
+				<li><a href="">京公网安备11010102000430号</a></li>
+				<li><a href="">广播电视节目制作经营许可证 (京)字第02253号</a></li>
+			</ul>
+		</div>
+		<div class="footer_nav">
+			<ul>
+				<li><a href="">网络文化经营许可证 京网文[2016]3438-413号</a></li>
+				<li><a href="">营业性演出许可证 京市演587号</a></li>
+			</ul>
+		</div>
+		<div class="footer_nav">
+			<ul>
+				<li><a href=""> 北京红马传媒文化发展有限公司 版权所有 </a></li>
+				<li><a href="">大麦网</a></li>
+				<li><p> Copyright 2003-2017 All Rights Reserved</p></li>
+			</ul>
+		</div>
+	</div>
+</body>
+
+<script>
+var $select_area = $('.select_area');
+ var $select_value = $('.select_area .select_value');
+ var $select_item = $('.select_area .select_item');
+ var $slider = $('.slider');
+ var $slider_over = $('.slider_over');
+ var $check_m = $('.check_m');
+
+ $slider.on("mousedown",function(ev){
+            var that=$(this);
+            var X= that.offset().left-$slider.position().left/2;
+            var speed = ev.pageX;
+            $(document).bind('mousemove',function (ev) {
+            	if(ev.pageX<293){
+            		$slider.css({
+                    	left: 46 +"px"
+                	});
+                	$slider_over.css({
+                		width:0+"px"
+                	});
+            	}else if(ev.pageX>559){
+            			$slider.css({
+                    	left: 335 +"px"
+                	});
+            		$slider_over.css({
+                		"width":"290px"
+                	});
+            	}else{ 
+            		$slider.css({
+                    	left: ev.pageX - X +"px"
+                	});
+                	$slider_over.css({
+                		width:ev.pageX-speed+"px"
+                	});
+            	}          
+            })
+            $(document).on("mouseup",function(){
+            	var sliderX = $slider.position().left;
+            	if(sliderX<334){
+            		$slider.stop().animate({
+            				left:"46px"
+            			},200);
+            		$slider_over.stop().animate({
+                		width:0+"px"
+                	},200);
+            	}else{
+            		$check_m.stop().show();
+            	}
+                $(document).unbind("mousemove");
+            });
+        });
+ //选着区号事件
+
+ $select_area.click(function(event) {
+ 	/* Act on the event */
+ 	if($select_item.is(":hidden")){
+ 		$select_item.stop().show(200);
+ 	}else{
+ 		$select_item.stop().hide(200);
+ 	}
+ });
+
+ $select_item.find('h4').click(function(event){
+ 	var index = $select_item.find('h4').index(this);
+ 	var str = $select_item.find('h4').eq(index).html();
+ 	$select_value.html("");
+ 	$select_value.append($(str));	
+ 	$select_item.stop().hide(200);
+ });
+ $select_area.blur(function(event){	
+ 	event.stopPropagation();
+ 	$select_item.stop().hide(200);
+ });
+</script>
+</html>

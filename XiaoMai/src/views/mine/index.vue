@@ -236,7 +236,7 @@ export default{
     data(){
         return{
                 level:'',
-                user_photo:'../static/photo.jpg',
+                user_photo:'../../../static/photo.jpg',
                 user_wallet:'0.0',
                 user_coupon:'0.0',
                 user_integration:'0.0'

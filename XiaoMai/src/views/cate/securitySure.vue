@@ -31,7 +31,7 @@ import Vue from 'vue'
 			proOrder(){
 				//验证成功 请求后台生成生成订单编号
 				//console.log(this.itemArray)
-				Vue.http.jsonp('api/mobile/Order/index').then(rtn=>{
+				Vue.http.jsonp('/api/mobile/Order/index').then(rtn=>{
 					//console.log(rtn.data)
 					let user_id=JSON.parse(localStorage.getItem('userInfo')).user_id
 					this.$router.push({

@@ -31,7 +31,7 @@ export default {
     }
   },
 	created(){
-      Vue.http.jsonp(apiUrl+'/mobile/cate').then(rtn =>{ //获取分类表的内容
+      Vue.http.jsonp('/api/mobile/cate').then(rtn =>{ //获取分类表的内容
         this.CateList=rtn.data
     })
 

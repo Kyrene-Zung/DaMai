@@ -101,7 +101,7 @@ import Vue from 'vue'
 			},
 			// askOrderApi(value){
 			// 	let user_id=JSON.parse(localStorage.getItem('userInfo')).user_id;
-			// 	Vue.http.jsonp('api/mobile/Order/getOrder',{params:{user_id:user_id,status:value}}).then(rtn=>{
+			// 	Vue.http.jsonp('/api/mobile/Order/getOrder',{params:{user_id:user_id,status:value}}).then(rtn=>{
 			// 		//console.log(rtn.data)
 			// 		this.orderArr=rtn.data;
 			// 	})

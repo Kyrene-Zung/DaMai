@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="__PUBLIC__/static/pc/home/css/classification-content.css">
+</head>
+<body>
+{include file="public/header"}
+
+<div class="classification" style="clear: both">
+    <div style="width: 100%;height: 3px;background: #d70000;"></div>
+    <div class="contain">
+        <div class="classification-title"style="width: 100%;height: 40px;">
+            <div style="float: left;width: 200px;height: 40px;background: #d70000;text-align: center;line-height: 40px;color: white">全部商品分类</div>
+            <ul style="float: left;" id="classification-type">
+                <li>戏剧</li>
+                <li>戏剧</li>
+                <li>戏剧</li>
+                <li>戏剧</li>
+                <li>戏剧</li>
+                <li>戏剧</li>
+                <li>戏剧</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div class="content">
+    <div class="contain">
+        <div class="content-left">
+            <div class="classification-content" style="clear: both">
+                <div style="margin-top: 12px">共16个商品</div>
+                <div class="classification-list">
+                    <ul class="classification-name" id="classification-name">
+                        <li class="city">城&nbsp;&nbsp;&nbsp;市:</li>
+                        <li class="all curl" id="all-one">全部</li>
+                        <li class="classification-city-one showCate" id="classification-city-one">
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                        </li>
+                        <li id="more" class="more">更多</li>
+                    </ul>
+                    <div class="line"></div>
+                    <ul class="classification-name">
+                        <li class="city">城&nbsp;&nbsp;&nbsp;市:</li>
+                        <li class="all curl" id="all-two">全部</li>
+                        <li class="classification-city" id="classification-city-two">
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                        </li>
+                    </ul>
+                    <div class="line"></div>
+                    <ul class="classification-name">
+                        <li class="city">城&nbsp;&nbsp;&nbsp;市:</li>
+                        <li class="all curl" id="all-three">全部</li>
+                        <li class="classification-city" id="classification-city-three">
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                        </li>
+                    </ul>
+                    <div class="line"></div>
+                    <ul class="classification-name">
+                        <li class="city">城&nbsp;&nbsp;&nbsp;市:</li>
+                        <li class="all curl" id="all-four">全部</li>
+                        <li class="classification-city" id="classification-city-four">
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                            <p>广州</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="movie-detail" style="margin-top: 12px">
+                <div class="contain">
+                    <div class="movie-content" style="width: 930px">
+                        <div class="movie-back" style="width: 100%;height: 40px;background: #cccccc;">
+                            <ul class="movie-option-left" id="movie-option-left">
+                                <li>相关度排序</li>
+                                <li class="movie-cur">人气最高</li>
+                                <li>人气最高</li>
+                                <li>人气最高</li>
+                            </ul>
+                            <ul class="movie-option-right" id="movie-option-right">
+                                <li><&nbsp;&nbsp;1/2&nbsp;&nbsp;></li>
+                                <li>图</li>
+                                <li>图</li>
+                            </ul>
+                        </div>
+                        <ul style="clear: both" id="movie-Introduction" class="movie-Introduction">
+                        {foreach $goodsList as $item}
+                            <li style="margin-top: 40px;margin-left: 30px">
+                                <div style="height: 237px" class="movie-Introduction-page">
+                                  <a href="{:url('details/index')}">  <img src="{$item.goods_pic}" alt="" width="150" style="float: left"> </a>
+                                    <div class="content-Introduction" style="float: left;width: 725px">
+                                        <h3>{$item.goods_title}</h3>
+                                        <p>{$item.goods_brief}</p>
+                                        <p style="opacity: 0.7"><i class=""></i>{$item.show_time}</p>
+                                        <p style="margin-bottom: 15px">{$item.venue}</p>
+                                        <span><b>{$item.goods_price}元</b>&nbsp;&nbsp;</span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                                <div class="line" style="width: 95%;height: 1px;background: #cccccc;margin: 0px auto 30px;"></div>
+                            </li>
+                        {/foreach}
+            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-right" style="float: right">
+            <img src="__PUBLIC__/static/pc/home/image/page-02-bg.jpg" alt="" title="岳云飞">
+            <div class="content-right-page">
+                <p style="text-align: center">观众都喜欢</p>
+                <ul class="content-right-movie">
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/page-02-bg01.jpg" alt="" style="float: left;clear: both" width="97">
+                        <div class="content-right-Intro" style="float: left">
+                            <p>浪漫经典童话剧《灰姑娘》</p>
+                        </div>
+                    </li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+<script src="__PUBLIC__/static/pc/home/js/jquery-1.11.1.js"></script>
+<script src="__PUBLIC__/static/pc/home/js/classification-content.js"></script>
+
+</html>

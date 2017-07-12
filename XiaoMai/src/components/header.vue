@@ -28,8 +28,8 @@
 		</section>
 	<!-- 主菜单二级分类页面头部 -->
 	       <transition name="rightIn">
-		<div v-if="$route.path=='/singing'||$route.path=='/concert'||$route.path=='/drama'||$route.path=='/sport'||$route.path=='/parenting'||$route.path=='/q_yuan'||$route.path=='/dance'" class="Rhead" style="background:#fff;border-bottom:1px solid #f6f9f8">
-			<mt-button icon="back" @click.native="$router.push({path:'/'})" style="top:1.3rem;color:#000;"></mt-button>
+		<div v-if="$route.path=='/singing'||$route.path=='/ranking'||$route.path=='/concert'||$route.path=='/drama'||$route.path=='/sport'||$route.path=='/parenting'||$route.path=='/q_yuan'||$route.path=='/dance'" class="Rhead" style="background:#fff;border-bottom:1px solid #f6f9f8">
+			<mt-button icon="back" @click.native="$router.go(-1)" style="top:1.3rem;color:#000;"></mt-button>
 			<div class="mui-input-row mui-search" style="margin-top:1.6rem;width:80%;margin-left:2.2rem;">
 				<i class="fa fa-search" aria-hidden="true"></i>
     			<input type="search" class="mui-input-clear" placeholder="搜索明星、演出、赛事、场馆"
@@ -38,16 +38,25 @@
 		</div>
 		</transition>
 		<!-- 电影分类页面显示的头部 -->
-		   <transition name="rightIn">
-		<div v-if="$route.path=='/movie'" class="Rhead" style="background:#ef0832;">
-			<mt-button icon="back" @click.native="$router.go(-1)" style="top:1.3rem;color:#fff;"></mt-button>
-			<mt-header fixed :title="headTitle" style="background:transparent !important;width:75%;text-align:left;margin-left:2rem;padding-top:0.5rem;" class="movieHead"></mt-header>
-			<div to="/" class="city" style="float:right;margin-right:0.75rem;margin-top:1.25rem;height: 100%;">
-				<span style="font-size:0.8rem;margin-right:0.25rem;">北京</span>
-				<i class="fa fa-angle-down" aria-hidden="true" style="font-size:0.9rem;font-weight:100;"></i>  
-				<!-- <i class="fa fa-chevron-down" aria-hidden="true" style="font-size:0.9rem;font-weight:100;"></i> -->
+		<transition name="rightIn">
+			<div v-if="$route.path=='/movie'" class="Rhead" style="background:#ef0832;">
+				<mt-button icon="back" @click.native="$router.go(-1)" style="top:1.3rem;color:#fff;"></mt-button>
+				<mt-header fixed :title="headTitle" style="background:transparent !important;width:75%;text-align:left;margin-left:2rem;padding-top:0.5rem;" class="movieHead"></mt-header>
+				<div to="/" class="city" style="float:right;margin-right:0.75rem;margin-top:1.25rem;height: 100%;">
+					<span style="font-size:0.8rem;margin-right:0.25rem;">北京</span>
+					<i class="fa fa-angle-down" aria-hidden="true" style="font-size:0.9rem;font-weight:100;"></i>  
+					<!-- <i class="fa fa-chevron-down" aria-hidden="true" style="font-size:0.9rem;font-weight:100;"></i> -->
+				</div>
 			</div>
-		</div>
+		</transition>
+
+		<!-- 主题详细页面的头部 -->
+		<transition name="rightIn">
+			<div v-if="$route.path=='/star'" class="Rhead" style="background:#ef0832;">
+				<mt-button icon="back" @click.native="$router.go(-1)" style="top:1.3rem;color:#fff;z-index:3005;"></mt-button>
+				<mt-header fixed :title="headTitle" style="background:transparent !important;width:75%;text-align:left;margin-left:2rem;padding-top:0.5rem;color:#fff;margin-left:-2rem;"></mt-header>
+				<i class="fa fa-share-alt" aria-hidden="true" style="float:right;color:#fff;margin-right:0.75rem;margin-top:1.9rem;"></i>
+			</div>
 		</transition>
 	<!-- 分类页面显示的头部 -->
 		<div v-if="$route.path=='/category'">

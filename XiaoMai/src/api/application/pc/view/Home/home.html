@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="__PUBLIC__/static/pc/home/css/home-css.css">
+    <link rel="stylesheet" href="__PUBLIC__/static/pc/home/icon/font_wq4gjbe46a0grpb9/iconfont.css">
+</head>
+<body>
+<div class="home">
+    {include file="public/header"}
+
+    
+
+    <div class="home-page">
+        <div class="contain">
+            <div class="classification">
+                <div class="type">广州分类</div>
+                <ul class="type-1" id="type-1" style="background: #e90f3c;overflow: hidden;color: white">
+                {foreach $cateList as $cate}
+                    <li><a href="{:url('home/lists')}"><i class="iconfont">&#xe60d;</i>&nbsp;{$cate.cate_name}</a></li>
+                {/foreach}
+              
+                </ul>
+                <div class="type">关键词</div>
+                <ul class="type-2" id="type-2" style="background: #e90f3c;overflow: hidden;color: white">
+                    <li><a href="#">演唱会</a></li>
+                    <li><a href="#">演唱会</a></li>
+                    <li><a href="#">演唱会</a></li>
+                    <li><a href="#">演唱会</a></li>
+                    <li><a href="#">演唱会</a></li>
+                </ul>
+                <div class="type">热门商圈</div>
+                <ul class="type-1" id="type-3" style="background: #e90f3c;overflow: hidden;color: white">
+                    <li><a href="#">演唱会</a></li>
+                    <li><a href="#">演唱会</a></li>
+                    <li><a href="#">演唱会</a></li>
+                    <li><a href="#">演唱会</a></li>
+                    <li><a href="#">演唱会</a></li>
+                    <li><a href="#">演唱会</a></li>
+                </ul>
+            </div>
+            <div class="carousel">
+                <ul class="carousel-text" id="carousel-text">
+                    <li><a href="#">戏曲</a></li>
+                    <li><a href="#">戏曲</a></li>
+                    <li><a href="#">戏曲</a></li>
+                    <li><a href="#">戏曲</a></li>
+                    <li><a href="#">戏曲</a></li>
+                </ul>
+                <div class="carousel-box">
+                    <ul class="carousel-page" id="carousel-page">
+                        <li><img src="__PUBLIC__/static/pc/home/image/Main%20map-01.jpg" alt=""></li>
+                        <li><img src="__PUBLIC__/static/pc/home/image/Main%20map-02.jpg" alt=""></li>
+                        <li><img src="__PUBLIC__/static/pc/home/image/Main%20map-03.jpg" alt=""></li>
+                        <li><img src="__PUBLIC__/static/pc/home/image/Main%20map-04.jpg" alt=""></li>
+                        <li><img src="__PUBLIC__/static/pc/home/image/Main%20map-05.jpg" alt=""></li>
+                        <li><img src="__PUBLIC__/static/pc/home/image/Main%20map-06.jpg" alt=""></li>
+                        <li><img src="__PUBLIC__/static/pc/home/image/Main%20map-01.jpg" alt=""></li>
+                    </ul>
+                </div>
+                <div class="num-box">
+                    <ul class="num-page" id="num-page">
+                        <li>01</li>
+                        <li>02</li>
+                        <li>03</li>
+                        <li>04</li>
+                        <li>05</li>
+                        <li>06</li>
+                        <li>01</li>
+                        <li>02</li>
+                        <li>03</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="little-carousel">
+                <div class="time-data"><i class="iconfont" style="color: #e51b46;cursor: pointer">&#xe602;</i>时间日期</div>
+                <ul class="little-carousel-page" id="little-carousel-page">
+                    <li><img src="__PUBLIC__/static/pc/home/image/Main%20map-right-01.jpg" alt=""></li>
+                    <li><img src="__PUBLIC__/static/pc/home/image/Main%20map-right-02.jpg" alt=""></li>
+                    <li><img src="__PUBLIC__/static/pc/home/image/Main%20map-right-03.jpg" alt=""></li>
+                </ul>
+                <div class="little-carousel-backgroud">
+                    <ul class="little-carousel-point" id="little-carousel-point">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="information">
+                    <div class="information-title"><p>广州信息</p></div>
+                    <ul class="information-page">
+                        <li>"重show就好"·再见</li>
+                        <li>"重show就好"·再见</li>
+                        <li>"重show就好"·再见</li>
+                        <li>"重show就好"·再见</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="recommend">
+        <div class="contain">
+            <div class="line">
+                <div class="line-text"><p>热门推荐</p></div>
+            </div>
+            <div class="recommend-page">
+                <ul class="recommend-img" id="recommend-img">
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/recommend-map-01.jpg" alt="" style="width: 145px">
+                        <div class="detail">
+                            <p>广州体育馆</p>
+                            <p>时间：2017-7-24</p>
+                        </div>
+                        <div class="fare">
+                            <p>麦戏剧|孟京辉经典戏剧<br>作品</p>
+                            <p>票价：<b>180</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="{:url('details/index')}"><img src="__PUBLIC__/static/pc/home/image/recommend-map-02.jpg" alt="" style="width: 145px"></a>
+                        <div class="detail">
+                            <p>广州体育馆</p>
+                            <p>时间：2017-7-24</p>
+                        </div>
+                        <div class="fare">
+                            <p>麦戏剧|孟京辉经典戏剧<br>作品</p>
+                            <p>票价：<b>180</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#"><img src="__PUBLIC__/static/pc/home/image/recommend-map-03.jpg" alt="" style="width: 145px"></a>
+                        <div class="detail">
+                            <p>广州体育馆</p>
+                            <p>时间：2017-7-24</p>
+                        </div>
+                        <div class="fare">
+                            <p>麦戏剧|孟京辉经典戏剧<br>作品</p>
+                            <p>票价：<b>180</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#"><img src="__PUBLIC__/static/pc/home/image/recommend-map-04.jpg" alt="" style="width: 145px"></a>
+                        <div class="detail">
+                            <p>广州体育馆</p>
+                            <p>时间：2017-7-24</p>
+                        </div>
+                        <div class="fare">
+                            <p>麦戏剧|孟京辉经典戏剧<br>作品</p>
+                            <p>票价：<b>180</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#"><img src="__PUBLIC__/static/pc/home/image/recommend-map-05.jpg" alt="" style="width: 145px"></a>
+                        <div class="detail">
+                            <p>广州体育馆</p>
+                            <p>时间：2017-7-24</p>
+                        </div>
+                        <div class="fare">
+                            <p>麦戏剧|孟京辉经典戏剧<br>作品</p>
+                            <p>票价：<b>180</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#"><img src="__PUBLIC__/static/pc/home/image/recommend-map-06.jpg" alt="" style="width: 145px"></a>
+                        <div class="detail">
+                            <p>广州体育馆</p>
+                            <p>时间：2017-7-24</p>
+                        </div>
+                        <div class="fare">
+                            <p>麦戏剧|孟京辉经典戏剧<br>作品</p>
+                            <p>票价：<b>180</b>起</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="contain">
+            <div class="content-title">
+                <p class="title">全城聚焦</p>
+                <ul class="classification" id="classification">
+                    <li class="curl" style="cursor: pointer;">大家都在看</li>
+                    <li style="cursor: pointer;">即将上映</li>
+                </ul>
+                <p class="show" style="cursor: pointer;"><a href="#">全部展示>></a></p>
+            </div>
+            <div class="content-page">
+                <div class="content-show">
+                    <ul>
+                        <li>
+                            <div class="img"><a href="#"><img src="__PUBLIC__/static/pc/home/image/content-map-01.jpg" alt="" style="width: 110px"></a></div>
+                            <div class="detail">
+                                <div style="margin-left: 8px">
+                                    <h6>麦戏剧&nbsp;&nbsp;孟京辉经典戏剧作品<br>《恋爱的犀牛》广州站</h6>
+                                    <p class="time-data">2017.6.23-2017.6.25</p>
+                                    <p class="location">广州友谊剧场</p>
+                                    <p class="money">￥<b>180</b>起</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img"><a href="#"><img src="__PUBLIC__/static/pc/home/image/content-map-02.jpg" alt="" style="width: 110px"></a></div>
+                            <div class="detail">
+                                <div style="margin-left: 8px">
+                                    <h6>麦戏剧&nbsp;&nbsp;孟京辉经典戏剧作品<br>《恋爱的犀牛》广州站</h6>
+                                    <p class="time-data" style="font-size: 12px;margin-top: 20px">2017.6.23-2017.6.25</p>
+                                    <p class="location" style="font-size: 12px">广州友谊剧场</p>
+                                    <p class="money">￥<b style="font-size: 20px">180</b>起</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img"><a href="#"><img src="__PUBLIC__/static/pc/home/image/content-map-03.jpg" alt="" style="width: 110px"></a></div>
+                            <div class="detail">
+                                <div style="margin-left: 8px">
+                                    <h6>麦戏剧&nbsp;&nbsp;孟京辉经典戏剧作品<br>《恋爱的犀牛》广州站</h6>
+                                    <p class="time-data" style="font-size: 12px;margin-top: 20px">2017.6.23-2017.6.25</p>
+                                    <p class="location" style="font-size: 12px">广州友谊剧场</p>
+                                    <p class="money">￥<b style="font-size: 20px">180</b>起</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img"><a href="#"><img src="__PUBLIC__/static/pc/home/image/content-map-04.jpg" alt="" style="width: 110px"></a></div>
+                            <div class="detail">
+                                <div style="margin-left: 8px">
+                                    <h6>麦戏剧&nbsp;&nbsp;孟京辉经典戏剧作品<br>《恋爱的犀牛》广州站</h6>
+                                    <p class="time-data" style="font-size: 12px;margin-top: 20px">2017.6.23-2017.6.25</p>
+                                    <p class="location" style="font-size: 12px">广州友谊剧场</p>
+                                    <p class="money">￥<b style="font-size: 20px">180</b>起</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="line"></div>
+                </div>
+                <div class="content-show">
+                    <ul>
+                        <li>
+                            <div class="img"><a href="#"><img src="__PUBLIC__/static/pc/home/image/content-map-05.jpg" alt="" style="width: 110px"></a></div>
+                            <div class="detail">
+                                <div style="margin-left: 8px">
+                                    <h6>麦戏剧&nbsp;&nbsp;孟京辉经典戏剧作品<br>《恋爱的犀牛》广州站</h6>
+                                    <p class="time-data" style="font-size: 12px;margin-top: 20px">2017.6.23-2017.6.25</p>
+                                    <p class="location" style="font-size: 12px">广州友谊剧场</p>
+                                    <p class="money">￥<b style="font-size: 20px">180</b>起</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img"><a href="#"><img src="__PUBLIC__/static/pc/home/image/content-map-06.jpg" alt="" style="width: 110px"></a></div>
+                            <div class="detail">
+                                <div style="margin-left: 8px">
+                                    <h6>麦戏剧&nbsp;&nbsp;孟京辉经典戏剧作品<br>《恋爱的犀牛》广州站</h6>
+                                    <p class="time-data" style="font-size: 12px;margin-top: 20px">2017.6.23-2017.6.25</p>
+                                    <p class="location" style="font-size: 12px">广州友谊剧场</p>
+                                    <p class="money">￥<b style="font-size: 20px">180</b>起</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img"><a href="#"><img src="__PUBLIC__/static/pc/home/image/content-map-07.jpg" alt="" style="width: 110px"></a></div>
+                            <div class="detail">
+                                <div style="margin-left: 8px">
+                                    <h6>麦戏剧&nbsp;&nbsp;孟京辉经典戏剧作品<br>《恋爱的犀牛》广州站</h6>
+                                    <p class="time-data" style="font-size: 12px;margin-top: 20px">2017.6.23-2017.6.25</p>
+                                    <p class="location" style="font-size: 12px">广州友谊剧场</p>
+                                    <p class="money">￥<b style="font-size: 20px">180</b>起</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="img"><a href="#"><img src="__PUBLIC__/static/pc/home/image/content-map-08.jpg" alt="" style="width: 110px"></a></div>
+                            <div class="detail">
+                                <div style="margin-left: 8px">
+                                    <h6>麦戏剧&nbsp;&nbsp;孟京辉经典戏剧作品<br>《恋爱的犀牛》广州站</h6>
+                                    <p class="time-data" style="font-size: 12px;margin-top: 20px">2017.6.23-2017.6.25</p>
+                                    <p class="location" style="font-size: 12px">广州友谊剧场</p>
+                                    <p class="money">￥<b style="font-size: 20px">180</b>起</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="line"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script src="__PUBLIC__/static/pc/home/js/jquery-1.11.1.js"></script>
+    <script src="__PUBLIC__/static/pc/home/js/home.js"></script>
+</body>
+</html>

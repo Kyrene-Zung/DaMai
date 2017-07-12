@@ -221,7 +221,7 @@ return [
     ],
     // 视图输出字符串内容替换
     'view_replace_str'       => [
-        '__PUBLIC__'         => '/0616Project/DaMai/src/api/public',
+        '__PUBLIC__'         => '/0616Project/XiaoMai/src/api/public',
         '__PC_PUBLIC__'         => '/public/static/pc/',
         '__ROOT__'              => '../../../',
     ],

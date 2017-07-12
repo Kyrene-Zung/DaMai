@@ -66,14 +66,14 @@ export default {
   	timeRanging(choice){ //  点击时间范围
   		this.setSearchCriteria({key:'rangeType',value:choice})
   		// console.log(this.setSearchCriteria)
-  		 Vue.http.jsonp('api/mobile/Goods/search',{params:this.searchCriteria}).then(rtn =>{ 
+  		 Vue.http.jsonp('/api/mobile/Goods/search',{params:this.searchCriteria}).then(rtn =>{ 
               this.setGoodsList(rtn.data)
           });
   	},
   	rangeTyping(choice){ //  点击排序方式
   		this.setSearchCriteria({key:'rangeType',value:choice})//改变搜索条件
   		// console.log(this.setSearchCriteria)
-  		 Vue.http.jsonp('api/mobile/Goods/search',{params:this.searchCriteria}).then(rtn =>{ 
+  		 Vue.http.jsonp('/api/mobile/Goods/search',{params:this.searchCriteria}).then(rtn =>{ 
               this.setGoodsList(rtn.data)
           });
 

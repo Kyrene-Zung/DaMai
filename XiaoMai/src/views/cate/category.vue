@@ -81,11 +81,11 @@ export default{
       this.setHeadTitle('分类')
       this.setSelected('tab2')
       //获取分类表的内容
-      Vue.http.jsonp('api/mobile/cate').then(rtn =>{ 
+      Vue.http.jsonp('/api/mobile/cate').then(rtn =>{ 
         this.CateList=rtn.data
       });
       //已进入页面获取商品的内容
-      Vue.http.jsonp('api/mobile/Goods/search',{params:this.searchCriteria}).then(rtn =>{ 
+      Vue.http.jsonp('/api/mobile/Goods/search',{params:this.searchCriteria}).then(rtn =>{ 
               // console.log(rtn.data)
               this.setGoodsList(rtn.data)
       });

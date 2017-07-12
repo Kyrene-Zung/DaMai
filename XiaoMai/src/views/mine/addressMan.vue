@@ -34,7 +34,7 @@ import Vue from 'vue'
 			next(vm=>{
 				 //拿地址
                   let user_id=JSON.parse(localStorage.getItem('userInfo')).user_id
-                    Vue.http.jsonp('api/mobile/User',{params:{user_id:user_id}}).then(rtn=>{
+                    Vue.http.jsonp('/api/mobile/User',{params:{user_id:user_id}}).then(rtn=>{
                           vm.setAddressArr(rtn.data);
                     })
 			})

@@ -9,7 +9,7 @@
         <div class="orchestral">
           <h4>管弦乐</h4>
           <img :src="orchestral_title" alt="">
-          <slide :slide="orchestral"></slide> <!-- 滑动菜单组件 -->
+          <slide :slide="orchestral" ref="slide1"></slide> <!-- 滑动菜单组件 -->
         </div>
       </div>
     </section>
@@ -19,7 +19,7 @@
         <div class="symphony">
           <h4>交响乐</h4>
           <img :src="symphony_title" alt="">
-          <slide :slide="symphony"></slide> <!-- 滑动菜单组件 -->
+          <slide :slide="symphony" ref="slide2"></slide> <!-- 滑动菜单组件 -->
         </div>
       </div>
     </section>
@@ -29,7 +29,7 @@
         <div class="piano">
           <h4>钢琴</h4>
           <img :src="piano_title" alt="">
-          <slide :slide="piano"></slide> 
+          <slide :slide="piano" ref="slide3"></slide> 
         </div>
       </div>
     </section>
@@ -39,7 +39,7 @@
         <div class="chorus">
           <h4>合唱团</h4>
           <img :src="chorus_title" alt="">
-          <slide :slide="chorus"></slide> 
+          <slide :slide="chorus" ref="slide4"></slide> 
         </div>
       </div>
     </section>
@@ -146,6 +146,7 @@ export default {
         symphony_title:'../../../static/images/recommend/S1_02.png',
         symphony:[
         {
+          id:'slide2',
           photo:'../../static/images/recommend/h1.jpg',
           title:'林子祥40周年世界巡回演唱会广州站',
           time:'2017.07.29'
@@ -175,6 +176,7 @@ export default {
         piano_title:'../../../static/images/recommend/S1_04.png',
         piano:[
         {
+          id:'slide3',
           photo:'../../static/images/recommend/h1.jpg',
           title:'林子祥40周年世界巡回演唱会广州站',
           time:'2017.07.29'
@@ -204,6 +206,7 @@ export default {
         chorus_title:'../../../static/images/recommend/S2_02.png',
         chorus:[
         {
+          id:'slide4',
           photo:'../../static/images/recommend/h1.jpg',
           title:'林子祥40周年世界巡回演唱会广州站',
           time:'2017.07.29'
@@ -264,22 +267,33 @@ export default {
 
     }
   },
-   beforeRouteEnter(to,from,next){
+  mouted(){
+    // this.$refs.slide1.init();
+    // this.$refs.slide2.init();
+    // this.$refs.slide3.init();
+    // this.$refs.slide4.init();
+  },
+  beforeRouteEnter(to,from,next){
       // console.log(to.query)
 
       next(vm=>{
+        console.log(vm.$refs)
+        vm.$refs.slide1.init();
+        vm.$refs.slide2.init();
+        vm.$refs.slide3.init();
+        vm.$refs.slide4.init();
         vm.cate_id=to.query.cate_id;
-        Vue.http.jsonp('api/mobile/Goods/goodsort',{params:{cate_id:vm.cate_id,sort:vm.selected}}).
-            then(rtn=>{
+        Vue.http.jsonp('/api/mobile/Goods/goodsort',{params:{cate_id:vm.cate_id,sort:vm.selected}}).
+        then(rtn=>{
               // console.log(rtn.data)
               vm.goodsort=rtn.data
             })
       })
     },
-  components:{
-    slide,tab,list,carousel
+    components:{
+      slide,tab,list,carousel
+    }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

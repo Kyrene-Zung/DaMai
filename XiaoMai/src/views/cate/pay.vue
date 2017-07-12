@@ -48,7 +48,7 @@ import Vue from 'vue'
 		methods:{
 			payClose(){ //取消订单 默认状态为0
 				this.popupVisible=false;
-				Vue.http.jsonp('api/mobile/Order/proOrder',{params:{orderMessage:this.orderMessage}})
+				Vue.http.jsonp('/api/mobile/Order/proOrder',{params:{orderMessage:this.orderMessage}})
 				.then(rtn=>{
 					if(rtn.data){//插入数据库成功
 						this.$router.push({path:'/damaiOrder',query:{type:10}})

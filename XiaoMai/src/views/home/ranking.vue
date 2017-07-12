@@ -1,4 +1,5 @@
 <template>
+ <transition name="bodyIn">
   <div class="ranking">
 
     <ul class="list">
@@ -19,6 +20,7 @@
       </li>
     </ul>
   </div>
+</transition>
 </template>
 
 <script type="es6">
@@ -90,7 +92,9 @@ li {display: inline-block;margin: 0;}
 a {color: #42b983;}
 .singing{background-color:#f1f5f4;}
 section{background: #fff;margin-top:0.4rem;}
-
+.ranking{
+  margin-top: 3.5rem;
+}
 /*排行榜列表*/
 .list li{border-bottom:1px solid #ccc;height:4.7rem;width: 100%;}
 .list li .place{margin-left: 0.5rem;margin-top:0.25rem;}

@@ -81,7 +81,7 @@ export default{
                   localStorage.setItem('userInfo',JSON.stringify(rtnD.data))
                   //拿地址
                   let user_id=rtnD.data.user_id;
-                    Vue.http.jsonp('api/mobile/User',{params:{user_id:user_id}}).then(rtn=>{
+                    Vue.http.jsonp('/api/mobile/User',{params:{user_id:user_id}}).then(rtn=>{
                           console.log(rtn.data);
                           this.setAddressArr(rtn.data);
                     })

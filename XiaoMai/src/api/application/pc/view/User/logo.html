@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="__PUBLIC__/static/pc/User/css/login.css">
+	<script src="__PUBLIC__/static/pc/User/js/jquery.min.js"></script>
+</head>
+<body>
+	<header class="header loginmain bg_white">
+		<nav class="nav">
+				<a class="float_left"><img src="__PUBLIC__/static/pc/User/imgs/logo.png"></a>
+				<h1 class="float_left">欢迎登录</h1>
+				<a href="javascript:;" class="header_en float_right">English</a>
+		</nav>
+	</header>
+	<div class="container loginmain">
+		<div class="content">
+			<div class="content_left float_left">
+				<a href=""><img src="__PUBLIC__/static/pc/User/imgs/02.jpg"></a>
+			</div>
+			<div class="content_right float_right bg_white">
+				<ul class="login_title">
+					<li class="li_current"><span class="login_title_span s_img00">账户登录</span></li>
+					<li><span class="login_title_span s_img01">二维码登录</span></li>
+					<li><span class="login_title_span s_img02">短信快捷登录</span></li>
+				</ul>
+				<div class="content_right_item">
+				<div class="content_right_infos">
+					<form action="" class="loginform">
+						<div class="login_form_div" style="position:relative">
+							<span class="login_form_img"></span>
+							<input type="text" id="tel" name="user" placeholder="手机号码">
+							<!-- <div style="width:100px;position:absolute;right:-35px;color:green;">格式正确</div> -->
+						</div>
+						<div class="login_form_div" style="position:relative">
+							<span class="login_form_img move00"></span>
+							<input id="paw" type="password" name="password" placeholder="登陆密码">
+							<!-- <div style="width:100px;position:absolute;right:-35px;color:green;">格式正确</div> -->
+						</div>
+						<p class="tips"></p><!-- 提示 -->
+						<input type="button" id="btn" value="提交" class="login_btn">
+					</form>
+					<div class="login_check">
+							<div class="float_left">
+								<input type="checkbox"><label>下次自动登录</lable>
+							</div>
+							<div class="float_right">
+								<a href="">忘记密码？</a>
+							<a href="{:url('user/register')}">立即注册</a>
+						</div>
+					</div>
+					<div class="login_check">
+							<p>其他登录:</p>
+							<a href=""><span class="bg_span0"></a></span>
+							<a href=""><span class="bg_span0 bg_span1"></a></span>
+							<a href=""><span class="bg_span0 bg_span2"></a></span>
+							<a href=""><span class="bg_span0 bg_span3"></a></span>
+					</div>
+
+				</div>
+
+				<script>
+
+					$('#btn').click(function(){
+						
+						var user_tel=$('input[name="user"]').val();
+
+						var password=$('input[name="password"]').val();
+
+						$.post('http://localhost/pc/damaiPC/public/pc/user/login',{user_tel,password},function(rtn){
+							if (rtn.status==1) {
+								alert(rtn.msg);
+								location.href='http://localhost/pc/damaiPC/public/pc/home/index';
+							}else{
+								alert(rtn.msg);
+							}
+							
+						})
+					})
+
+				</script>
+
+
+				<div>
+					<div class="ewm text_center">
+						<h3 class="text_left">扫码登录</h3>
+						<p>用<a href="">大麦手机客户端</a>扫码快速登录</p>
+						<img src="__PUBLIC__/static/pc/User/imgs/weixin-code.png"><br><!-- 二维码显示 -->
+						<a href="">刷新一下</a>
+					</div>
+				</div>
+				<div class="sends">
+					<span>验证即登录，未注册将自动创建大麦网账号</span>
+					<form action="" class="loginform">
+						<div class="login_form_div">
+							<span class="login_form_img"></span>
+							<div class="select_area" tabindex="1">
+								<h4 class="select_value">
+									<span class="f0 float_left"></span>
+									<b class="f1 float_left">中国</b>
+									<b class="f2 float_right">+86</b>
+								</h4>
+								<div class="select_item">
+									<h4 class="float_left">
+										<span class="f0 float_left"></span>
+										<b class="f1 float_left">中国</b>
+										<b class="f2 float_right">+86</b>
+									</h4>
+									<h4 class="float_left">
+										<span class="f0 move0 float_left"></span>
+										<b class="f1 float_left">香港</b>
+										<b class="f2 float_right">+852</b>
+									</h4>
+									<h4 class="float_left">
+										<span class="f0 move1 float_left"></span>
+										<b class="f1 float_left">澳门</b>
+										<b class="f2 float_right">+853</b>
+									</h4>
+
+								</div>
+							</div>
+							<input type="text" name="user" placeholder="手机号码">
+
+							
+						</div>
+						<div class="sends_div">
+							<div class="login_form_div sendsinputW">
+							<span class="login_form_img move00"></span>
+							<input type="password" name="password" placeholder="动态密码">						
+						</div>
+						<button class="sends_btn">发送动态密码</button>
+						</div>
+						<p class="tips"></p><!-- 提示 -->
+						<input type="submit" class="login_btn" value="立即登录">
+					</form>
+				</div>
+				</div>
+			</div>	
+		</div>
+	</div>
+	<div class="footer text_center">
+		<div class="footer_nav">
+			<ul>
+				<li><a href="">公司介绍</a></li>
+				<li><a href="">品牌识别</a></li>
+				<li><a href="">企业荣誉</a></li>
+				<li><a href="">联系方式</a></li>
+				<li><a href="">隐私声明</a></li>
+				<li><a href="">合作招商</a></li>
+				<li><a href="">招聘信息</a></li>
+				<li><a href="">网站地图</a></li>
+				<li><a href="">友情链接</a></li>
+			</ul>
+		</div>
+		<div class="footer_nav">
+			<ul>
+				<li><a href="">京ICP证031057号</a></li>
+				<li><a href="">京ICP备11043884号</a></li>
+				<li><a href="">京公网安备11010102000430号</a></li>
+				<li><a href="">广播电视节目制作经营许可证 (京)字第02253号</a></li>
+			</ul>
+		</div>
+		<div class="footer_nav">
+			<ul>
+				<li><a href="">网络文化经营许可证 京网文[2016]3438-413号</a></li>
+				<li><a href="">营业性演出许可证 京市演587号</a></li>
+			</ul>
+		</div>
+		<div class="footer_nav">
+			<ul>
+				<li><a href=""> 北京红马传媒文化发展有限公司 版权所有 </a></li>
+				<li><a href="">大麦网</a></li>
+				<li><p> Copyright 2003-2017 All Rights Reserved</p></li>
+			</ul>
+		</div>
+	</div>
+</body>
+<script src="__PUBLIC__/static/pc/User/js/jquery.min.js"></script>
+<script>
+ var $box = $(".content_right_item >div");
+ var $LiItem = $(".login_title li");
+ var $title_span = $('.login_title li span');
+ var $select_area = $('.select_area');
+ var $select_value = $('.select_area .select_value');
+ var $select_item = $('.select_area .select_item');
+ //选着区号事件
+ $select_area.click(function(event) {
+ 	/* Act on the event */
+ 	if($select_item.is(":hidden")){
+ 		$select_item.stop().show(200);
+ 	}else{
+ 		$select_item.stop().hide(200);
+ 	}
+ });
+$select_item.find('h4').click(function(event){
+ 	var index = $select_item.find('h4').index(this);
+ 	var str = $select_item.find('h4').eq(index).html();
+ 	$select_value.html("");
+ 	$select_value.append($(str));	
+ 	$select_item.stop().hide(200);
+ });
+ $select_area.blur(function(event){	
+ 	event.stopPropagation();
+ 	$select_item.stop().hide(200);
+ });
+ //选项卡事件
+ function tabbox($LiItem,$box){
+ 	$LiItem.on("click",function (){
+ 		var index = $LiItem.index(this);
+ 		console.log(this);
+ 		$box.eq(index).addClass('content_right_infos').siblings().removeClass('content_right_infos');
+ 		$LiItem.eq(index).addClass('li_current').siblings().removeClass('li_current');
+ 	});
+ }
+ tabbox($LiItem,$box);
+</script>
+</html>

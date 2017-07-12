@@ -19,10 +19,11 @@ export default {
     }
   },
   mounted(){
-    this.init();
+    // this.init();
   },
   methods:{
     init(){
+      console.log(1111)
       slideMenu()
       clickSlideMenu()
     }
@@ -33,7 +34,7 @@ export default {
 
 //滑动菜单
 
-function slideMenu(){
+function slideMenu(element){
   var box=document.getElementById("boxIndex");
   var slider=document.getElementById('slider');
   var lis=slider.querySelectorAll('li');

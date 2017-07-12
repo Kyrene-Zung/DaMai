@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="__PUBLIC__/static/pc/home/css/main-home.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/pc/home/css/dmcdn.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/static/pc/home/css/style.css">
+    <script src="__PUBLIC__/static/pc/home/js/main-page.js?1.0.2"></script>
+</head>
+<body>
+{include file="public/header"}
+
+<div class="main-page" style="margin-top: 150px">
+    <div class="contain" style="width: 1200px;margin: auto;position: relative;z-index: 99">
+        <p style="position: absolute;color: white;line-height: 40px;top: -40px;width: 150px;text-align: center;background: #e90f3c;font-size: 15px">全部商品分类</p>
+        <ul class="classification" id="classification">
+        {foreach $cateType as $Type}
+            <li data-cateId="{$Type.cate_id}">
+                <p><a href="{:url('home/home')}"><i class="iconfont">{$Type.cate_icon}</i>{$Type.cate_name}</a></p>
+                <div class="main-content" style="overflow-y: auto;background-color: #fff;">
+                    <span style="margin-left: 10px;width: 100px;height: 20px;">{$Type.cate_name}</span>
+                    <a href="#">流行</a>
+                    <a href="#">流行</a>
+                    <a href="#">流行</a>
+                    <div class="line" style="height: 1px;width: 95%;margin: auto;background: black"></div>
+                    <div class="content">
+                        <h4 style="font-size: 20px">相关电影</h4>
+                        <ul>
+                            
+                            
+                        </ul>
+                    </div>
+                </div>
+              
+            </li>
+            {/foreach}
+            
+            
+        </ul>
+    </div>
+    <ul class="main-img" style="width: 100%;height: 420px;position: relative">
+        <li style="width: 100%;height: 420px;background: #000066;"><img src="__PUBLIC__/static/pc/home/image/main-img-01.jpg" alt=""></li>
+        <li style="width: 100%;height: 420px;background: #000013;"><img src="__PUBLIC__/static/pc/home/image/main-img-02.jpg" alt=""></li>
+        <li style="width: 100%;height: 420px;background: #b9af9e;"><img src="__PUBLIC__/static/pc/home/image/main-img-03.jpg" alt=""></li>
+        <li style="width: 100%;height: 420px;background: #fce7cc;"><img src="__PUBLIC__/static/pc/home/image/main-img-04.jpg" alt=""></li>
+    </ul>
+</div>
+
+<div class="Intro" style="margin-top: 80px">
+    <div class="contain">
+        <ul class="Intro-title" style="border: 1px solid #cccccc;width: 100%;height: 50px;">
+            <li class="bord-cur">
+                <p class="title">今日热门</p>
+
+            </li>
+            <li>
+                <p class="title">今日热门</p>
+            </li>
+            <li>
+                <p class="title">今日热门</p>
+            </li>
+        </ul>
+        <div class="Intro-content">
+            <div class="Intro-content-page">
+                <ul>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-01.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-01.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-01.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-01.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-01.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-01.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="Intro-content-page" style="display: none;">
+                <ul>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-02.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-02.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-02.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-02.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-02.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-02.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="Intro-content-page" style="display: none;">
+                <ul>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-03.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-03.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-03.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-03.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-03.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-img-03.jpg" alt="" width="146">
+                        <div class="Intro-money" style="font-size: 12px">
+                            <p>周柏豪&nbsp;ONE&nbsp; STEP&nbsp; CLOSE</p>
+                            <p>票价：<b>&nbsp;￥780.00</b>起</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="Intro-page-01">
+    <div class="contain">
+        <div class="left">
+            <ul class="page" id="page">
+                <li>
+                    <img src="__PUBLIC__/static/pc/home/image/Intro-page-01.jpg" alt="">
+                    <div style="width: 200px;height: 100px;background: rgba(0,0,0,0.7);position: relative;margin-top: -104px"></div>
+                </li>
+                <li>
+                    <div class="page-content" id="page-content-1" style="height: 114px;position: relative">
+                        <div class="page-content-one">
+                            <img src="__PUBLIC__/static/pc/home/image/Intro-page-02.jpg" alt="">
+                            <div class="bg_yy" style="top: 0px;color: white">
+                                <ul>
+                                    <li>厦门站</li>
+                                    <li>广州站</li>
+                                </ul>
+                                <div class="line" style="height: 1px;width: 90%;background: white;margin: 70px auto 0px;"></div>
+                                <h4 style="text-align: center;margin-top: 10px">巡演专题</h4>
+                            </div>
+                        </div>
+                        <div class="page-content-one">
+                            <img src="__PUBLIC__/static/pc/home/image/Intro-page-02.jpg" alt="" style="margin-left: 10px;">
+                            <div class="bg_yy" style="top: 0px;left: 124px;">
+                                <ul>
+                                    <li>厦门站</li>
+                                    <li>广州站</li>
+                                </ul>
+                                <div class="line" style="height: 1px;width: 90%;background: white;margin: 70px auto 0px;"></div>
+                                <h4 style="text-align: center;margin-top: 10px">巡演专题</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-content" id="page-content-2" style="position: relative" >
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-03.jpg" alt="" style="margin: 10px 0px;">
+                        <div class="bg_xx" style="top: 10px;">
+                            <ul>
+                                <li>厦门站</li>
+                                <li>广州站</li>
+                            </ul>
+                            <div class="line" style="height: 1px;width: 90%;background: white;margin: 70px auto 0px;"></div>
+                            <h4 style="text-align: center;margin-top: 10px">巡演专题</h4>
+                        </div>
+                    </div>
+                    <div class="page-content" id="page-content-3" style="position: relative;top: -4px;">
+                        <div class="page-content-one">
+                            <img src="__PUBLIC__/static/pc/home/image/Intro-page-02.jpg" alt="">
+                            <div class="bg_yy" style="top: 0px;">
+                                <ul>
+                                    <li>厦门站</li>
+                                    <li>广州站</li>
+                                </ul>
+                                <div class="line" style="height: 1px;width: 90%;background: white;margin: 70px auto 0px;"></div>
+                                <h4 style="text-align: center;margin-top: 10px">巡演专题</h4>
+                            </div>
+                        </div>
+                        <div class="page-content-one">
+                            <img src="__PUBLIC__/static/pc/home/image/Intro-page-02.jpg" alt="" style="margin-left: 10px;">
+                            <div class="bg_yy" style="top: 0px;left: 124px;">
+                                <ul>
+                                    <li>厦门站</li>
+                                    <li>广州站</li>
+                                </ul>
+                                <div class="line" style="height: 1px;width: 90%;background: white;margin: 70px auto 0px;"></div>
+                                <h4 style="text-align: center;margin-top: 10px">巡演专题</h4>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="page-content" id="page-content-4" style="position: relative">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-04.jpg" alt="">
+                        <div class="bg_cc">
+                            <ul>
+                                <li>厦门站</li>
+                                <li>广州站</li>
+                            </ul>
+                            <div class="line" style="height: 1px;width: 90%;background: white;margin: 180px auto 0px;"></div>
+                            <h4 style="text-align: center;margin-top: 10px">巡演专题</h4>
+                        </div>
+                    </div>
+                    <div class="page-content" id="page-content-5" style="position: relative;top: 0px;">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-03.jpg" alt="" style="margin: 7px 0px;">
+                        <div class="bg_xx" style="top: 6px;">
+                            <ul style="">
+                                <li>厦门站</li>
+                                <li>广州站</li>
+                            </ul>
+                            <div class="line" style="height: 1px;width: 90%;background: white;margin: 70px auto 0px;"></div>
+                            <h4 style="text-align: center;margin-top: 10px">巡演专题</h4>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="page-content" id="page-content-6"  style="position: relative">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-02.jpg" alt="">
+                        <div class="bg_yy" style="top: 0px;">
+                            <ul>
+                                <li>厦门站</li>
+                                <li>广州站</li>
+                            </ul>
+                            <div class="line" style="height: 1px;width: 90%;background: white;margin: 70px auto 0px;"></div>
+                            <h4 style="text-align: center;margin-top: 10px">巡演专题</h4>
+                        </div>
+                    </div>
+                    <div class="page-content" id="page-content-7" style="margin-top: 6px;position: relative">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-02.jpg" alt="">
+                        <div class="bg_yy" style="top: 0px;">
+                            <ul>
+                                <li>厦门站</li>
+                                <li>广州站</li>
+                            </ul>
+                            <div class="line" style="height: 1px;width: 90%;background: white;margin: 70px auto 0px;"></div>
+                            <h4 style="text-align: center;margin-top: 10px">巡演专题</h4>
+                        </div>
+                    </div>
+                    <div class="page-content">
+                        <p>更多</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="right">
+            <img src="__PUBLIC__/static/pc/home/image/Intro-page-05.jpg" alt="">
+        </div>
+    </div>
+</div>
+
+<div class="Intro-page-02">
+  <div class="contain">
+      <div class="left">
+          <div class="title">
+              <div class="city">
+                  <p style="font-size: 20px;font-weight: 600">广州</p>
+                  <p>猜你想看广州周边的演出</p>
+                  <p>[其他城市]</p>
+              </div>
+          </div>
+          <div class="hot-word" style="clear: both">
+              <div class="hot-word-left">
+                  <div class="city-word">
+                      <h3>城市<br>热词</h3>
+                  </div>
+                  <div class="line"></div>
+                  <div class="word">
+                      <a href="#">冠军杯</a>
+                      <a href="#">冠军杯</a>
+                      <a href="#">冠军杯</a>
+                      <a href="#">冠军杯</a>
+                  </div>
+              </div>
+              <div class="hot-word-right">
+                  <div class="city-word">
+                      <h3>热门<br>场馆</h3>
+                  </div>
+                  <div class="line"></div>
+                  <div class="word">
+                      <a href="#">中山纪念馆</a>
+                      <a href="#">中山纪念馆</a>
+                      <a href="#">中山纪念馆</a>
+                      <a href="#">中山纪念馆</a>
+                  </div>
+              </div>
+          </div>
+          <ul class="type">
+              <li>音乐会</li>
+              <li>音乐会</li>
+              <li>音乐会</li>
+              <li>音乐会</li>
+              <li>音乐会</li>
+              <li>音乐会</li>
+          </ul>
+          <ul class="movie-content" style="clear: both">
+              <li>
+                  <img src="__PUBLIC__/static/pc/home/image/Intro-img-01.jpg" alt="" width="146">
+                  <p>浪漫经典童话剧《灰姑凉》</p>
+                  <p>票价：￥60起</p>
+              </li>
+              <li>
+                  <img src="__PUBLIC__/static/pc/home/image/Intro-img-01.jpg" alt="" width="146">
+                  <p>浪漫经典童话剧《灰姑凉》</p>
+                  <p>票价：￥60起</p>
+              </li>
+              <li>
+                  <img src="__PUBLIC__/static/pc/home/image/Intro-img-01.jpg" alt="" width="146">
+                  <p>浪漫经典童话剧《灰姑凉》</p>
+                  <p>票价：￥60起</p>
+              </li>
+              <li>
+                  <img src="__PUBLIC__/static/pc/home/image/Intro-img-01.jpg" alt="" width="146">
+                  <p>浪漫经典童话剧《灰姑凉》</p>
+                  <p>票价：￥60起</p>
+              </li>
+              <li>
+                  <img src="__PUBLIC__/static/pc/home/image/Intro-img-01.jpg" alt="" width="146">
+                  <p>浪漫经典童话剧《灰姑凉》</p>
+                  <p>票价：￥60起</p>
+              </li>
+          </ul>
+      </div>
+      <div class="right">
+
+      </div>
+  </div>
+</div>
+
+<div class="Intro-page-03">
+    <div class="contain">
+        <div class="Intro-content">
+            <div class="title" style="margin: 20px;">
+                <h3>戏剧达人</h3>
+            </div>
+            <div class="left">
+                <div class="content-left">
+                    <img src="__PUBLIC__/static/pc/home/image/Intro-page-06.jpg" alt="">
+                </div>
+                <div class="content-right">
+                    <div class="Introduction-top">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-07.jpg" alt="" width="112" style="float: left">
+                        <div class="content-page">
+                            <p>麦戏聚 | 3D多媒体舞台剧<br>《三体》杭州站</p>
+                        </div>
+                    </div>
+                    <div class="Introduction-top" style="margin-left: 20px">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-07.jpg" alt="" width="112" style="float: left">
+                        <div class="content-page">
+                            <p>麦戏聚 | 3D多媒体舞台剧<br>《三体》杭州站</p>
+                        </div>
+                    </div>
+                    <div class="Introduction-top" style="margin-top: 20px">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-07.jpg" alt="" width="112" style="float: left">
+                        <div class="content-page">
+                            <p>麦戏聚 | 3D多媒体舞台剧<br>《三体》杭州站</p>
+                        </div>
+                    </div>
+                    <div class="Introduction-top" style="margin-left: 20px;margin-top: 20px">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-07.jpg" alt="" width="112" style="float: left">
+                        <div class="content-page">
+                            <p>麦戏聚 | 3D多媒体舞台剧<br>《三体》杭州站</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="Intro-page-03">
+    <div class="contain">
+        <div class="Intro-content">
+            <div class="title" style="margin: 20px;">
+                <h3>戏剧达人</h3>
+            </div>
+            <div class="left">
+                <div class="content-left">
+                    <img src="__PUBLIC__/static/pc/home/image/Intro-page-06.jpg" alt="">
+                </div>
+                <div class="content-right">
+                    <div class="Introduction-top">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-07.jpg" alt="" width="112" style="float: left">
+                        <div class="content-page">
+                            <p>麦戏聚 | 3D多媒体舞台剧<br>《三体》杭州站</p>
+                        </div>
+                    </div>
+                    <div class="Introduction-top" style="margin-left: 20px">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-07.jpg" alt="" width="112" style="float: left">
+                        <div class="content-page">
+                            <p>麦戏聚 | 3D多媒体舞台剧<br>《三体》杭州站</p>
+                        </div>
+                    </div>
+                    <div class="Introduction-top" style="margin-top: 20px">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-07.jpg" alt="" width="112" style="float: left">
+                        <div class="content-page">
+                            <p>麦戏聚 | 3D多媒体舞台剧<br>《三体》杭州站</p>
+                        </div>
+                    </div>
+                    <div class="Introduction-top" style="margin-left: 20px;margin-top: 20px">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-07.jpg" alt="" width="112" style="float: left">
+                        <div class="content-page">
+                            <p>麦戏聚 | 3D多媒体舞台剧<br>《三体》杭州站</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="Intro-page-03">
+    <div class="contain">
+        <div class="Intro-content">
+            <div class="title" style="margin: 20px;">
+                <h3>戏剧达人</h3>
+            </div>
+            <div class="left">
+                <div class="content-left">
+                    <img src="__PUBLIC__/static/pc/home/image/Intro-page-06.jpg" alt="">
+                </div>
+                <div class="content-right">
+                    <div class="Introduction-top">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-07.jpg" alt="" width="112" style="float: left">
+                        <div class="content-page">
+                            <p>麦戏聚 | 3D多媒体舞台剧<br>《三体》杭州站</p>
+                        </div>
+                    </div>
+                    <div class="Introduction-top" style="margin-left: 20px">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-07.jpg" alt="" width="112" style="float: left">
+                        <div class="content-page">
+                            <p>麦戏聚 | 3D多媒体舞台剧<br>《三体》杭州站</p>
+                        </div>
+                    </div>
+                    <div class="Introduction-top" style="margin-top: 20px">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-07.jpg" alt="" width="112" style="float: left">
+                        <div class="content-page">
+                            <p>麦戏聚 | 3D多媒体舞台剧<br>《三体》杭州站</p>
+                        </div>
+                    </div>
+                    <div class="Introduction-top" style="margin-left: 20px;margin-top: 20px">
+                        <img src="__PUBLIC__/static/pc/home/image/Intro-page-07.jpg" alt="" width="112" style="float: left">
+                        <div class="content-page">
+                            <p>麦戏聚 | 3D多媒体舞台剧<br>《三体》杭州站</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="g-ft" style="margin-top: 30px">
+    <div class="m-ft1">
+        <div class="bd">
+            <!-- 底部帮助 begin -->
+            <div class="m-helper">
+                <dl class="lst  lst-order">
+                    <dt>订购方式</dt>
+                    <dd>
+                        <a href="javascript:;">在线订购</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:;">电话订购</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:;">上门订购</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:;">大客户团体订购</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:;">大麦超级票订购</a>
+                    </dd>
+                </dl>
+                <dl class="lst  lst-dist">
+                    <dt>配送方式</dt>
+                    <dd>
+                        <a target="_blank" href="javascript:;">送货上门</a>
+                    </dd>
+                    <dd>
+                        <a target="_blank" href="javascript:;">电子票</a>
+                    </dd>
+                    <dd>
+                        <a target="_blank" href="javascript:;">上门自取</a>
+                    </dd>
+                    <dd>
+                        <a target="_blank" href="javascript:;">大麦自助机换票</a>
+                    </dd>
+                </dl>
+                <dl class="lst  lst-pay">
+                    <dt>支付方式</dt>
+                    <dd>
+                        <a target="_blank" href="javascript:;">在线支付</a>
+                    </dd>
+                    <dd>
+                        <a target="_blank" href="javascript:;">柜台付款</a>
+                    </dd>
+                </dl>
+                <dl class="lst lst-weixin">
+                    <dt style="margin-left:-2px;">大麦网微信</dt>
+                    <dd>
+                        <a class="qrcode"></a>
+                    </dd>
+                </dl>
+                <dl class="lst lst-touch">
+                    <dt style="margin-left:-8px;">大麦网触屏版</dt>
+                    <dd>
+                        <a class="qrcode"></a>
+                    </dd>
+                </dl>
+                <dl class="lst  lst-safe ">
+                    <dt>账户安全</dt>
+                    <dd>
+                        <a target="_blank" href="javascript:;">找回密码</a>
+                    </dd>
+                    <dd>
+                        <a target="_blank" href="javascript:;">账户注册</a>
+                    </dd>
+                    <dd>
+                        <a target="_blank" href="javascript:;">账户绑定</a>
+                    </dd>
+                    <dd>
+                        <a target="_blank" href="javascript:;">SSL安全证书</a>
+                    </dd>
+                </dl>
+                <dl class="lst  lst-service ">
+                    <dt>售后服务</dt>
+                    <dd>
+                        <a target="_blank" href="javascript:;">退换及缺货说明</a>
+                    </dd>
+                    <dd>
+                        <a target="_blank" href="javascript:;">发票帮助</a>
+                    </dd>
+                    <dd>
+                        <a target="_blank" href="javascript:;">订票服务条款</a>
+                    </dd>
+                </dl>
+                <dl class="lst lst-feature">
+                    <dt>特色服务</dt>
+                    <dd>
+                        <a href="javascript:;">超级票</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:;">积分商城</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:;">票务系统</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:;">场馆库</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:;">演出订阅</a>
+                    </dd>
+                </dl>
+            </div>
+            <!-- 底部帮助 end -->
+            <!-- 底部链接 begin -->
+            <div class="m-lnks">
+                <a href="javascript:;" target="_blank">公司介绍</a>
+                |<a href="javascript:;" target="_blank">品牌识别</a>
+                |<a href="javascript:;" target="_blank">企业荣誉</a>
+                |<a href="javascript:;" target="_blank">联系方式</a>
+                |<a href="javascript:;" target="_blank">隐私声明</a>
+                |<a href="javascript:;" target="_blank">合作招商</a>
+                |<a href="javascript:;" target="_blank">招聘信息</a>
+                |<a href="javascript:;" target="_blank">网站地图</a>
+                |<a href="javascript:;" target="_blank">友情链接</a>
+            </div>
+            <!-- 底部链接 end -->
+        </div>
+        <div class="m-ft2">
+            <div class="bd">
+                <!-- 版权信息 begin -->
+                <div class="m-cprt">
+                    <p>
+                        <a href="javascript:;" target="_blank">京ICP证031057号</a><span>|</span>
+                        <a href="javascript:;" target="_blank">京ICP备11043884号</a><span>|</span>
+                        <a href="javascript:;" target="_blank">
+                            <img src="__PUBLIC__/static/pc/details/images/police.png" class="vm">京公网安备11010102000430号
+                        </a>
+                        <a href="javascript:;" target="_blank" se_prerender_url="complete">广播电视节目制作经营许可证 (京)字第02253号</a>
+                        <br>
+                        <a href="javascript:;" target="_blank">网络文化经营许可证 京网文[2016]3438-413号</a><span>|</span>
+                        <a href="javascript:;" target="_blank">营业性演出许可证 京市演587号</a>
+                    </p>
+                    <p>北京红马传媒文化发展有限公司 版权所有 大麦网 Copyright 2003-2016 All Rights Reserved</p>
+                    <p>
+                        <a rel="nofollow" title="中国票务在线" target="_blank" href="javascript:;">
+                            <img class="mr10" src="__PUBLIC__/static/pc/details/images/piao.png" style="display: inline;">
+                        </a>
+                        <a href="javascript:;" target="_blank" title="电子营业执照" rel="nofollow">
+                            <img class="mr10" src="__PUBLIC__/static/pc/details/images/dzyy.png" style="display: inline;">
+                        </a>
+                        <span id="siteseal">
+                                <script async="" type="text/javascript">
+                                    function verifySeal() {
+                                        var bgHeight = "null";
+                                        var bgWidth = "593";
+                                        var url = "https:\/\/seal.godaddy.com\/verifySeal?sealID=LU6rXPgk5BZ6                               7ZEYpYS2JcN3AyCJOs6aD3HBo4dwA3iGeqp6csKFmqgB0zLL";
+                                        window.open(url,'SealVerfication','menubar=no,toolbar=no,personalbar=                               no,location=yes,status=no,resizable=yes,fullscreen=no,scrollbars=no,w                               idth=' + bgWidth + ',height=' + bgHeight);
+                                    }
+                                </script>
+                                <img style="cursor:pointer;cursor:hand" src="__PUBLIC__/static/pc/details/images/siteseal_gd_3_h_l_m.gif" onclick="verifySeal();" alt="SSL site seal - click to verify">
+                            </span>
+                        <a rel="nofollow" target="_blank" href="javascript:;">
+                            <img class="mr10" src="__PUBLIC__/static/pc/details/images/pci.png" style="display: inline;">
+                        </a>
+                        <a rel="nofollow" target="_blank" href="javascript:;">
+                            <img class="mr10" src="__PUBLIC__/static/pc/details/images/xin.png" style="display: inline;">
+                        </a>
+                        <a target="_blank" href="javascript:;">
+                            <img src="__PUBLIC__/static/pc/details/images/chengxin.png" style="display: inline;">
+                        </a>
+                    </p>
+                </div>
+                <!-- 版权信息 end -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 固定侧栏 begin -->
+<div class="m-sdfix">
+    <span class="itm weixin xiaonengService" style="cursor:pointer;">在线<br>客服</span>
+
+    <a class="itm resch" target="_blank" href="javascript:;">
+        <i class="ico"></i>
+        <span class="txt">调查问卷</span>
+    </a>
+    <a class="itm weixin" href="javascript:;" id="siteWeixinQR" style="">
+        <i class="ico"></i>
+        <span class="code">
+            <img alt="广州站" src="__PUBLIC__/static/pc/details/images/gzweixin.jpg"></span>
+    </a>
+    <a class="itm totop" href="javascript:;" id="gotop">
+        <i class="ico"></i>
+        <span class="txt">返回顶部</span>
+    </a>
+</div>
+<!-- 固定侧栏 end -->
+
+
+
+
+
+<script src="__PUBLIC__/static/pc/home/js/jquery-1.11.1.js"></script>
+<script src="__PUBLIC__/static/pc/home/js/main-page.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

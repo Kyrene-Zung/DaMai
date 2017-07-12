@@ -1,5 +1,14 @@
 <?php
 use think\Request;
+use think\Session;
+
+// 获取用户信息
+function getUserInfo()
+{
+    return Session::get('user_info');
+    
+}
+
 function test($cur_ctr,$str)
 {
 

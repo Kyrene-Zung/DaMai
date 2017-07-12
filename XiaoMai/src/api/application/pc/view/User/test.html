@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.chang_box{
+				width: 790px;
+				min-height: 279px;
+				overflow: hidden;
+				background: #d3d3d3;
+				display: none;
+			}
+		.chang_box_show{
+				display: block;
+			}
+	</style>
+
+</head>
+<body>
+	<div class="chang_box">		
+        <div class="m-tip"><i class="light"></i>安全说明：麦麦为了更好的保护您的个人信息，需要您完成安全验证，再继续查看订单信息和个人信息。 </div>
+        <div class="m-from">
+            <p class="hint">短信提示：请用150****1857接收短信验证码，验证码有效期为5分钟</p>
+            <div class="clear">
+                <div class="row fl">
+                    <label class="code">验证码：</label>
+                    <input class="input-text-t" id="txtValidCode" type="text">
+                </div>
+                <div class="m-warn z-hide" id="msgTips">
+                    <span>验证错误，请重新输入</span>
+                </div>
+            </div>
+            <p class="m-time">
+                如果2分钟内没有收到短信验证码，您可以：
+                <button class="btn12" id="btnGetCode12" style="display: none;"><span id="smstime">90s</span>后获取验证码</button>
+                <button class="btn13" id="smsCode">获取验证码</button>
+                或拨打1010-3721联系客服
+            </p>
+            <button class="btn05" id="validCode">验证</button>
+        </div>
+    
+	</div>
+	<div class="chang_box">
+		
+			<div class="breadcrumb">
+				<a href="http://my.damai.cn/">我的大麦</a>&gt; 电子钱包/超级票
+			</div>
+			<div class="section">
+				<div class="hd r">
+					<h2>电子钱包</h2>
+					<div class="right"><div class="right">
+	<a href="https://wallet.damai.cn/ewallet-front-web/accountAccess/myEwallet" class="on">我的钱包</a>
+	<span class="i1"></span>
+	<a href="https://wallet.damai.cn/ewallet-front-web/recharge/showCashRechageAction" ss="https://wallet.damai.cn/ewallet-front-web/recharge/showSupTicRechageAction">充值</a>	
+	<span class="i1"></span>
+	<a href="https://wallet.damai.cn/ewallet-front-web/detail/detailInfoAction">帐户明细</a>
+	<!--
+	<span class="i1"></span>
+	<a href="https://wallet.damai.cn/ewallet-front-web/accountAccess/artificialServiceAction">人工服务</a>
+	-->
+	<span class="i1"></span>
+	<a href="http://www.damai.cn/QuestionDetail_164_371.html" target="_blank">查看帮助</a>
+</div>
+ 
+</div>
+				</div>
+			
+			  <input id="startingState" value="2" type="hidden">
+          	  <div id="safeCenter" style="display: block;" class="yellow-msg-box mt15 ml10 mr10">
+              <div class="t-c pt20 pb20">
+                <p class="check-suc f14 bold">您还没有开通电子钱包！<button onclick="goToSC()" class="btn05 ml10">开通电子钱包</button></p>
+              </div>
+              </div>
+              
+				<div class="c-n e-wallet-msg">
+					<!--
+					<div class="current-msg">
+						<span class="wh02">姓名：</span> <span
+							class="wh02">账户状态：正常</span> <span
+							class="wh02">账户类型：个人帐户</span>
+					</div>-->
+					<table class="table01">
+						<tbody>
+							<tr class="">
+								<td class="bgl pl20 bgr pr20">
+									<p class="tex3">现金账户</p>
+									<div class="txt-msg">
+										<span class="wh02">余额 <strong class="c4 f16" id="amount">0.00</strong> 元
+										</span> <span class="wh03">冻结金额 <strong class="c1 f16">0.00</strong>
+											元
+										</span> <span class="wh04"><a class="btn-yellow-u mr10" id="rechage" href="javascript:void(0)">充值</a><a class="btn-grey" id="tixian_1" href="javascript:void(0)">提现</a></span>
+									</div>
+								</td>
+							</tr>
+							<tr class="no-bg">
+								<td class="bgl pl20 bgr pr20">
+									<p class="tex3">超级票账户</p>
+									<div class="txt-msg">
+										<span class="wh02">余额 <strong class="c4 f16">0.00</strong>
+											元
+										</span> <span class="wh03">冻结金额 <strong class="c1 f16">0.00</strong>
+											元
+										</span> <span class="wh04"><a class="btn-yellow-u" id="Ticrechage" href="javascript:void(0)">充值</a></span>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		
+			<div class="useri-msg mt0">
+				<p>
+					电子钱包是由大麦网自主研发的第三方支付平台，为每一个用户在购票过程中提供“简单、安全、快速”的在线支付解决方案。<br>
+					1、超级票：激活【电子钱包】后，方可使用超级票，购票时优先扣减超级票余额；<br>
+					2、便捷购票：拥有大麦电子钱包，无需繁琐的支付操作，购票瞬间完成；<br>
+					3、安全支付：用户支付票款受到电子钱包保护，只有在确认出票后，才会正式扣款；<br>
+					4、抢票利器：抢票时间是关键，拥有电子钱包，节约支付时间，下单抢票总是领先于人。
+				</p>
+				<p>
+					<a target="_blank" href="http://help.damai.cn/damai/contents/293/5712.html" class="c7">《大麦网电子钱包消费预存服务用户协议》</a>
+				</p>
+			</div>
+
+		
+	</div>
+	<div class="chang_box">
+		2
+	</div>
+	<div class="chang_box">
+		3
+	</div>
+	<div class="chang_box">
+		4
+	</div>
+	<div class="chang_box">
+		5
+	</div>
+	<div class="chang_box">
+		6
+	</div>
+	<div class="chang_box">
+		7
+	</div>
+	<div class="chang_box">
+		8
+	</div>
+	<div class="chang_box">
+		9
+	</div>
+	<div class="chang_box">
+		10
+	</div>
+	<div class="chang_box">
+		11
+	</div>
+	<div class="chang_box">
+		12
+	</div>
+	<div class="chang_box">
+		13
+	</div>
+	<div class="chang_box">
+		14
+	</div>
+</body>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script>
+	function change(index){
+		$(".chang_box").eq(index).show().siblings().hide();
+	}
+</script>
+</html>

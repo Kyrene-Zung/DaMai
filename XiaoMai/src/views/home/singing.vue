@@ -172,7 +172,7 @@
 
       next(vm=>{
         vm.cate_id=to.query.cate_id;
-        Vue.http.jsonp('api/mobile/Goods/goodsort',{params:{cate_id:vm.cate_id,sort:vm.selected}}).
+        Vue.http.jsonp('/api/mobile/Goods/goodsort',{params:{cate_id:vm.cate_id,sort:vm.selected}}).
             then(rtn=>{
               // console.log(rtn.data)
               vm.goodsort=rtn.data
@@ -181,7 +181,7 @@
     },
     watch:{
       selected:function(newValue,oldValue){
-          Vue.http.jsonp('api/mobile/Goods/goodsort',{params:{cate_id:this.cate_id,sort:newValue}}).
+          Vue.http.jsonp('/api/mobile/Goods/goodsort',{params:{cate_id:this.cate_id,sort:newValue}}).
               then(rtn=>{
                 //console.log(rtn.data)
                 this.goodsort=rtn.data

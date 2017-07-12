@@ -1,0 +1,108 @@
+
+<div class="Introduction" style="width: 100%;height: 45px;background: #cccccc">
+    <div class="contain">
+        <div class="left">
+            <?php  $user_info = getUserInfo(); ?>
+            {if $user_info}
+            <div class="left-page" style="margin-top: 14px;width: 190px">欢迎来小麦&nbsp;[&nbsp;<a href="{:url('user/quit')}">退出</a>&nbsp;]</div>
+            <div class="left-page" id="left" style="position: relative;width: 80px;">
+                <p> {$user_info.usertel}</p>
+                <ul class="list">
+                    <li>个人信息</li>
+                    <li>订单管理</li>
+                    <li>我的钱包</li>
+                    <li>我的订阅</li>   
+                    <li>我的优惠券</li>
+                </ul>
+            </div>
+            {else}
+                <div class="left-page" style="margin-top: 14px;width: 190px">HI , 欢迎来小麦[&nbsp;<a href="{:url('user/logo')}">登录</a>&nbsp;<a href="{:url('user/register')}">注册</a>&nbsp;]</div>
+            <div class="left-page" id="left" style="position: relative;width: 80px">
+                <p> 我的小麦</p>
+                <ul class="list">
+                    <li>个人信息</li>
+                    <li>订单管理</li>
+                    <li>我的钱包</li>
+                    <li>我的订阅</li>   
+                    <li>我的优惠券</li>
+                </ul>
+            </div>
+            {/if}
+            <div class="left-page"  style="margin-top: 14px;width: 80px">我的订单</div>
+        </div>
+        <div class="right" id="right">
+            <div class="right-page" style="width: 90px;text-align: center">
+                <p>小麦网微信</p>
+                <ul class="list">
+                    <li>1111</li>
+                    <li>2222</li>
+                    <li>3333</li>
+                    <li>4444</li>
+                </ul>
+            </div>
+            <div class="right-page">
+                <p>手机版</p>
+                <ul class="list">
+                    <li>1111</li>
+                    <li>2222</li>
+                    <li>3333</li>
+                    <li>4444</li>
+                </ul>
+            </div>
+            <div class="right-page">
+                <p>客户服务</p>
+                <ul class="list">
+                    <li>账号服务</li>
+                    <li>人工服务</li>
+                    <li>特色产品</li>
+                    <li>帮助中心</li>
+                    <li>在线客服</li>
+                </ul>
+            </div>
+            <div class="right-page">
+                <p>网站导航</p>
+                <ul class="list">
+                    <li>1111</li>
+                    <li>2222</li>
+                    <li>3333</li>
+                    <li>4444</li>
+                </ul>
+            </div>
+            <div class="right-page">
+                <p>English</p>
+                <ul class="list">
+                    <li>1111</li>
+                    <li>2222</li>
+                    <li>3333</li>
+                    <li>4444</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="navigation">
+    <div class="contain">
+        <ul class="logo">
+            <li><img src="__PUBLIC__/static/pc/xiaomai.png" alt="" style="width: 50px;height: 50px;"></li>
+            <li class="logo-content">
+                <h3 style="margin-bottom: 20px">广州</h3>
+                <a href="#">推荐进入首页</a>
+            </li>
+        </ul>
+        <ul class="search">
+            <li class="search-content">
+                <form action="#">
+                    <input type="text" placeholder="请输入关键词...">
+                    <div>搜索</div>
+                </form>
+            </li>
+            <li class="history">
+                <p>罗志祥</p>
+                <p>美国大使</p>
+                <p>奥巴马</p>
+                <p>LOL</p>
+            </li>
+        </ul>
+    </div>
+</div>
